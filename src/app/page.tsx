@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import AboutSection from "@/components/AboutSection";
 import Scene from "@/components/Scene";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
@@ -40,6 +41,7 @@ export default function Home() {
 
         <div className="scroll-container relative z-10 w-full">
           <Hero isActive={!isLoading} />
+          <AboutSection />
           <CTASection />
           <Footer />
         </div>
