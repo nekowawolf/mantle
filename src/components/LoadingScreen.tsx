@@ -10,21 +10,28 @@ interface LoadingScreenProps {
 }
 
 export default function LoadingScreen({ onComplete, isModelLoaded }: LoadingScreenProps) {
-  const wipeRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isCompletedRef = useRef(false);
 
   useEffect(() => {
-    if (isModelLoaded && wipeRef.current) {
+    document.body.style.overflow = "hidden";
+    return () => {
+      if (!isCompletedRef.current) document.body.style.overflow = "";
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isModelLoaded && !isCompletedRef.current) {
       const timer = setTimeout(() => {
-        const tl = gsap.timeline({
+        gsap.to(containerRef.current, {
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.inOut",
           onComplete: () => {
+            isCompletedRef.current = true;
+            document.body.style.overflow = "";
             onComplete();
           }
-        });
-
-        tl.to(wipeRef.current, {
-          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-          duration: 1.2,
-          ease: "power3.inOut"
         });
       }, 800);
 
@@ -33,7 +40,10 @@ export default function LoadingScreen({ onComplete, isModelLoaded }: LoadingScre
   }, [isModelLoaded, onComplete]);
 
   return (
-    <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden">
+    <div 
+      ref={containerRef}
+      className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black overflow-hidden"
+    >
       {/* Background Video */}
       <video
         autoPlay
@@ -55,6 +65,7 @@ export default function LoadingScreen({ onComplete, isModelLoaded }: LoadingScre
             src="/img/logo_mantle1.png"
             alt="Mantle Logo"
             fill
+            sizes="(max-width: 768px) 128px, 192px"
             className="object-contain"
             priority
           />
@@ -63,15 +74,6 @@ export default function LoadingScreen({ onComplete, isModelLoaded }: LoadingScre
           Mantle Network
         </h1>
       </div>
-
-      {/* Diagonal Wipe Overlay*/}
-      <div
-        ref={wipeRef}
-        className="fixed inset-0 z-20 bg-black"
-        style={{
-          clipPath: "polygon(0 100%, 0 100%, 0 100%, 0 100%)"
-        }}
-      />
     </div>
   );
 }

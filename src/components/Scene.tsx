@@ -14,7 +14,6 @@ interface SceneProps {
 export default function Scene({ onLoaded }: SceneProps) {
   const [isModelReady, setIsModelReady] = useState(false);
 
-  // Notify parent only when model is truly ready
   useEffect(() => {
     if (isModelReady) {
       const timer = setTimeout(() => {
@@ -53,7 +52,6 @@ function Model({ url, onLoaded }: { url: string, onLoaded: () => void }) {
     
     if (!modelRef.current) return;
 
-    // Center the model geometry
     const box = new THREE.Box3().setFromObject(scene);
     const center = box.getCenter(new THREE.Vector3());
     scene.position.x += (scene.position.x - center.x);
@@ -69,24 +67,17 @@ function Model({ url, onLoaded }: { url: string, onLoaded: () => void }) {
         trigger: ".scroll-container",
         start: "top top",
         end: "bottom bottom",
-        scrub: 1.2,
+        scrub: 1.5,
       }
     });
 
-    // Scale up on scroll
-    tl.to(modelRef.current.scale, {
-      x: 2.2,
-      y: 2.2,
-      z: 2.2,
-      ease: "power2.inOut"
-    }, 0);
+    tl.to(modelRef.current.scale, { x: 2.5, y: 2.5, z: 2.5, duration: 1, ease: "power1.inOut" }, 0);
+    tl.to(modelRef.current.rotation, { x: Math.PI * 0.5, y: Math.PI * 1.5, duration: 1, ease: "none" }, 0);
 
-    // Rotate on scroll
-    tl.to(modelRef.current.rotation, {
-      x: Math.PI * 0.2,
-      y: Math.PI * 4,
-      ease: "none"
-    }, 0);
+    tl.to(modelRef.current.rotation, { x: Math.PI * 1, y: Math.PI * 3, duration: 1, ease: "none" }, 1);
+
+    tl.to(modelRef.current.scale, { x: 1.5, y: 1.5, z: 1.5, duration: 1, ease: "power1.inOut" }, 2);
+    tl.to(modelRef.current.rotation, { x: Math.PI * 2, y: Math.PI * 4.5, duration: 1, ease: "none" }, 2);
 
     return () => {
       tl.kill();

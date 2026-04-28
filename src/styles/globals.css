@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 html,
@@ -14,21 +14,52 @@ body {
   color: white;
 }
 
+/* Custom Scrollbar - Chrome, Edge, Safari */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 14px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #0a0a0a;
+  border-radius: 7px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
+  background: #092C25;
+  border-radius: 7px;
+  border: 2px solid #1a1a1a;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #0d453a;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #092C25 #0a0a0a;
+}
+
+/* Hide scrollbar during loading - completely hidden */
+body.loading {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+body.loading::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+}
+
+/* Hide scrollbar on html during loading */
+body.loading html {
+  overflow: hidden !important;
+}
+
+body.loading html::-webkit-scrollbar {
+  display: none !important;
 }
 
 @layer utilities {
