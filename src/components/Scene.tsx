@@ -7,7 +7,7 @@ import * as THREE from "three";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-export default function Scene() {
+export default function Scene({ isHidden }: { isHidden: boolean }) {
   const [quality, setQuality] = useState<"low" | "high">("low");
 
   useEffect(() => {
@@ -19,7 +19,11 @@ export default function Scene() {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-20 pointer-events-none will-change-transform">
+    <div
+      className={`fixed inset-0 z-20 pointer-events-none will-change-transform transition-opacity duration-700 ${
+        isHidden ? "opacity-0" : "opacity-100"
+      }`}
+    >
       <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
         <ambientLight intensity={0.8} />
         <directionalLight position={[10, 10, 5]} intensity={1.2} />
@@ -52,36 +56,36 @@ function Model({
     const center = box.getCenter(new THREE.Vector3());
     scene.position.sub(center);
 
-    // SCALE MODEL
+    // SCALE
     modelRef.current.scale.set(1.6, 1.6, 1.6);
 
+    // ROTATION BASE
     modelRef.current.rotation.y = Math.PI;
 
-    // LOW QUALITY MODE (mobile / initial load)
-    if (quality === "low") {
-      return;
+    // HIGH QUALITY ANIMATION
+    if (quality === "high") {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".scroll-container",
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+      });
+
+      tl.to(modelRef.current.rotation, {
+        y: Math.PI * 2,
+        ease: "none",
+      });
+
+      return () => {
+        tl.kill();
+        ScrollTrigger.getAll().forEach((t) => t.kill());
+      };
     }
-
-    // HIGH QUALITY MODE (scroll animation aktif)
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".scroll-container",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-    });
-
-    tl.to(modelRef.current.rotation, {
-      y: Math.PI * 2,
-      ease: "none",
-    });
-
-    return (): void => {
-      tl.kill();
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
   }, [scene, quality]);
 
   return <primitive ref={modelRef} object={scene} />;
 }
+
+useGLTF.preload("/models/mantle_coin.glb");

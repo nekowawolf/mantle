@@ -10,12 +10,10 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [startScene, setStartScene] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-      setStartScene(true); 
     }, 2200);
 
     return () => clearTimeout(timer);
@@ -30,15 +28,15 @@ export default function Home() {
       {/* Loading Screen */}
       {isLoading && <LoadingScreen />}
 
-      {/* Main Content */}
+      <Scene isHidden={isLoading} />
+
+      {/* UI CONTENT */}
       <div
         className={`${
           isLoading ? "invisible opacity-0" : "visible opacity-100"
         } transition-opacity duration-700`}
       >
         <Navbar />
-
-        {startScene && <Scene />}
 
         <div className="scroll-container relative z-10 w-full">
           <Hero isActive={!isLoading} />
