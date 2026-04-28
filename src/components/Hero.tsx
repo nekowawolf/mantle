@@ -93,7 +93,7 @@ export default function Hero({ isActive }: HeroProps) {
         </div>
 
         {/* SCROLL INDICATOR */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-16 md:bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
           <p className="text-xs md:text-sm tracking-[0.3em] opacity-60 whitespace-nowrap">
             SCROLL TO EXPLORE
           </p>
