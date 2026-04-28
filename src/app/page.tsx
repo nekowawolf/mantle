@@ -10,37 +10,38 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [isModelLoaded, setIsModelLoaded] = useState(false);
+  const [startScene, setStartScene] = useState(false);
 
   useEffect(() => {
-    if (isLoading) {
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'instant' });
-      }, 100);
-    }
-  }, [isLoading]);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      setStartScene(true); 
+    }, 2200);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <main className={`relative bg-black ${isLoading ? 'h-screen overflow-hidden' : 'min-h-screen overflow-x-hidden'} text-white selection:bg-[#092C25] selection:text-white`}>
-      {/* Loading Screen Overlay */}
-      {isLoading && (
-        <LoadingScreen 
-          onComplete={() => setIsLoading(false)} 
-          isModelLoaded={isModelLoaded} 
-        />
-      )}
-      
-      {/* Main Content Container */}
-      <div 
-        className={`${isLoading ? "invisible" : "visible"} transition-opacity duration-1000`}
-        style={{ opacity: isLoading ? 0 : 1 }}
+    <main
+      className={`relative bg-black ${
+        isLoading ? "h-screen overflow-hidden" : "min-h-screen overflow-x-hidden"
+      } text-white selection:bg-[#092C25] selection:text-white`}
+    >
+      {/* Loading Screen */}
+      {isLoading && <LoadingScreen />}
+
+      {/* Main Content */}
+      <div
+        className={`${
+          isLoading ? "invisible opacity-0" : "visible opacity-100"
+        } transition-opacity duration-700`}
       >
         <Navbar />
-        
-        <Scene onLoaded={() => setIsModelLoaded(true)} />
-        
+
+        {startScene && <Scene />}
+
         <div className="scroll-container relative z-10 w-full">
-          <Hero isActive={!isLoading} /> 
+          <Hero isActive={!isLoading} />
           <CTASection />
           <Footer />
         </div>
