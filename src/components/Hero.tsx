@@ -13,6 +13,7 @@ export default function Hero({ isActive }: HeroProps) {
   const videoRef = useRef<HTMLDivElement>(null);
   const videoElementRef = useRef<HTMLVideoElement>(null);
   const { scrollY } = useScroll();
+  const clipPath = useTransform(scrollY, [0, 300], ["inset(0 0 0% 0)", "inset(0 0 50% 0)"]);
 
   const opacityFade = useTransform(scrollY, [0, 120], [1, 0]);
 
@@ -75,10 +76,13 @@ export default function Hero({ isActive }: HeroProps) {
       <section className="h-screen w-full relative z-10 px-6 md:px-16 pointer-events-none">
 
         {/* LEFT TOP TEXT */}
-        <motion.div 
-          style={{ opacity: opacityFade }}
-          className="fixed top-32 md:top-24 left-6 md:left-16 max-w-3xl pt-[80px] md:pt-[130px] lg:pt-[160px]"
-        >
+       <motion.div 
+        style={{ 
+          opacity: opacityFade,
+          clipPath: clipPath 
+        }}
+        className="fixed top-32 md:top-24 left-6 md:left-16 max-w-3xl pt-[80px] md:pt-[130px] lg:pt-[160px]"
+      >
           <h2 className="text-xl md:text-3xl lg:text-4xl font-light text-gray-300 ml-1 md:ml-2 -mt-4 md:-mt-6">
             Network
           </h2>
