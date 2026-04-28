@@ -79,8 +79,7 @@ export default function Hero({ isActive }: HeroProps) {
           style={{ opacity: opacityFade }}
           className="fixed top-32 md:top-24 left-6 md:left-16 max-w-3xl pt-[80px] md:pt-[130px] lg:pt-[160px]"
         >
-          {/* NETWORK SMALL UNDER IT (adjusted padding to account for moved MANTLE logo) */}
-          <h2 className="text-xl md:text-3xl lg:text-4xl font-light text-gray-300 ml-1 md:ml-2">
+          <h2 className="text-xl md:text-3xl lg:text-4xl font-light text-gray-300 ml-1 md:ml-2 -mt-4 md:-mt-6">
             Network
           </h2>
         </motion.div>
@@ -98,7 +97,7 @@ export default function Hero({ isActive }: HeroProps) {
         {/* SCROLL INDICATOR */}
         <motion.div 
           style={{ opacity: opacityFade }}
-          className="fixed bottom-16 md:bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
+          className="fixed bottom-14 md:bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
         >
           <p className="text-[10px] md:text-sm tracking-[0.3em] opacity-60 whitespace-nowrap text-white">
             SCROLL TO EXPLORE
