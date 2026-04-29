@@ -9,20 +9,36 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function Scene({ isHidden }: { isHidden: boolean }) {
   const [quality, setQuality] = useState<"low" | "high">("low");
+  const [vh, setVh] = useState("100dvh");
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setQuality("high");
     }, 2500);
 
+    if (typeof window !== "undefined") {
+      setVh(`${window.innerHeight}px`);
+      
+      const handleOrientationChange = () => {
+        setTimeout(() => setVh(`${window.innerHeight}px`), 200);
+      };
+      window.addEventListener("orientationchange", handleOrientationChange);
+
+      return () => {
+        clearTimeout(timer);
+        window.removeEventListener("orientationchange", handleOrientationChange);
+      };
+    }
+
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <div
-      className={`fixed inset-0 z-20 pointer-events-none will-change-transform transition-opacity duration-700 ${
+      className={`fixed top-0 left-0 w-full z-20 pointer-events-none will-change-transform transition-opacity duration-700 ${
         isHidden ? "opacity-0" : "opacity-100"
       }`}
+      style={{ height: vh }}
     >
       <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
         <ambientLight intensity={0.8} />
@@ -48,6 +64,7 @@ function Model({
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
 
     if (!scene || !modelRef.current) return;
 
