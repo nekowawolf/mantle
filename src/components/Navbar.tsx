@@ -39,7 +39,7 @@ export default function Navbar() {
             y: isDesktop ? y : yMobile,
             transformOrigin: "top left"
           }}
-          className="fixed top-32 md:top-24 left-6 md:left-16 z-[51] text-[70px] md:text-[120px] lg:text-[150px] font-bold leading-[0.85] tracking-tight text-white pointer-events-auto cursor-pointer"
+          className="fixed top-34 md:top-25 left-6 md:left-16 z-[51] text-[70px] md:text-[120px] lg:text-[150px] font-bold leading-[0.85] tracking-tight text-white pointer-events-auto cursor-pointer"
         >
           MANTLE
         </motion.h1>
