@@ -18,15 +18,19 @@ export default function Scene({ isHidden }: { isHidden: boolean }) {
 
     if (typeof window !== "undefined") {
       setVh(`${window.innerHeight}px`);
-      
+
       const handleOrientationChange = () => {
         setTimeout(() => setVh(`${window.innerHeight}px`), 200);
       };
+
       window.addEventListener("orientationchange", handleOrientationChange);
 
       return () => {
         clearTimeout(timer);
-        window.removeEventListener("orientationchange", handleOrientationChange);
+        window.removeEventListener(
+          "orientationchange",
+          handleOrientationChange
+        );
       };
     }
 
@@ -62,6 +66,16 @@ function Model({
   const { scene } = useGLTF(url);
   const modelRef = useRef<THREE.Group>(null);
 
+  // MOBILE CHECK
+  const isMobile =
+    typeof window !== "undefined" && window.innerWidth < 768;
+
+  // DIFFERENT SCALE
+  const targetScale = isMobile ? 1.9 : 2.8;
+
+  // DIFFERENT POSITION
+  const targetY = isMobile ? -1 : -1.5;
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     ScrollTrigger.config({ ignoreMobileResize: true });
@@ -73,7 +87,7 @@ function Model({
     const center = box.getCenter(new THREE.Vector3());
     scene.position.sub(center);
 
-    // SCALE
+    // INITIAL SCALE
     modelRef.current.scale.set(1.6, 1.6, 1.6);
 
     // ROTATION BASE
@@ -85,14 +99,41 @@ function Model({
         scrollTrigger: {
           trigger: ".scroll-container",
           start: "top top",
-          end: "bottom bottom",
+          end: "+=1200",
           scrub: 1,
         },
       });
 
+      // PHASE 1 — ZOOM IN
+      tl.to(modelRef.current.scale, {
+        x: targetScale,
+        y: targetScale,
+        z: targetScale,
+        ease: "power2.out",
+        duration: 4,
+      });
+
+      // KEEP ORIGINAL POSITION
+      tl.to(
+        modelRef.current.position,
+        {
+          x: 0,
+          y: targetY,
+          z: 1,
+          ease: "power2.out",
+          duration: 4,
+        },
+        0
+      );
+
+      // HOLD
+      tl.to({}, { duration: 0.5 });
+
+      // ROTATE
       tl.to(modelRef.current.rotation, {
         y: Math.PI * 2,
         ease: "none",
+        duration: 1.5,
       });
 
       return () => {
@@ -100,7 +141,7 @@ function Model({
         ScrollTrigger.getAll().forEach((t) => t.kill());
       };
     }
-  }, [scene, quality]);
+  }, [scene, quality, targetScale]);
 
   return <primitive ref={modelRef} object={scene} />;
 }

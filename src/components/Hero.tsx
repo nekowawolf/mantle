@@ -15,7 +15,7 @@ export default function Hero({ isActive }: HeroProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
   const clipPath = useTransform(scrollY, [0, 300], ["inset(0 0 0% 0)", "inset(0 0 50% 0)"]);
-  const opacityFade = useTransform(scrollY, [0, 120], [1, 0]);
+  const opacityFade = useTransform(scrollY, [0, 400], [1, 0]);
 
   // VIDEO CONTROL
   useEffect(() => {
@@ -52,16 +52,16 @@ export default function Hero({ isActive }: HeroProps) {
 
       // Overlay becomes solid faster
       if (overlay) {
-        gsap.to(overlay, {
-          backgroundColor: "rgba(0, 0, 0, 0.9)",
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".scroll-container",
-            start: "top top",
-            end: "+=300",
-            scrub: 0.5,
-          },
-        });
+       gsap.to(overlay, {
+  backgroundColor: "rgba(0, 0, 0, 0.95)",
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".scroll-container",
+    start: "top top",
+    end: "+=400",
+    scrub: true,
+  },
+});
       }
     });
 
