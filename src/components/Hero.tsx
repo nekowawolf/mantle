@@ -14,8 +14,8 @@ export default function Hero({ isActive }: HeroProps) {
   const videoElementRef = useRef<HTMLVideoElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
-  const clipPath = useTransform(scrollY, [0, 300], ["inset(0 0 0% 0)", "inset(0 0 50% 0)"]);
-  const opacityFade = useTransform(scrollY, [0, 400], [1, 0]);
+  const clipPath = useTransform(scrollY, [0, 200], ["inset(0 0 0% 0)", "inset(0 0 80% 0)"]);
+  const opacityFade = useTransform(scrollY, [0, 250], [1, 0]);
 
   // VIDEO CONTROL
   useEffect(() => {
@@ -38,30 +38,30 @@ export default function Hero({ isActive }: HeroProps) {
     if (!videoContainer) return;
 
     const ctx = gsap.context(() => {
-      // Video fade out
+      // Video fade out - faster (4 scrolls ≈ 400px)
       gsap.to(videoContainer, {
         opacity: 0,
         ease: "none",
         scrollTrigger: {
           trigger: ".scroll-container",
           start: "top top",
-          end: "+=500",
+          end: "+=400",
           scrub: 0.5,
         },
       });
 
       // Overlay becomes solid faster
       if (overlay) {
-       gsap.to(overlay, {
-  backgroundColor: "rgba(0, 0, 0, 0.95)",
-  ease: "none",
-  scrollTrigger: {
-    trigger: ".scroll-container",
-    start: "top top",
-    end: "+=400",
-    scrub: true,
-  },
-});
+        gsap.to(overlay, {
+          backgroundColor: "rgba(0, 0, 0, 0.95)",
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".scroll-container",
+            start: "top top",
+            end: "+=300",
+            scrub: true,
+          },
+        });
       }
     });
 
@@ -125,7 +125,8 @@ export default function Hero({ isActive }: HeroProps) {
         </motion.div>
       </section>
 
-      <section className="relative z-10 w-full h-[50vh] pointer-events-none" />
+      {/* Spacer - Reduced from 50vh to 20vh since hero fades faster */}
+      <section className="relative z-10 w-full h-[20vh] pointer-events-none" />
     </>
   );
 }
