@@ -13,6 +13,7 @@ export default function Hero({ isActive }: HeroProps) {
   const videoRef = useRef<HTMLDivElement>(null);
   const videoElementRef = useRef<HTMLVideoElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const gradientRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
 
   const clipPath = useTransform(
@@ -22,10 +23,8 @@ export default function Hero({ isActive }: HeroProps) {
   );
 
   const opacityFade = useTransform(scrollY, [0, 250], [1, 0]);
-
-  // NEW: text muncul setelah overlay mulai gelap
   const textOpacity = useTransform(scrollY, [200, 450], [0, 1]);
-  
+
  // TEXT SWITCH ANIMATION
 const text1Opacity = useTransform(
   scrollY,
@@ -70,6 +69,7 @@ const leftTextOpacity = useTransform(
 
     const videoContainer = videoRef.current;
     const overlay = overlayRef.current;
+    const gradient = gradientRef.current;
     if (!videoContainer) return;
 
     const ctx = gsap.context(() => {
@@ -97,6 +97,24 @@ const leftTextOpacity = useTransform(
             scrub: true,
           },
         });
+      }
+
+      // Gradient Background
+      if (gradient) {
+        gsap.fromTo(
+          gradient,
+          { opacity: 0 },
+          {
+            opacity: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: ".scroll-container",
+              start: "300px top",
+              end: "2800px top",
+              scrub: true,
+            },
+          }
+        );
       }
     });
 
@@ -126,91 +144,102 @@ const leftTextOpacity = useTransform(
         />
       </div>
 
+      {/* GRADIENT BACKGROUND */}
+      <div
+        ref={gradientRef}
+        className="fixed inset-0 w-full h-screen z-0 pointer-events-none"
+        style={{
+        background:
+          "linear-gradient(4deg, rgba(9, 44, 37, 1) 0%, rgba(0, 0, 0, 1) 100%)",
+        opacity: 0,
+      }}
+      />
+
       {/* HERO CONTENT */}
-<section className="h-screen w-full relative z-10 px-6 md:px-16 pointer-events-none">
-  
-  {/* LEFT TEXT (Jadi bagian ATAS di mobile) */}
-  <motion.div
-    style={{ opacity: leftTextOpacity }}
-    className="
-      fixed 
-      /* Mobile: Atas tengah */
-      left-1/2 -translate-x-1/2 top-28
-      /* Desktop: Kiri tengah */
-      md:left-40 md:top-1/2 md:-translate-y-1/2 md:translate-x-0
-      w-[90%] md:max-w-sm
-    "
-  >
-    <p className="text-3xl md:text-5xl text-gray-300 leading-tight font-bold text-center md:text-left">
-      WHAT IS <br className="md:hidden" /> MANTLE NETWORK?
-    </p>
-  </motion.div>
+      <section className="h-screen w-full relative z-10 px-6 md:px-16 pointer-events-none">
 
-  {/* RIGHT TEXT (Jadi bagian BAWAH di mobile) */}
-<div
-  className="
-    fixed 
-    left-1/2 -translate-x-1/2 bottom-26
-    md:right-19 md:left-auto md:top-1/2 md:-translate-y-1/2 md:translate-x-0 md:bottom-auto
-    w-[90%] md:max-w-96
-    h-[140px]
-  "
->
-  {/* TEXT 1 */}
-  <motion.p
-    style={{ opacity: text1Opacity }}
-    className="
-      absolute inset-0
-      text-base md:text-lg
-      text-gray-300
-      leading-relaxed
-      font-semibold
-      text-center md:text-right
-      break-words
-    "
-  >
-    Mantle is a next-generation Ethereum Layer 2
-    built for mass adoption — combining scalability,
-    speed, and a seamless on-chain experience
-    for the next wave of decentralized applications.
-  </motion.p>
+        {/* LEFT TEXT */}
+        <motion.div
+          style={{ opacity: leftTextOpacity }}
+          className="
+            fixed 
+            /* Mobile: Atas tengah */
+            left-1/2 -translate-x-1/2 top-28
+            /* Desktop: Kiri tengah */
+            md:left-40 md:top-1/2 md:-translate-y-1/2 md:translate-x-0
+            w-[90%] md:max-w-sm
+          "
+        >
+          <p className="text-3xl md:text-5xl text-gray-300 leading-tight font-bold text-center md:text-left">
+            WHAT IS <br className="md:hidden" /> MANTLE NETWORK?
+          </p>
+        </motion.div>
 
-  {/* TEXT 2 */}
-  <motion.p
-    style={{ opacity: text2Opacity }}
-    className="
-      absolute inset-0
-      text-base md:text-lg
-      text-gray-300
-      leading-relaxed
-      font-semibold
-      text-center md:text-right
-      break-words
-    "
-  >
-    Ethereum-grade security, ultra-low transaction fees,
-and blazing-fast performance designed to power
-millions of users, creators, and on-chain economies.
-  </motion.p>
+        {/* RIGHT TEXT */}
+      <div
+        className="
+          fixed 
+          left-1/2 -translate-x-1/2 bottom-26
+          md:right-19 md:left-auto md:top-1/2 md:-translate-y-1/2 md:translate-x-0 md:bottom-auto
+          w-[90%] md:max-w-96
+          h-[140px]
+        "
+      >
+        {/* TEXT 1 */}
+        <motion.p
+          style={{ opacity: text1Opacity }}
+          className="
+            absolute inset-0
+            text-base md:text-lg
+            text-gray-300
+            leading-relaxed
+            font-semibold
+            text-center md:text-right
+            break-words
+          "
+        >
+          Mantle is a next-generation Ethereum Layer 2
+          built for mass adoption — combining scalability,
+          speed, and a seamless on-chain experience
+          for the next wave of decentralized applications.
+        </motion.p>
 
-  {/* TEXT 3 */}
-  <motion.p
-    style={{ opacity: text3Opacity }}
-    className="
-      absolute inset-0
-      text-base md:text-lg
-      text-gray-300
-      leading-relaxed
-      font-semibold
-      text-center md:text-right
-      break-words
-    "
-  >
-    Powered by modular architecture, EigenLayer integration,
-and next-generation ZK technology — enabling a faster,
-more scalable, and community-governed future for Web3.
-  </motion.p>
-</div>
+        {/* TEXT 2 */}
+        <motion.p
+          style={{ opacity: text2Opacity }}
+          className="
+            absolute inset-0
+            text-base md:text-lg
+            text-gray-300
+            leading-relaxed
+            font-semibold
+            text-center md:text-right
+            break-words
+          "
+        >
+          Ethereum-grade security, ultra-low transaction fees,
+      and blazing-fast performance designed to power
+      millions of users, creators, and on-chain economies.
+        </motion.p>
+
+        {/* TEXT 3 */}
+        <motion.p
+          style={{ opacity: text3Opacity }}
+          className="
+            absolute inset-0
+            text-base md:text-lg
+            text-gray-300
+            leading-relaxed
+            font-semibold
+            text-center md:text-right
+            break-words
+          "
+        >
+          Powered by modular architecture, EigenLayer integration,
+      and next-generation ZK technology — enabling a faster,
+      more scalable, and community-governed future for Web3.
+        </motion.p>
+      </div>
 
         {/* EXISTING CONTENT */}
         <motion.div

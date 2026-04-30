@@ -17,18 +17,18 @@ export default function Navbar() {
   }, []);
 
   // Desktop transforms
-  const scale = useTransform(scrollY, [0, 300], [1, 0.1333]); // 150px to 20px
-  const x = useTransform(scrollY, [0, 300], [0, 0]); // We'll rely on transform-origin top left
-  const y = useTransform(scrollY, [0, 300], [0, -80]); // Adjust Y to align
+  const scale = useTransform(scrollY, [0, 300], [1, 0.1333]); 
+  const x = useTransform(scrollY, [0, 300], [0, 0]); 
+  const y = useTransform(scrollY, [0, 300], [0, -80]); 
 
   // Mobile transforms
-  const scaleMobile = useTransform(scrollY, [0, 300], [1, 0.285]); // 70px to 20px
-  const yMobile = useTransform(scrollY, [0, 300], [0, -112]); // Adjust Y for mobile
+  const scaleMobile = useTransform(scrollY, [0, 300], [1, 0.285]); 
+  const yMobile = useTransform(scrollY, [0, 300], [0, -112]); 
 
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 px-4 md:px-12 py-4 flex justify-between items-center bg-gradient-to-b from-black/80 to-transparent">
+      <nav className="fixed top-0 left-0 right-0 z-50 px-4 md:px-12 py-4 flex justify-between items-center">
         {/* Logo space placeholder to keep flex layout intact */}
         <div className="w-[100px]" />
 
