@@ -46,32 +46,28 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8 text-sm font-medium">
-          <a
-            href="#"
-            className="text-white hover:text-[#092C25] hover:bg-white/90 px-3 py-1 rounded transition-all duration-300"
-          >
+          <a href="#" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
+            About
+          </a>
+
+          <a href="#" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
             Ecosystem
           </a>
 
-          <a
-            href="#"
-            className="text-white hover:text-[#092C25] hover:bg-white/90 px-3 py-1 rounded transition-all duration-300"
-          >
-            Developers
+          <a href="#" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
+            Governance
           </a>
 
-          <a
-            href="#"
-            className="text-white hover:text-[#092C25] hover:bg-white/90 px-3 py-1 rounded transition-all duration-300"
-          >
+          <a href="#" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
+            Get MNT
+          </a>
+
+          <a href="#" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
+            Event
+          </a>
+
+          <a href="#" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
             Community
-          </a>
-
-          <a
-            href="#"
-            className="text-white hover:text-[#092C25] hover:bg-white/90 px-3 py-1 rounded transition-all duration-300"
-          >
-            About
           </a>
         </div>
 
@@ -100,39 +96,56 @@ export default function Navbar() {
 
         {/* Menu Content */}
         <div className="flex flex-col justify-center h-full px-10">
-          <div className="flex flex-col items-end space-y-8 text-right">
-            <a
-              href="#"
-              onClick={() => setIsOpen(false)}
-              className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
-            >
-              Ecosystem
-            </a>
+        <div className="flex flex-col items-end space-y-8 text-right w-full">
 
-            <a
-              href="#"
-              onClick={() => setIsOpen(false)}
-              className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
-            >
-              Developers
-            </a>
+          <a
+            href="#about"
+            onClick={() => setIsOpen(false)}
+            className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
+          >
+            About
+          </a>
 
-            <a
-              href="#"
-              onClick={() => setIsOpen(false)}
-              className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
-            >
-              Community
-            </a>
+          <a
+            href="#ecosystem"
+            onClick={() => setIsOpen(false)}
+            className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
+          >
+            Ecosystem
+          </a>
 
-            <a
-              href="#"
-              onClick={() => setIsOpen(false)}
-              className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
-            >
-              About
-            </a>
-          </div>
+          <a
+            href="#governance"
+            onClick={() => setIsOpen(false)}
+            className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
+          >
+            Governance
+          </a>
+
+          <a
+            href="#get-mnt"
+            onClick={() => setIsOpen(false)}
+            className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
+          >
+            Get MNT
+          </a>
+
+          <a
+            href="#event"
+            onClick={() => setIsOpen(false)}
+            className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
+          >
+            Event
+          </a>
+
+          <a
+            href="#community"
+            onClick={() => setIsOpen(false)}
+            className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
+          >
+            Community
+          </a>
+            </div> 
         </div>
       </div>
     </>
