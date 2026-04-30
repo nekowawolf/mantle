@@ -134,6 +134,32 @@ function Model({
         y: Math.PI * 2,
         ease: "none",
         duration: 1.5,
+      },
+        0.7
+      );
+
+      // ROTATE 2 (TEXT 1 -> TEXT 2)
+      gsap.to(modelRef.current.rotation, {
+        y: Math.PI * 2,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".scroll-container",
+          start: "2600px top",
+          end: "4200px top",
+          scrub: 2,
+        },
+      });
+
+      // ROTATE 3 (TEXT 2 -> TEXT 3)
+      gsap.to(modelRef.current.rotation, {
+        y: Math.PI * 2,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".scroll-container",
+          start: "5200px top",
+          end: "7000px top",
+          scrub: 2,
+        },
       });
 
       return () => {
