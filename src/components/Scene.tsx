@@ -66,14 +66,10 @@ function Model({
   const { scene } = useGLTF(url);
   const modelRef = useRef<THREE.Group>(null);
 
-  // MOBILE CHECK
   const isMobile =
     typeof window !== "undefined" && window.innerWidth < 768;
 
-  // DIFFERENT SCALE
   const targetScale = isMobile ? 1.9 : 2.8;
-
-  // DIFFERENT POSITION
   const targetY = isMobile ? -1 : -1.7;
 
   useEffect(() => {
@@ -82,20 +78,16 @@ function Model({
 
     if (!scene || !modelRef.current) return;
 
-    // CENTER MODEL
     const box = new THREE.Box3().setFromObject(scene);
     const center = box.getCenter(new THREE.Vector3());
     scene.position.sub(center);
 
-    // INITIAL SCALE
     modelRef.current.scale.set(1.6, 1.6, 1.6);
-
-    // ROTATION BASE
     modelRef.current.rotation.y = 0;
 
-    // HIGH QUALITY ANIMATION
     if (quality === "high") {
-      const tl = gsap.timeline({
+      // ─── PHASE 1: HERO — ZOOM IN ───
+      const heroTl = gsap.timeline({
         scrollTrigger: {
           trigger: ".scroll-container",
           start: "top top",
@@ -104,8 +96,7 @@ function Model({
         },
       });
 
-      // PHASE 1 — ZOOM IN
-      tl.to(modelRef.current.scale, {
+      heroTl.to(modelRef.current.scale, {
         x: targetScale,
         y: targetScale,
         z: targetScale,
@@ -113,8 +104,7 @@ function Model({
         duration: 4,
       });
 
-      // KEEP ORIGINAL POSITION
-      tl.to(
+      heroTl.to(
         modelRef.current.position,
         {
           x: 0,
@@ -126,11 +116,9 @@ function Model({
         0
       );
 
-      // HOLD
-      tl.to({}, { duration: 0.5 });
+      heroTl.to({}, { duration: 0.5 });
 
-      // ROTATE 1
-      tl.to(
+      heroTl.to(
         modelRef.current.rotation,
         {
           y: "+=" + Math.PI,
@@ -140,7 +128,50 @@ function Model({
         0.7
       );
 
-       // ROTATE 2
+      // ─── PHASE 2: HERO → ECOSYSTEM TRANSITION ───
+      const ecosystemTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#ecosystem",           
+          start: "top 90%",                
+          end: "top 20%",                  
+          scrub: 1,
+        },
+      });
+
+      // Coin mengecil
+      ecosystemTl.to(modelRef.current.scale, {
+        x: 1.3,
+        y: 1.3,
+        z: 1.3,
+        ease: "power2.inOut",
+        duration: 3,
+      });
+
+      // Coin naik ke tengah
+      ecosystemTl.to(
+        modelRef.current.position,
+        {
+          x: 0,
+          y: 0,
+          z: 1,
+          ease: "power2.inOut",
+          duration: 3,
+        },
+        0
+      );
+
+      // Rotasi pelan
+      ecosystemTl.to(
+        modelRef.current.rotation,
+        {
+          y: "+=" + Math.PI * 2,
+          ease: "none",
+          duration: 4,
+        },
+        0
+      );
+
+      // ─── ROTATE 2 & 3 (text switch triggers) ───
       ScrollTrigger.create({
         trigger: ".scroll-container",
         start: "2600px top",
@@ -160,7 +191,6 @@ function Model({
         },
       });
 
-      // ROTATE 3
       ScrollTrigger.create({
         trigger: ".scroll-container",
         start: "5200px top",
@@ -179,8 +209,10 @@ function Model({
           });
         },
       });
+
       return () => {
-        tl.kill();
+        heroTl.kill();
+        ecosystemTl.kill();
         ScrollTrigger.getAll().forEach((t) => t.kill());
       };
     }
