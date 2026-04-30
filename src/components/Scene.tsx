@@ -91,7 +91,7 @@ function Model({
     modelRef.current.scale.set(1.6, 1.6, 1.6);
 
     // ROTATION BASE
-    modelRef.current.rotation.y = Math.PI;
+    modelRef.current.rotation.y = 0;
 
     // HIGH QUALITY ANIMATION
     if (quality === "high") {
@@ -129,39 +129,42 @@ function Model({
       // HOLD
       tl.to({}, { duration: 0.5 });
 
-      // ROTATE
-      tl.to(modelRef.current.rotation, {
-        y: Math.PI * 2,
-        ease: "none",
-        duration: 1.5,
-      },
+      // ROTATE 1
+      tl.to(
+        modelRef.current.rotation,
+        {
+          y: "+=" + Math.PI,
+          ease: "power2.out",
+          duration: 2,
+        },
         0.7
       );
 
-      // ROTATE 2 (TEXT 1 -> TEXT 2)
-      gsap.to(modelRef.current.rotation, {
-        y: Math.PI * 2,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".scroll-container",
-          start: "2600px top",
-          end: "4200px top",
-          scrub: 2,
+      // ROTATE 2
+      ScrollTrigger.create({
+        trigger: ".scroll-container",
+        start: "2600px top",
+        onEnter: () => {
+          gsap.to(modelRef.current!.rotation, {
+            y: "+=" + Math.PI,
+            duration: 2,
+            ease: "power2.out",
+          });
         },
       });
 
-      // ROTATE 3 (TEXT 2 -> TEXT 3)
-      gsap.to(modelRef.current.rotation, {
-        y: Math.PI * 2,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".scroll-container",
-          start: "5200px top",
-          end: "7000px top",
-          scrub: 2,
+      // ROTATE 3
+      ScrollTrigger.create({
+        trigger: ".scroll-container",
+        start: "5200px top",
+        onEnter: () => {
+          gsap.to(modelRef.current!.rotation, {
+            y: "+=" + Math.PI,
+            duration: 2,
+            ease: "power2.out",
+          });
         },
       });
-
       return () => {
         tl.kill();
         ScrollTrigger.getAll().forEach((t) => t.kill());
