@@ -14,8 +14,43 @@ export default function Hero({ isActive }: HeroProps) {
   const videoElementRef = useRef<HTMLVideoElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
-  const clipPath = useTransform(scrollY, [0, 200], ["inset(0 0 0% 0)", "inset(0 0 80% 0)"]);
+
+  const clipPath = useTransform(
+    scrollY,
+    [0, 200],
+    ["inset(0 0 0% 0)", "inset(0 0 80% 0)"]
+  );
+
   const opacityFade = useTransform(scrollY, [0, 250], [1, 0]);
+
+  // NEW: text muncul setelah overlay mulai gelap
+  const textOpacity = useTransform(scrollY, [200, 450], [0, 1]);
+  
+ // TEXT SWITCH ANIMATION
+const text1Opacity = useTransform(
+  scrollY,
+  [200, 700, 1600, 2600],
+  [0, 1, 1, 0]
+);
+
+const text2Opacity = useTransform(
+  scrollY,
+  [2600, 3200, 4200, 5200],
+  [0, 1, 1, 0]
+);
+
+const text3Opacity = useTransform(
+  scrollY,
+  [5200, 5800, 7000, 7300],
+  [0, 1, 1, 0]
+);
+
+// LEFT TITLE OPACITY
+const leftTextOpacity = useTransform(
+  scrollY,
+  [200, 700, 7000, 7300],
+  [0, 1, 1, 0]
+);
 
   // VIDEO CONTROL
   useEffect(() => {
@@ -38,7 +73,7 @@ export default function Hero({ isActive }: HeroProps) {
     if (!videoContainer) return;
 
     const ctx = gsap.context(() => {
-      // Video fade out - faster (4 scrolls ≈ 400px)
+      // Video fade out
       gsap.to(videoContainer, {
         opacity: 0,
         ease: "none",
@@ -85,19 +120,103 @@ export default function Hero({ isActive }: HeroProps) {
           <source src="/videos/background_animation2.mp4" type="video/mp4" />
         </video>
 
-        {/* Fast appearing overlay */}
-        <div 
+        <div
           ref={overlayRef}
           className="absolute inset-0 bg-black/60 transition-all duration-300"
         />
       </div>
 
       {/* HERO CONTENT */}
-      <section className="h-screen w-full relative z-10 px-6 md:px-16 pointer-events-none">
-        <motion.div 
-          style={{ 
+<section className="h-screen w-full relative z-10 px-6 md:px-16 pointer-events-none">
+  
+  {/* LEFT TEXT (Jadi bagian ATAS di mobile) */}
+  <motion.div
+    style={{ opacity: leftTextOpacity }}
+    className="
+      fixed 
+      /* Mobile: Atas tengah */
+      left-1/2 -translate-x-1/2 top-28
+      /* Desktop: Kiri tengah */
+      md:left-40 md:top-1/2 md:-translate-y-1/2 md:translate-x-0
+      w-[90%] md:max-w-sm
+    "
+  >
+    <p className="text-3xl md:text-5xl text-gray-300 leading-tight font-bold text-center md:text-left">
+      WHAT IS <br className="md:hidden" /> MANTLE NETWORK?
+    </p>
+  </motion.div>
+
+  {/* RIGHT TEXT (Jadi bagian BAWAH di mobile) */}
+<div
+  className="
+    fixed 
+    left-1/2 -translate-x-1/2 bottom-26
+    md:right-19 md:left-auto md:top-1/2 md:-translate-y-1/2 md:translate-x-0 md:bottom-auto
+    w-[90%] md:max-w-96
+    h-[140px]
+  "
+>
+  {/* TEXT 1 */}
+  <motion.p
+    style={{ opacity: text1Opacity }}
+    className="
+      absolute inset-0
+      text-base md:text-lg
+      text-gray-300
+      leading-relaxed
+      font-semibold
+      text-center md:text-right
+      break-words
+    "
+  >
+    Mantle is a next-generation Ethereum Layer 2
+    built for mass adoption — combining scalability,
+    speed, and a seamless on-chain experience
+    for the next wave of decentralized applications.
+  </motion.p>
+
+  {/* TEXT 2 */}
+  <motion.p
+    style={{ opacity: text2Opacity }}
+    className="
+      absolute inset-0
+      text-base md:text-lg
+      text-gray-300
+      leading-relaxed
+      font-semibold
+      text-center md:text-right
+      break-words
+    "
+  >
+    Ethereum-grade security, ultra-low transaction fees,
+and blazing-fast performance designed to power
+millions of users, creators, and on-chain economies.
+  </motion.p>
+
+  {/* TEXT 3 */}
+  <motion.p
+    style={{ opacity: text3Opacity }}
+    className="
+      absolute inset-0
+      text-base md:text-lg
+      text-gray-300
+      leading-relaxed
+      font-semibold
+      text-center md:text-right
+      break-words
+    "
+  >
+    Powered by modular architecture, EigenLayer integration,
+and next-generation ZK technology — enabling a faster,
+more scalable, and community-governed future for Web3.
+  </motion.p>
+</div>
+
+        {/* EXISTING CONTENT */}
+        <motion.div
+          style={{
             opacity: opacityFade,
-            clipPath: clipPath 
+            clipPath: clipPath,
           }}
           className="fixed top-32 md:top-24 left-6 md:left-16 max-w-3xl pt-[80px] md:pt-[130px] lg:pt-[160px]"
         >
@@ -106,7 +225,7 @@ export default function Hero({ isActive }: HeroProps) {
           </h2>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           style={{ opacity: opacityFade }}
           className="fixed bottom-36 right-6 md:right-16 max-w-xs md:max-w-md text-right"
         >
@@ -115,7 +234,7 @@ export default function Hero({ isActive }: HeroProps) {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           style={{ opacity: opacityFade }}
           className="fixed bottom-14 md:bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
         >
@@ -125,8 +244,8 @@ export default function Hero({ isActive }: HeroProps) {
         </motion.div>
       </section>
 
-      {/* Spacer - Reduced from 50vh to 20vh since hero fades faster */}
-      <section className="relative z-10 w-full h-[20vh] pointer-events-none" />
+      {/* Spacer */}
+      <section className="relative z-10 w-full h-[1000vh] pointer-events-none" />
     </>
   );
 }
