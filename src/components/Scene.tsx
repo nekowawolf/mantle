@@ -140,13 +140,20 @@ function Model({
         0.7
       );
 
-      // ROTATE 2
+       // ROTATE 2
       ScrollTrigger.create({
         trigger: ".scroll-container",
         start: "2600px top",
         onEnter: () => {
           gsap.to(modelRef.current!.rotation, {
             y: "+=" + Math.PI,
+            duration: 2,
+            ease: "power2.out",
+          });
+        },
+        onLeaveBack: () => {
+          gsap.to(modelRef.current!.rotation, {
+            y: "-=" + Math.PI,
             duration: 2,
             ease: "power2.out",
           });
@@ -160,6 +167,13 @@ function Model({
         onEnter: () => {
           gsap.to(modelRef.current!.rotation, {
             y: "+=" + Math.PI,
+            duration: 2,
+            ease: "power2.out",
+          });
+        },
+        onLeaveBack: () => {
+          gsap.to(modelRef.current!.rotation, {
+            y: "-=" + Math.PI,
             duration: 2,
             ease: "power2.out",
           });
