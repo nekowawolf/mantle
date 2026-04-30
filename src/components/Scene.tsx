@@ -74,7 +74,7 @@ function Model({
   const targetScale = isMobile ? 1.9 : 2.8;
 
   // DIFFERENT POSITION
-  const targetY = isMobile ? -1 : -1.5;
+  const targetY = isMobile ? -1 : -1.7;
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);

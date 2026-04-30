@@ -5,8 +5,6 @@ import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Scene from "@/components/Scene";
-import CTASection from "@/components/CTASection";
-import Footer from "@/components/Footer";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -40,8 +38,6 @@ export default function Home() {
 
         <div className="scroll-container relative z-10 w-full">
           <Hero isActive={!isLoading} />
-          <CTASection />
-          <Footer />
         </div>
       </div>
     </main>
