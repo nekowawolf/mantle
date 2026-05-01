@@ -441,12 +441,12 @@ export default function Ecosystem() {
           >
             <div>
               <div className="flex items-center gap-4 mb-4">
-                <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-white/10">
+                <div className="relative w-12 h-12 rounded-lg overflow-hidden">
                   <Image
                     src={card.logo}
                     alt={card.name}
                     fill
-                    className="object-contain p-1"
+                    className="object-contain"
                   />
                 </div>
                 <h3 className="text-2xl font-bold text-white">{card.name}</h3>
@@ -475,12 +475,12 @@ export default function Ecosystem() {
           >
             <div>
               <div className="flex items-center gap-3 mb-3">
-                <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-white/10">
+                <div className="relative w-10 h-10 rounded-lg overflow-hidden">
                   <Image
                     src={card.logo}
                     alt={card.name}
                     fill
-                    className="object-contain p-1"
+                    className="object-contain"
                   />
                 </div>
                 <h3 className="text-xl font-bold text-white">{card.name}</h3>
