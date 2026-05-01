@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 
 const words = ["We", "build", "$MNT-powered", "products", "on", "Ethereum"];
 const TEXT_START = 8000;
@@ -37,6 +38,28 @@ const newCardsData = [
   {
     title: "Stables-Backed Yield Asset Partnerships",
     desc: "Mantle strengthens its ecosystem through partnerships with Ethena USDe, Agora AUSD, and Ondo USDy — enhancing treasury yield, institutional-backed stability, and innovative yield opportunities across the network.",
+  },
+];
+
+// Data for partner cards
+const partnerCardsData = [
+  {
+    logo: "https://www.mantle.xyz/images/home/project-ecofund-logo.svg",
+    name: "EcoFund",
+    desc: "The Mantle EcoFund supports ecosystem growth with a $200M capital pool, backing innovative projects alongside top-tier VCs like Polychain and Dragonfly.",
+    link: "Visit",
+  },
+  {
+    logo: "https://www.mantle.xyz/images/home/project-mirana-logo.svg",
+    name: "Mirana Ventures",
+    desc: "Mirana Ventures supports Mantle's EcoFund with strong venture capital expertise, helping drive ecosystem growth through strategic investments and industry experience.",
+    link: "Visit",
+  },
+  {
+    logo: "https://www.mantle.xyz/images/home/project-bybit-logo.svg",
+    name: "Bybit",
+    desc: "Bybit strengthens Mantle's liquidity and DeFi-CeFi integration through yield-bearing collateral, simplified asset access, fiat ramps, and connected on-chain and CEX opportunities.",
+    link: "Visit",
   },
 ];
 
@@ -122,10 +145,108 @@ export default function Ecosystem() {
     { op: mNewCard3Op, y: mNewCard3Y },
   ];
 
+  // --- TEXT: "We work with initiatives..." ---
+  const initiativeWords = ["We", "work", "with", "initiatives", "that", "boost", "user", "gains", "&", "fortify", "the", "ecosystem"];
+
+  const INITIATIVE_TEXT_START_DESKTOP = 16000;
+  const INITIATIVE_TEXT_START_MOBILE = 18500;
+
+  // Desktop animations
+  const initiativeWordOpacitiesDesktop = initiativeWords.map((_, i) => {
+    const wordStart = INITIATIVE_TEXT_START_DESKTOP + i * 100;
+    const wordEnd = wordStart + 320;
+
+    return useTransform(scrollY, [wordStart, wordEnd], [0, 1]);
+  });
+
+  const initiativeWordYsDesktop = initiativeWords.map((_, i) => {
+    const wordStart = INITIATIVE_TEXT_START_DESKTOP + i * 100;
+    const wordEnd = wordStart + 320;
+
+    return useTransform(scrollY, [wordStart, wordEnd], [40, 0]);
+  });
+
+  // Mobile animations
+  const initiativeWordOpacitiesMobile = initiativeWords.map((_, i) => {
+    const wordStart = INITIATIVE_TEXT_START_MOBILE + i * 120;
+    const wordEnd = wordStart + 400;
+
+    return useTransform(scrollY, [wordStart, wordEnd], [0, 1]);
+  });
+
+  const initiativeWordYsMobile = initiativeWords.map((_, i) => {
+    const wordStart = INITIATIVE_TEXT_START_MOBILE + i * 120;
+    const wordEnd = wordStart + 400;
+
+    return useTransform(scrollY, [wordStart, wordEnd], [40, 0]);
+  });
+
+  const initiativeContainerOpacity = useTransform(
+    scrollY,
+    [18600, 19400],
+    [1, 0]
+  );
+
+  // --- PARTNER DESKTOP CARDS ---
+  const dPartnerCard1Op = useTransform(
+    scrollY,
+    [19600, 20000, 21800, 22200],
+    [0, 1, 1, 0]
+  );
+  const dPartnerCard1Y = useTransform(scrollY, [19600, 20000], [50, 0]);
+
+  const dPartnerCard2Op = useTransform(
+    scrollY,
+    [19800, 20200, 22000, 22400],
+    [0, 1, 1, 0]
+  );
+  const dPartnerCard2Y = useTransform(scrollY, [19800, 20200], [50, 0]);
+
+  const dPartnerCard3Op = useTransform(
+    scrollY,
+    [20000, 20400, 22200, 22600],
+    [0, 1, 1, 0]
+  );
+  const dPartnerCard3Y = useTransform(scrollY, [20000, 20400], [50, 0]);
+
+  const desktopPartnerCardsAnim = [
+    { op: dPartnerCard1Op, y: dPartnerCard1Y },
+    { op: dPartnerCard2Op, y: dPartnerCard2Y },
+    { op: dPartnerCard3Op, y: dPartnerCard3Y },
+  ];
+
+  // --- PARTNER MOBILE CARDS ---
+  const mPartnerCard1Op = useTransform(
+    scrollY,
+    [21000, 21300, 22300, 22600],
+    [0, 1, 1, 0]
+  );
+  const mPartnerCard1Y = useTransform(scrollY, [21000, 21300], [50, 0]);
+
+  const mPartnerCard2Op = useTransform(
+    scrollY,
+    [22650, 22950, 23950, 24250],
+    [0, 1, 1, 0]
+  );
+  const mPartnerCard2Y = useTransform(scrollY, [22650, 22950], [50, 0]);
+
+  const mPartnerCard3Op = useTransform(
+    scrollY,
+    [24300, 24600, 25600, 25900],
+    [0, 1, 1, 0]
+  );
+  const mPartnerCard3Y = useTransform(scrollY, [24300, 24600], [50, 0]);
+
+  const mobilePartnerCardsAnim = [
+    { op: mPartnerCard1Op, y: mPartnerCard1Y },
+    { op: mPartnerCard2Op, y: mPartnerCard2Y },
+    { op: mPartnerCard3Op, y: mPartnerCard3Y },
+  ];
+
   return (
     <section
       id="ecosystem"
-      className="relative z-10 w-full h-[1300vh] pointer-events-none"
+      className="relative z-10 w-full h-[2500vh] pointer-events-none"
     >
       {/* TEXT POSITION */}
       <motion.div
@@ -236,6 +357,134 @@ export default function Ecosystem() {
                 {card.desc}
               </p>
             </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* INITIATIVE TEXT - DESKTOP */}
+      <motion.div
+        style={{ opacity: initiativeContainerOpacity }}
+        className="
+          hidden md:flex
+          fixed
+          bottom-40
+          left-1/2 -translate-x-1/2
+          w-[90%] max-w-4xl
+          flex-wrap justify-center gap-x-4 gap-y-2
+        "
+      >
+        {initiativeWords.map((word, i) => (
+          <motion.span
+            key={`initiative-desktop-${word}-${i}`}
+            style={{
+              opacity: initiativeWordOpacitiesDesktop[i],
+              y: initiativeWordYsDesktop[i],
+            }}
+            className={`
+              text-6xl lg:text-7xl
+              font-bold tracking-tight leading-tight
+              ${(word === "gains" || word === "ecosystem") ? "text-[#00D4A0]" : "text-white"}
+            `}
+          >
+            {word}
+          </motion.span>
+        ))}
+      </motion.div>
+
+      {/* INITIATIVE TEXT - MOBILE */}
+      <motion.div
+        style={{ opacity: initiativeContainerOpacity }}
+        className="
+          flex md:hidden
+          fixed
+          bottom-80
+          left-1/2 -translate-x-1/2
+          w-[90%]
+          flex-wrap justify-center gap-x-4 gap-y-2
+        "
+      >
+        {initiativeWords.map((word, i) => (
+          <motion.span
+            key={`initiative-mobile-${word}-${i}`}
+            style={{
+              opacity: initiativeWordOpacitiesMobile[i],
+              y: initiativeWordYsMobile[i],
+            }}
+            className={`
+              text-4xl
+              font-bold tracking-tight leading-tight
+              ${(word === "gains" || word === "ecosystem") ? "text-[#00D4A0]" : "text-white"}
+            `}
+          >
+            {word}
+          </motion.span>
+        ))}
+      </motion.div>
+
+      {/* PARTNER DESKTOP CARDS (md:flex) */}
+      <div className="hidden md:flex fixed top-[60%] -translate-y-1/2 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl gap-6 pointer-events-auto">
+        {partnerCardsData.map((card, i) => (
+          <motion.div
+            key={`desktop-partner-${i}`}
+            style={{ opacity: desktopPartnerCardsAnim[i].op, y: desktopPartnerCardsAnim[i].y }}
+            className="flex-1 min-h-[300px] bg-[#092C25]/40 border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl p-8 flex flex-col justify-between hover:bg-[#092C25]/60 transition-colors duration-300"
+          >
+            <div>
+              <div className="flex items-center gap-4 mb-4">
+                <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-white/10">
+                  <Image
+                    src={card.logo}
+                    alt={card.name}
+                    fill
+                    className="object-contain p-1"
+                  />
+                </div>
+                <h3 className="text-2xl font-bold text-white">{card.name}</h3>
+              </div>
+              <p className="text-gray-300 leading-relaxed text-sm lg:text-base">
+                {card.desc}
+              </p>
+            </div>
+            <a
+              href="#"
+              className="mt-8 inline-block text-[#00D4A0] font-semibold hover:text-white transition-colors"
+            >
+              {card.link} →
+            </a>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* PARTNER MOBILE CARDS (md:hidden) */}
+      <div className="flex md:hidden fixed top-[55%] -translate-y-1/2 left-1/2 -translate-x-1/2 w-[90%] max-w-sm pointer-events-auto h-[320px]">
+        {partnerCardsData.map((card, i) => (
+          <motion.div
+            key={`mobile-partner-${i}`}
+            style={{ opacity: mobilePartnerCardsAnim[i].op, y: mobilePartnerCardsAnim[i].y }}
+            className="absolute inset-0 w-full h-full bg-[#092C25]/60 border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl p-6 flex flex-col justify-between shadow-xl"
+          >
+            <div>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-white/10">
+                  <Image
+                    src={card.logo}
+                    alt={card.name}
+                    fill
+                    className="object-contain p-1"
+                  />
+                </div>
+                <h3 className="text-xl font-bold text-white">{card.name}</h3>
+              </div>
+              <p className="text-gray-300 leading-relaxed text-sm">
+                {card.desc}
+              </p>
+            </div>
+            <a
+              href="#"
+              className="mt-6 inline-block text-[#00D4A0] font-semibold hover:text-white transition-colors"
+            >
+              {card.link} →
+            </a>
           </motion.div>
         ))}
       </div>
