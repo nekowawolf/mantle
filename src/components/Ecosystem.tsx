@@ -12,16 +12,19 @@ const cardsData = [
     title: "ZK Roadmap",
     desc: "Delivering institutional-grade settlement and value transfer as the world's largest L2 with ZK validity proofs — supporting banking for the next generation.",
     link: "Learn More",
+    bg: "/img/mantle_card1.1.png",
   },
   {
     title: "Modular Design",
     desc: "Upgradable modules for execution, data availability, and finality.",
     link: "Build On Mantle",
+    bg: "/img/mantle_card1.2.png",
   },
   {
     title: "EigenLayer Integration",
     desc: "First L2 to adopt EigenDA technology and enable ETH restaking via Eigenlayer.",
     link: "Restake",
+    bg: "/img/mantle_card1.3.png",
   },
 ];
 
@@ -30,14 +33,17 @@ const newCardsData = [
   {
     title: "Native ETH Asset",
     desc: "mETH Protocol is a liquid ETH staking and restaking protocol that maximizes yields — widely accepted as collateral in CEXs & DeFi apps, and money markets.",
+    bg: "/img/mantle_card2.1.png",
   },
   {
     title: "Native BTC Asset",
     desc: "Ignition fBTC bridges Bitcoin into Web3, unlocking new financial opportunities as the most integrated wrapped BTC asset, powering ecosystems like Babylon, Solv Protocol, and PumpBTC.",
+    bg: "/img/mantle_card2.2.png",
   },
   {
     title: "Stables-Backed Yield Asset Partnerships",
     desc: "Mantle strengthens its ecosystem through partnerships with Ethena USDe, Agora AUSD, and Ondo USDy — enhancing treasury yield, institutional-backed stability, and innovative yield opportunities across the network.",
+    bg: "/img/mantle_card2.3.png",
   },
 ];
 
@@ -288,8 +294,14 @@ export default function Ecosystem() {
         {cardsData.map((card, i) => (
           <motion.div
             key={`desktop-${i}`}
-            style={{ opacity: desktopCardsAnim[i].op, y: desktopCardsAnim[i].y }}
-            className="flex-1 min-h-[300px] bg-[#092C25]/40 border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl p-8 flex flex-col justify-between hover:bg-[#092C25]/60 transition-colors duration-300"
+            style={{
+              opacity: desktopCardsAnim[i].op,
+              y: desktopCardsAnim[i].y,
+              backgroundImage: `linear-gradient(to bottom, rgba(9, 44, 37, 0.4), rgba(9, 44, 37, 0.7)), url(${card.bg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+            className="flex-1 min-h-[300px] border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl p-8 flex flex-col justify-between hover:scale-[1.02] transition-all duration-300 relative overflow-hidden"
           >
             <div>
               <h3 className="text-2xl font-bold text-white mb-4">{card.title}</h3>
@@ -299,7 +311,7 @@ export default function Ecosystem() {
             </div>
             <a
               href="#"
-              className="mt-8 inline-block text-[#00D4A0] font-semibold hover:text-white transition-colors"
+              className="mt-8 inline-block text-[#00D4A0] font-semibold hover:text-white transition-colors cursor-pointer"
             >
               {card.link} →
             </a>
@@ -312,8 +324,14 @@ export default function Ecosystem() {
         {cardsData.map((card, i) => (
           <motion.div
             key={`mobile-${i}`}
-            style={{ opacity: mobileCardsAnim[i].op, y: mobileCardsAnim[i].y }}
-            className="absolute inset-0 w-full h-full bg-[#092C25]/60 border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl p-6 flex flex-col justify-between shadow-xl"
+            style={{
+              opacity: mobileCardsAnim[i].op,
+              y: mobileCardsAnim[i].y,
+              backgroundImage: `linear-gradient(to bottom, rgba(9, 44, 37, 0.6), rgba(9, 44, 37, 0.8)), url(${card.bg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+            className="absolute inset-0 w-full h-full border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl p-6 flex flex-col justify-between shadow-xl"
           >
             <div>
               <h3 className="text-xl font-bold text-white mb-3">{card.title}</h3>
@@ -323,7 +341,7 @@ export default function Ecosystem() {
             </div>
             <a
               href="#"
-              className="mt-6 inline-block text-[#00D4A0] font-semibold hover:text-white transition-colors"
+              className="mt-6 inline-block text-[#00D4A0] font-semibold hover:text-white transition-colors cursor-pointer"
             >
               {card.link} →
             </a>
@@ -336,8 +354,14 @@ export default function Ecosystem() {
         {newCardsData.map((card, i) => (
           <motion.div
             key={`desktop-new-${i}`}
-            style={{ opacity: desktopNewCardsAnim[i].op, y: desktopNewCardsAnim[i].y }}
-            className="flex-1 min-h-[300px] bg-[#092C25]/40 border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl p-8 flex flex-col justify-between hover:bg-[#092C25]/60 transition-colors duration-300"
+            style={{
+              opacity: desktopNewCardsAnim[i].op,
+              y: desktopNewCardsAnim[i].y,
+              backgroundImage: `linear-gradient(to bottom, rgba(9, 44, 37, 0.4), rgba(9, 44, 37, 0.7)), url(${card.bg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+            className="flex-1 min-h-[300px] border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl p-8 flex flex-col justify-between hover:scale-[1.02] transition-all duration-300 relative overflow-hidden"
           >
             <div>
               <h3 className="text-2xl font-bold text-white mb-4">{card.title}</h3>
@@ -354,8 +378,14 @@ export default function Ecosystem() {
         {newCardsData.map((card, i) => (
           <motion.div
             key={`mobile-new-${i}`}
-            style={{ opacity: mobileNewCardsAnim[i].op, y: mobileNewCardsAnim[i].y }}
-            className="absolute inset-0 w-full h-full bg-[#092C25]/60 border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl p-6 flex flex-col justify-between shadow-xl"
+            style={{
+              opacity: mobileNewCardsAnim[i].op,
+              y: mobileNewCardsAnim[i].y,
+              backgroundImage: `linear-gradient(to bottom, rgba(9, 44, 37, 0.6), rgba(9, 44, 37, 0.8)), url(${card.bg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+            className="absolute inset-0 w-full h-full border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl p-6 flex flex-col justify-between shadow-xl"
           >
             <div>
               <h3 className="text-xl font-bold text-white mb-3">{card.title}</h3>
@@ -453,7 +483,7 @@ export default function Ecosystem() {
             </div>
             <a
               href="#"
-              className="mt-8 inline-block text-[#00D4A0] font-semibold hover:text-white transition-colors"
+              className="mt-8 inline-block text-[#00D4A0] font-semibold hover:text-white transition-colors cursor-pointer"
             >
               {card.link} →
             </a>
@@ -487,7 +517,7 @@ export default function Ecosystem() {
             </div>
             <a
               href="#"
-              className="mt-6 inline-block text-[#00D4A0] font-semibold hover:text-white transition-colors"
+              className="mt-6 inline-block text-[#00D4A0] font-semibold hover:text-white transition-colors cursor-pointer"
             >
               {card.link} →
             </a>
