@@ -24,6 +24,22 @@ const cardsData = [
   },
 ];
 
+// Data for new 3 Cards (no link/button)
+const newCardsData = [
+  {
+    title: "Native ETH Asset",
+    desc: "mETH Protocol is a liquid ETH staking and restaking protocol that maximizes yields — widely accepted as collateral in CEXs & DeFi apps, and money markets.",
+  },
+  {
+    title: "Native BTC Asset",
+    desc: "Ignition fBTC bridges Bitcoin into Web3, unlocking new financial opportunities as the most integrated wrapped BTC asset, powering ecosystems like Babylon, Solv Protocol, and PumpBTC.",
+  },
+  {
+    title: "Stables-Backed Yield Asset Partnerships",
+    desc: "Mantle strengthens its ecosystem through partnerships with Ethena USDe, Agora AUSD, and Ondo USDy — enhancing treasury yield, institutional-backed stability, and innovative yield opportunities across the network.",
+  },
+];
+
 export default function Ecosystem() {
   const { scrollY } = useScroll();
 
@@ -43,7 +59,6 @@ export default function Ecosystem() {
   const containerOpacity = useTransform(scrollY, [9800, 10800], [1, 0]);
 
   // --- DESKTOP ANIMATION CARDS ---
-  // Timing is adjusted so that it is not cut off by the bottom of the page.
   const dCard1Op = useTransform(scrollY, [10700, 11100, 12300, 12700], [0, 1, 1, 0]);
   const dCard1Y = useTransform(scrollY, [10700, 11100], [50, 0]);
 
@@ -60,7 +75,6 @@ export default function Ecosystem() {
   ];
 
   // --- MOBILE ANIMATION CARDS ---
-  // Timing is tightened so that the turns are smooth and definitely appear on the short HP screen.
   const mCard1Op = useTransform(scrollY, [10700, 11000, 11600, 11900], [0, 1, 1, 0]);
   const mCard1Y = useTransform(scrollY, [10700, 11000], [50, 0]);
 
@@ -76,10 +90,42 @@ export default function Ecosystem() {
     { op: mCard3Op, y: mCard3Y },
   ];
 
+  // --- NEW DESKTOP CARDS (appear after existing cards disappear) ---
+  const dNewCard1Op = useTransform(scrollY, [13100, 13500, 14700, 15100], [0, 1, 1, 0]);
+  const dNewCard1Y = useTransform(scrollY, [13100, 13500], [50, 0]);
+
+  const dNewCard2Op = useTransform(scrollY, [13300, 13700, 14900, 15300], [0, 1, 1, 0]);
+  const dNewCard2Y = useTransform(scrollY, [13300, 13700], [50, 0]);
+
+  const dNewCard3Op = useTransform(scrollY, [13500, 13900, 15100, 15500], [0, 1, 1, 0]);
+  const dNewCard3Y = useTransform(scrollY, [13500, 13900], [50, 0]);
+
+  const desktopNewCardsAnim = [
+    { op: dNewCard1Op, y: dNewCard1Y },
+    { op: dNewCard2Op, y: dNewCard2Y },
+    { op: dNewCard3Op, y: dNewCard3Y },
+  ];
+
+  // --- NEW MOBILE CARDS (appear after existing cards disappear) ---
+  const mNewCard1Op = useTransform(scrollY, [14500, 14800, 15400, 15700], [0, 1, 1, 0]);
+  const mNewCard1Y = useTransform(scrollY, [14500, 14800], [50, 0]);
+
+  const mNewCard2Op = useTransform(scrollY, [15750, 16050, 16650, 16950], [0, 1, 1, 0]);
+  const mNewCard2Y = useTransform(scrollY, [15750, 16050], [50, 0]);
+
+  const mNewCard3Op = useTransform(scrollY, [17000, 17300, 17900, 18200], [0, 1, 1, 0]);
+  const mNewCard3Y = useTransform(scrollY, [17000, 17300], [50, 0]);
+
+  const mobileNewCardsAnim = [
+    { op: mNewCard1Op, y: mNewCard1Y },
+    { op: mNewCard2Op, y: mNewCard2Y },
+    { op: mNewCard3Op, y: mNewCard3Y },
+  ];
+
   return (
     <section
       id="ecosystem"
-      className="relative z-10 w-full h-[1100vh] pointer-events-none"
+      className="relative z-10 w-full h-[1300vh] pointer-events-none"
     >
       {/* TEXT POSITION */}
       <motion.div
@@ -154,6 +200,42 @@ export default function Ecosystem() {
             >
               {card.link} →
             </a>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* NEW DESKTOP CARDS (md:flex) - appear after existing cards */}
+      <div className="hidden md:flex fixed top-[60%] -translate-y-1/2 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl gap-6 pointer-events-auto">
+        {newCardsData.map((card, i) => (
+          <motion.div
+            key={`desktop-new-${i}`}
+            style={{ opacity: desktopNewCardsAnim[i].op, y: desktopNewCardsAnim[i].y }}
+            className="flex-1 min-h-[300px] bg-[#092C25]/40 border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl p-8 flex flex-col justify-between hover:bg-[#092C25]/60 transition-colors duration-300"
+          >
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-4">{card.title}</h3>
+              <p className="text-gray-300 leading-relaxed text-sm lg:text-base">
+                {card.desc}
+              </p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* NEW MOBILE CARDS (md:hidden) - appear after existing cards */}
+      <div className="flex md:hidden fixed top-[55%] -translate-y-1/2 left-1/2 -translate-x-1/2 w-[90%] max-w-sm pointer-events-auto h-[320px]">
+        {newCardsData.map((card, i) => (
+          <motion.div
+            key={`mobile-new-${i}`}
+            style={{ opacity: mobileNewCardsAnim[i].op, y: mobileNewCardsAnim[i].y }}
+            className="absolute inset-0 w-full h-full bg-[#092C25]/60 border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl p-6 flex flex-col justify-between shadow-xl"
+          >
+            <div>
+              <h3 className="text-xl font-bold text-white mb-3">{card.title}</h3>
+              <p className="text-gray-300 leading-relaxed text-sm">
+                {card.desc}
+              </p>
+            </div>
           </motion.div>
         ))}
       </div>
