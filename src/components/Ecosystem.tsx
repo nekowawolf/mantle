@@ -23,7 +23,7 @@ export default function Ecosystem() {
 
   const containerOpacity = useTransform(
     scrollY,
-    [9500, 10000],
+    [9800, 10800],
     [1, 0]
   );
 
@@ -37,7 +37,7 @@ export default function Ecosystem() {
         style={{ opacity: containerOpacity }}
         className="
           fixed
-          bottom-48 md:bottom-64
+          bottom-80 md:bottom-64
           left-1/2 -translate-x-1/2
           w-[90%] max-w-4xl
           flex flex-wrap justify-center gap-x-4 gap-y-2

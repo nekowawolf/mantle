@@ -132,9 +132,9 @@ function Model({
       const ecosystemTl = gsap.timeline({
         scrollTrigger: {
           trigger: "#ecosystem",
-          start: "top 90%",
-          end: "top 10%",
-          scrub: 3,
+          start: isMobile ? "top 300%" : "top 90%",
+          end: isMobile ? "top 40%" : "top 10%",
+          scrub: isMobile ? 0.5 : 3,
         },
       });
 
