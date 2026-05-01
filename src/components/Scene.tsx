@@ -131,18 +131,18 @@ function Model({
       // ─── PHASE 2: HERO → ECOSYSTEM TRANSITION ───
       const ecosystemTl = gsap.timeline({
         scrollTrigger: {
-          trigger: "#ecosystem",           
-          start: "top 90%",                
-          end: "top 20%",                  
-          scrub: 1,
+          trigger: "#ecosystem",
+          start: "top 90%",
+          end: "top 10%",
+          scrub: 3,
         },
       });
 
-      // Coin mengecil
+      // Coins shrink smaller
       ecosystemTl.to(modelRef.current.scale, {
-        x: 1.3,
-        y: 1.3,
-        z: 1.3,
+        x: 0.9,
+        y: 0.9,
+        z: 0.9,
         ease: "power2.inOut",
         duration: 3,
       });
@@ -152,7 +152,7 @@ function Model({
         modelRef.current.position,
         {
           x: 0,
-          y: 0,
+          y: 1.2,
           z: 1,
           ease: "power2.inOut",
           duration: 3,
@@ -160,11 +160,10 @@ function Model({
         0
       );
 
-      // Rotasi pelan
       ecosystemTl.to(
         modelRef.current.rotation,
         {
-          y: "+=" + Math.PI * 2,
+          y: "+=" + Math.PI * 3,
           ease: "none",
           duration: 4,
         },
