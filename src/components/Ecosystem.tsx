@@ -114,13 +114,13 @@ export default function Ecosystem() {
   ];
 
   // --- NEW DESKTOP CARDS (appear after existing cards disappear) ---
-  const dNewCard1Op = useTransform(scrollY, [13100, 13500, 14700, 15100], [0, 1, 1, 0]);
+  const dNewCard1Op = useTransform(scrollY, [13100, 13500, 14700, 15000], [0, 1, 1, 0]);
   const dNewCard1Y = useTransform(scrollY, [13100, 13500], [50, 0]);
 
-  const dNewCard2Op = useTransform(scrollY, [13300, 13700, 14900, 15300], [0, 1, 1, 0]);
+  const dNewCard2Op = useTransform(scrollY, [13300, 13700, 14900, 15200], [0, 1, 1, 0]);
   const dNewCard2Y = useTransform(scrollY, [13300, 13700], [50, 0]);
 
-  const dNewCard3Op = useTransform(scrollY, [13500, 13900, 15100, 15500], [0, 1, 1, 0]);
+  const dNewCard3Op = useTransform(scrollY, [13500, 13900, 15100, 15300], [0, 1, 1, 0]);
   const dNewCard3Y = useTransform(scrollY, [13500, 13900], [50, 0]);
 
   const desktopNewCardsAnim = [
@@ -136,7 +136,7 @@ export default function Ecosystem() {
   const mNewCard2Op = useTransform(scrollY, [15750, 16050, 16650, 16950], [0, 1, 1, 0]);
   const mNewCard2Y = useTransform(scrollY, [15750, 16050], [50, 0]);
 
-  const mNewCard3Op = useTransform(scrollY, [17000, 17300, 17900, 18200], [0, 1, 1, 0]);
+  const mNewCard3Op = useTransform(scrollY, [17000, 17300, 17900, 18100], [0, 1, 1, 0]);
   const mNewCard3Y = useTransform(scrollY, [17000, 17300], [50, 0]);
 
   const mobileNewCardsAnim = [
@@ -145,11 +145,12 @@ export default function Ecosystem() {
     { op: mNewCard3Op, y: mNewCard3Y },
   ];
 
+
   // --- TEXT: "We work with initiatives..." ---
   const initiativeWords = ["We", "work", "with", "initiatives", "that", "boost", "user", "gains", "&", "fortify", "the", "ecosystem"];
 
-  const INITIATIVE_TEXT_START_DESKTOP = 16000;
-  const INITIATIVE_TEXT_START_MOBILE = 18500;
+  const INITIATIVE_TEXT_START_DESKTOP = 15400;
+  const INITIATIVE_TEXT_START_MOBILE = 18200;
 
   // Desktop animations
   const initiativeWordOpacitiesDesktop = initiativeWords.map((_, i) => {
@@ -181,33 +182,40 @@ export default function Ecosystem() {
     return useTransform(scrollY, [wordStart, wordEnd], [40, 0]);
   });
 
-  const initiativeContainerOpacity = useTransform(
+  const initiativeContainerOpacityDesktop = useTransform(
     scrollY,
-    [18600, 19400],
+    [18000, 18500],
     [1, 0]
   );
+
+  const initiativeContainerOpacityMobile = useTransform(
+    scrollY,
+    [21000, 21500],
+    [1, 0]
+  );
+
 
   // --- PARTNER DESKTOP CARDS ---
   const dPartnerCard1Op = useTransform(
     scrollY,
-    [19600, 20000, 21800, 22200],
+    [18600, 19000, 20800, 21200],
     [0, 1, 1, 0]
   );
-  const dPartnerCard1Y = useTransform(scrollY, [19600, 20000], [50, 0]);
+  const dPartnerCard1Y = useTransform(scrollY, [18600, 19000], [50, 0]);
 
   const dPartnerCard2Op = useTransform(
     scrollY,
-    [19800, 20200, 22000, 22400],
+    [18800, 19200, 21000, 21400],
     [0, 1, 1, 0]
   );
-  const dPartnerCard2Y = useTransform(scrollY, [19800, 20200], [50, 0]);
+  const dPartnerCard2Y = useTransform(scrollY, [18800, 19200], [50, 0]);
 
   const dPartnerCard3Op = useTransform(
     scrollY,
-    [20000, 20400, 22200, 22600],
+    [19000, 19400, 21200, 21600],
     [0, 1, 1, 0]
   );
-  const dPartnerCard3Y = useTransform(scrollY, [20000, 20400], [50, 0]);
+  const dPartnerCard3Y = useTransform(scrollY, [19000, 19400], [50, 0]);
 
   const desktopPartnerCardsAnim = [
     { op: dPartnerCard1Op, y: dPartnerCard1Y },
@@ -215,27 +223,28 @@ export default function Ecosystem() {
     { op: dPartnerCard3Op, y: dPartnerCard3Y },
   ];
 
+
   // --- PARTNER MOBILE CARDS ---
   const mPartnerCard1Op = useTransform(
     scrollY,
-    [21000, 21300, 22300, 22600],
+    [21600, 21900, 22900, 23200],
     [0, 1, 1, 0]
   );
-  const mPartnerCard1Y = useTransform(scrollY, [21000, 21300], [50, 0]);
+  const mPartnerCard1Y = useTransform(scrollY, [21600, 21900], [50, 0]);
 
   const mPartnerCard2Op = useTransform(
     scrollY,
-    [22650, 22950, 23950, 24250],
+    [23250, 23550, 24550, 24850],
     [0, 1, 1, 0]
   );
-  const mPartnerCard2Y = useTransform(scrollY, [22650, 22950], [50, 0]);
+  const mPartnerCard2Y = useTransform(scrollY, [23250, 23550], [50, 0]);
 
   const mPartnerCard3Op = useTransform(
     scrollY,
-    [24300, 24600, 25600, 25900],
+    [24900, 25200, 26200, 26500],
     [0, 1, 1, 0]
   );
-  const mPartnerCard3Y = useTransform(scrollY, [24300, 24600], [50, 0]);
+  const mPartnerCard3Y = useTransform(scrollY, [24900, 25200], [50, 0]);
 
   const mobilePartnerCardsAnim = [
     { op: mPartnerCard1Op, y: mPartnerCard1Y },
@@ -243,10 +252,11 @@ export default function Ecosystem() {
     { op: mPartnerCard3Op, y: mPartnerCard3Y },
   ];
 
+
   return (
     <section
       id="ecosystem"
-      className="relative z-10 w-full h-[2500vh] pointer-events-none"
+      className="relative z-10 w-full h-[2000vh] pointer-events-none"
     >
       {/* TEXT POSITION */}
       <motion.div
@@ -363,7 +373,7 @@ export default function Ecosystem() {
 
       {/* INITIATIVE TEXT - DESKTOP */}
       <motion.div
-        style={{ opacity: initiativeContainerOpacity }}
+        style={{ opacity: initiativeContainerOpacityDesktop }}
         className="
           hidden md:flex
           fixed
@@ -393,7 +403,7 @@ export default function Ecosystem() {
 
       {/* INITIATIVE TEXT - MOBILE */}
       <motion.div
-        style={{ opacity: initiativeContainerOpacity }}
+        style={{ opacity: initiativeContainerOpacityMobile }}
         className="
           flex md:hidden
           fixed
