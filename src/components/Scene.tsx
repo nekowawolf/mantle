@@ -199,7 +199,7 @@ function Model({
         trigger: "#get-mnt",
 
         // Different trigger positions
-        start: isMobile ? "top 200%" : "top 80%",
+        start: isMobile ? "top 100%" : "top 80%",
         end: isMobile ? "top 35%" : "top 20%",
 
         scrub: isMobile ? 1 : 2,
@@ -219,9 +219,9 @@ function Model({
           getMntTl.to(
             modelRef.current.scale,
             {
-              x: isMobile ? 1.3 : 1.6,
-              y: isMobile ? 1.3 : 1.6,
-              z: isMobile ? 1.3 : 1.6,
+              x: isMobile ? 1.5 : 1.6,
+              y: isMobile ? 1.5 : 1.6,
+              z: isMobile ? 1.5 : 1.6,
               duration: 1.2,
               ease: "power2.out",
             },
@@ -244,7 +244,7 @@ function Model({
             modelRef.current.position,
             {
               x: 0,
-              y: isMobile ? -0.6 : -1.2,
+              y: isMobile ? -0.5 : -1,
               z: 1,
               duration: 1.4,
               ease: "power2.inOut",
