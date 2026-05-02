@@ -54,18 +54,21 @@ const partnerCardsData = [
     name: "EcoFund",
     desc: "The Mantle EcoFund supports ecosystem growth with a $200M capital pool, backing innovative projects alongside top-tier VCs like Polychain and Dragonfly.",
     link: "Visit",
+    bg: "/img/mantle_card1.1.png",
   },
   {
     logo: "https://www.mantle.xyz/images/home/project-mirana-logo.svg",
     name: "Mirana Ventures",
     desc: "Mirana Ventures supports Mantle's EcoFund with strong venture capital expertise, helping drive ecosystem growth through strategic investments and industry experience.",
     link: "Visit",
+    bg: "/img/mantle_card1.2.png",
   },
   {
     logo: "https://www.mantle.xyz/images/home/project-bybit-logo.svg",
     name: "Bybit",
     desc: "Bybit strengthens Mantle's liquidity and DeFi-CeFi integration through yield-bearing collateral, simplified asset access, fiat ramps, and connected on-chain and CEX opportunities.",
     link: "Visit",
+    bg: "/img/mantle_card1.3.png",
   },
 ];
 
@@ -462,8 +465,14 @@ export default function Ecosystem() {
         {partnerCardsData.map((card, i) => (
           <motion.div
             key={`desktop-partner-${i}`}
-            style={{ opacity: desktopPartnerCardsAnim[i].op, y: desktopPartnerCardsAnim[i].y }}
-            className="flex-1 min-h-[300px] bg-[#092C25]/40 border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl p-8 flex flex-col justify-between hover:bg-[#092C25]/60 transition-colors duration-300"
+            style={{
+              opacity: desktopPartnerCardsAnim[i].op,
+              y: desktopPartnerCardsAnim[i].y,
+              backgroundImage: `linear-gradient(to bottom, rgba(9, 44, 37, 0.4), rgba(9, 44, 37, 0.7)), url(${card.bg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+            className="flex-1 min-h-[300px] border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl p-8 flex flex-col justify-between hover:scale-[1.02] transition-all duration-300 relative overflow-hidden"
           >
             <div>
               <div className="flex items-center gap-4 mb-4">
@@ -496,8 +505,14 @@ export default function Ecosystem() {
         {partnerCardsData.map((card, i) => (
           <motion.div
             key={`mobile-partner-${i}`}
-            style={{ opacity: mobilePartnerCardsAnim[i].op, y: mobilePartnerCardsAnim[i].y }}
-            className="absolute inset-0 w-full h-full bg-[#092C25]/60 border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl p-6 flex flex-col justify-between shadow-xl"
+            style={{
+              opacity: mobilePartnerCardsAnim[i].op,
+              y: mobilePartnerCardsAnim[i].y,
+              backgroundImage: `linear-gradient(to bottom, rgba(9, 44, 37, 0.6), rgba(9, 44, 37, 0.8)), url(${card.bg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+            className="absolute inset-0 w-full h-full border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl p-6 flex flex-col justify-between shadow-xl"
           >
             <div>
               <div className="flex items-center gap-3 mb-3">
