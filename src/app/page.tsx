@@ -7,6 +7,7 @@ import Hero from "@/components/Hero";
 import Scene from "@/components/Scene";
 import Ecosystem from "@/components/Ecosystem";
 import Governance from "@/components/Governance";
+import GetMNT from "@/components/GetMNT";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -41,6 +42,7 @@ export default function Home() {
           <Hero isActive={!isLoading} />
           <Ecosystem />
           <Governance />
+          <GetMNT />
         </div>
       </div>
     </main>

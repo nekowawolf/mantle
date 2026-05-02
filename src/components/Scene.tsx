@@ -194,6 +194,105 @@ function Model({
         0
       );
 
+      // ─── PHASE 4: GetMNT — coin stop float, scale up, rotate 1×, turun ke center ───
+      ScrollTrigger.create({
+        trigger: "#get-mnt",
+        start: "top 80%",
+        end: "top 20%",
+        scrub: 2,
+        
+        onEnter: () => {
+          // Hentikan floating animation
+          if (floatTweenRef.current) {
+            floatTweenRef.current.kill();
+            floatTweenRef.current = null;
+          }
+
+          if (!modelRef.current) return;
+
+          const getMntTl = gsap.timeline();
+
+          // 1. Scale up (0.9 → 1.3)
+          getMntTl.to(
+            modelRef.current.scale,
+            {
+              x: 1.3,
+              y: 1.3,
+              z: 1.3,
+              duration: 1.2,
+              ease: "power2.out",
+            },
+            0
+          );
+
+          // 2. Rotate 1× (360°) dari posisi terakhir
+          getMntTl.to(
+            modelRef.current.rotation,
+            {
+              y: "+=" + Math.PI * 2,
+              duration: 1.5,
+              ease: "power2.inOut",
+            },
+            0
+          );
+
+          // 3. Turunkan coin ke center layar (y≈0)
+          getMntTl.to(
+            modelRef.current.position,
+            {
+              x: 0,
+              y: 0,
+              z: 1,
+              duration: 1.4,
+              ease: "power2.inOut",
+            },
+            0.1
+          );
+        },
+        
+        onLeaveBack: () => {
+          if (!modelRef.current) return;
+
+          // 🔧 FIX 1: Reverse rotate ke posisi floating (balik 360°)
+          gsap.to(modelRef.current.rotation, {
+            y: "-=" + Math.PI * 2,
+            duration: 1.2,
+            ease: "power2.inOut",
+          });
+
+          // Scale balik ke 0.9 (floating size)
+          gsap.to(modelRef.current.scale, {
+            x: 0.9,
+            y: 0.9,
+            z: 0.9,
+            duration: 1,
+            ease: "power2.inOut",
+          });
+
+          // Position balik ke floating position (y=1.2)
+          gsap.to(modelRef.current.position, {
+            x: 0,
+            y: 1.2,
+            z: 1,
+            duration: 1,
+            ease: "power2.inOut",
+            onComplete: () => {
+              // Aktifkan kembali floating
+              if (modelRef.current) {
+                const baseY = modelRef.current.position.y;
+                floatTweenRef.current = gsap.to(modelRef.current.position, {
+                  y: baseY + 0.08,
+                  duration: 4.5,
+                  ease: "sine.inOut",
+                  yoyo: true,
+                  repeat: -1,
+                });
+              }
+            },
+          });
+        },
+      });
+
       // ─── ROTATE 2 & 3 (text switch triggers) ───
       ScrollTrigger.create({
         trigger: ".scroll-container",
