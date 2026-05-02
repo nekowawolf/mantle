@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Scene from "@/components/Scene";
 import Ecosystem from "@/components/Ecosystem";
+import Governance from "@/components/Governance";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -39,6 +40,7 @@ export default function Home() {
         <div className="scroll-container relative w-full">
           <Hero isActive={!isLoading} />
           <Ecosystem />
+          <Governance />
         </div>
       </div>
     </main>

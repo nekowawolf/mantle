@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import { FiArrowRight } from "react-icons/fi";
 
 const words = ["We", "build", "$MNT-powered", "products", "on", "Ethereum"];
 const TEXT_START = 8000;
@@ -320,14 +321,17 @@ export default function Ecosystem() {
                 {card.desc}
               </p>
             </div>
-            <a
-              href={card.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-block text-[#00D4A0] font-semibold hover:text-white transition-colors cursor-pointer"
-            >
-              {card.textLink} →
-            </a>
+            <div className="flex mt-8">
+              <a
+                href={card.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-2.5 bg-[#153e33] border border-[#00D4A0]/40 text-white font-semibold rounded-xl hover:bg-[#00D4A0] hover:text-[#092C25] hover:border-[#00D4A0] transition-all duration-300 cursor-pointer text-sm shadow-md"
+              >
+                {card.textLink}
+                <FiArrowRight className="text-lg" />
+              </a>
+            </div>
           </motion.div>
         ))}
       </div>
@@ -353,14 +357,17 @@ export default function Ecosystem() {
                 {card.desc}
               </p>
             </div>
-            <a
-              href={card.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-block text-[#00D4A0] font-semibold hover:text-white transition-colors cursor-pointer"
-            >
-              {card.textLink} →
-            </a>
+            <div className="flex mt-6 w-full">
+              <a
+                href={card.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full px-5 py-2.5 bg-[#153e33] border border-[#00D4A0]/40 text-white font-semibold rounded-xl hover:bg-[#00D4A0] hover:text-[#092C25] hover:border-[#00D4A0] transition-all duration-300 cursor-pointer text-sm shadow-md"
+              >
+                {card.textLink}
+                <FiArrowRight className="text-lg" />
+              </a>
+            </div>
           </motion.div>
         ))}
       </div>
@@ -508,14 +515,17 @@ export default function Ecosystem() {
                 {card.desc}
               </p>
             </div>
-            <a
-              href={card.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-block text-[#00D4A0] font-semibold hover:text-white transition-colors cursor-pointer"
-            >
-              {card.textLink} →
-            </a>
+            <div className="flex mt-8">
+              <a
+                href={card.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-2.5 bg-[#153e33] border border-[#00D4A0]/40 text-white font-semibold rounded-xl hover:bg-[#00D4A0] hover:text-[#092C25] hover:border-[#00D4A0] transition-all duration-300 cursor-pointer text-sm shadow-md"
+              >
+                {card.textLink}
+                <FiArrowRight className="text-lg" />
+              </a>
+            </div>
           </motion.div>
         ))}
       </div>
@@ -551,14 +561,17 @@ export default function Ecosystem() {
                 {card.desc}
               </p>
             </div>
-            <a
-              href={card.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-block text-[#00D4A0] font-semibold hover:text-white transition-colors cursor-pointer"
-            >
-              {card.textLink} →
-            </a>
+            <div className="flex mt-6 w-full">
+              <a
+                href={card.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full px-5 py-2.5 bg-[#153e33] border border-[#00D4A0]/40 text-white font-semibold rounded-xl hover:bg-[#00D4A0] hover:text-[#092C25] hover:border-[#00D4A0] transition-all duration-300 cursor-pointer text-sm shadow-md"
+              >
+                {card.textLink}
+                <FiArrowRight className="text-lg" />
+              </a>
+            </div>
           </motion.div>
         ))}
       </div>
