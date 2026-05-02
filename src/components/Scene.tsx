@@ -39,7 +39,7 @@ export default function Scene({ isHidden }: { isHidden: boolean }) {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full z-20 pointer-events-none will-change-transform transition-opacity duration-700 ${
+      className={`fixed top-0 left-0 w-full z-10 pointer-events-none will-change-transform transition-opacity duration-700 ${
         isHidden ? "opacity-0" : "opacity-100"
       }`}
       style={{ height: vh }}

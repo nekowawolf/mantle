@@ -27,17 +27,16 @@ export default function Home() {
       {/* Loading Screen */}
       {isLoading && <LoadingScreen />}
 
-      <Scene isHidden={isLoading} />
-
       {/* UI CONTENT */}
       <div
         className={`${
           isLoading ? "invisible opacity-0" : "visible opacity-100"
         } transition-opacity duration-700`}
       >
+        <Scene isHidden={isLoading} />
         <Navbar />
 
-        <div className="scroll-container relative z-10 w-full">
+        <div className="scroll-container relative w-full">
           <Hero isActive={!isLoading} />
           <Ecosystem />
         </div>

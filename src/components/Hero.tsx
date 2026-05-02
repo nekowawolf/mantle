@@ -156,7 +156,7 @@ const leftTextOpacity = useTransform(
       />
 
       {/* HERO CONTENT */}
-      <section className="h-screen w-full relative z-10 px-6 md:px-16 pointer-events-none">
+      <section className="h-screen w-full relative z-20 px-6 md:px-16 pointer-events-none">
 
         {/* LEFT TEXT */}
         <motion.div
@@ -168,6 +168,7 @@ const leftTextOpacity = useTransform(
             /* Desktop: Kiri tengah */
             md:left-40 md:top-1/2 md:-translate-y-1/2 md:translate-x-0
             w-[90%] md:max-w-sm
+            pointer-events-auto
           "
         >
           <p className="text-3xl md:text-5xl text-gray-300 leading-tight font-bold text-center md:text-left">
@@ -183,6 +184,7 @@ const leftTextOpacity = useTransform(
           md:right-19 md:left-auto md:top-1/2 md:-translate-y-1/2 md:translate-x-0 md:bottom-auto
           w-[90%] md:max-w-96
           h-[140px]
+          pointer-events-auto
         "
       >
         {/* TEXT 1 */}
@@ -247,7 +249,7 @@ const leftTextOpacity = useTransform(
             opacity: opacityFade,
             clipPath: clipPath,
           }}
-          className="fixed top-32 md:top-24 left-6 md:left-16 max-w-3xl pt-[80px] md:pt-[130px] lg:pt-[160px]"
+          className="fixed top-32 md:top-24 left-6 md:left-16 max-w-3xl pt-[80px] md:pt-[130px] lg:pt-[160px] pointer-events-auto"
         >
           <h2 className="text-xl md:text-3xl lg:text-4xl font-light text-gray-300 ml-1 md:ml-2 -mt-4 md:-mt-6">
             Network
@@ -256,7 +258,7 @@ const leftTextOpacity = useTransform(
 
         <motion.div
           style={{ opacity: opacityFade }}
-          className="fixed bottom-36 right-6 md:right-16 max-w-xs md:max-w-md text-right"
+          className="fixed bottom-36 right-6 md:right-16 max-w-xs md:max-w-md text-right pointer-events-auto"
         >
           <p className="text-base md:text-2xl text-gray-300 leading-relaxed font-semibold">
             A modular Layer 2 blockchain focused on hyper-scaled performance, low fees, and Ethereum-grade security.
