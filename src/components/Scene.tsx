@@ -65,6 +65,7 @@ function Model({
 }) {
   const { scene } = useGLTF(url);
   const modelRef = useRef<THREE.Group>(null);
+  const floatTweenRef = useRef<gsap.core.Tween | null>(null);
 
   const isMobile =
     typeof window !== "undefined" && window.innerWidth < 768;
@@ -130,11 +131,34 @@ function Model({
 
       // ─── PHASE 2: HERO → ECOSYSTEM TRANSITION ───
       const ecosystemTl = gsap.timeline({
+        onComplete: () => {
+          // ─── PHASE 3: FLOATING ANIMATION ───
+          if (modelRef.current) {
+            // Kill any existing float tween
+            if (floatTweenRef.current) {
+              floatTweenRef.current.kill();
+            }
+            const baseY = modelRef.current.position.y;
+            floatTweenRef.current = gsap.to(modelRef.current.position, {
+              y: baseY + 0.08, 
+              duration: 4.5,  
+              ease: "sine.inOut",
+              yoyo: true,
+              repeat: -1,     
+            });
+          }
+        },
         scrollTrigger: {
           trigger: "#ecosystem",
           start: isMobile ? "top 300%" : "top 90%",
           end: isMobile ? "top 40%" : "top 10%",
           scrub: isMobile ? 0.5 : 3,
+          onLeaveBack: () => {
+            if (floatTweenRef.current) {
+              floatTweenRef.current.kill();
+              floatTweenRef.current = null;
+            }
+          },
         },
       });
 
@@ -212,6 +236,9 @@ function Model({
       return () => {
         heroTl.kill();
         ecosystemTl.kill();
+        if (floatTweenRef.current) {
+          floatTweenRef.current.kill();
+        }
         ScrollTrigger.getAll().forEach((t) => t.kill());
       };
     }

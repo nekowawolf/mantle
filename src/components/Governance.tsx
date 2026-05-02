@@ -19,7 +19,7 @@ const cardsData = [
       { label: "Snapshot", link: "https://snapshot.org/#/bitdao.eth/" },
       { label: "Delegate", link: "https://delegatevote.mantle.xyz/" },
     ],
-    bg: "/img/mantle_card1.1.png",
+    bg: "/img/mantle_card3.1.png",
   },
   {
     title: "Resource Management",
@@ -28,7 +28,7 @@ const cardsData = [
       { label: "Treasury Monitor", link: "https://treasurymonitor.mantle.xyz/" },
       { label: "Mantle Rewards Station", link: "https://rewards.mantle.xyz/" },
     ],
-    bg: "/img/mantle_card1.2.png",
+    bg: "/img/mantle_card3.2.png",
   },
 ];
 
