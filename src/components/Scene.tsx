@@ -194,13 +194,16 @@ function Model({
         0
       );
 
-      // ─── PHASE 4: GetMNT — coin stop float, scale up, rotate 1×, turun ke center ───
+      // ─── PHASE 4: GetMNT ───
       ScrollTrigger.create({
         trigger: "#get-mnt",
-        start: "top 80%",
-        end: "top 20%",
-        scrub: 2,
-        
+
+        // Different trigger positions
+        start: isMobile ? "top 200%" : "top 80%",
+        end: isMobile ? "top 35%" : "top 20%",
+
+        scrub: isMobile ? 1 : 2,
+
         onEnter: () => {
           // Hentikan floating animation
           if (floatTweenRef.current) {
@@ -212,20 +215,20 @@ function Model({
 
           const getMntTl = gsap.timeline();
 
-          // 1. Scale up (0.9 → 1.3)
+          // 1. Scale up
           getMntTl.to(
             modelRef.current.scale,
             {
-              x: 1.3,
-              y: 1.3,
-              z: 1.3,
+              x: isMobile ? 1.3 : 1.6,
+              y: isMobile ? 1.3 : 1.6,
+              z: isMobile ? 1.3 : 1.6,
               duration: 1.2,
               ease: "power2.out",
             },
             0
           );
 
-          // 2. Rotate 1× (360°) dari posisi terakhir
+          // 2. Rotate 1×
           getMntTl.to(
             modelRef.current.rotation,
             {
@@ -236,12 +239,12 @@ function Model({
             0
           );
 
-          // 3. Turunkan coin ke center layar (y≈0)
+          // 3. Move coin to center
           getMntTl.to(
             modelRef.current.position,
             {
               x: 0,
-              y: 0,
+              y: isMobile ? -0.6 : -1.2,
               z: 1,
               duration: 1.4,
               ease: "power2.inOut",
@@ -249,18 +252,18 @@ function Model({
             0.1
           );
         },
-        
+
         onLeaveBack: () => {
           if (!modelRef.current) return;
 
-          // 🔧 FIX 1: Reverse rotate ke posisi floating (balik 360°)
+          // Reverse rotate
           gsap.to(modelRef.current.rotation, {
             y: "-=" + Math.PI * 2,
             duration: 1.2,
             ease: "power2.inOut",
           });
 
-          // Scale balik ke 0.9 (floating size)
+          // Scale back
           gsap.to(modelRef.current.scale, {
             x: 0.9,
             y: 0.9,
@@ -269,7 +272,7 @@ function Model({
             ease: "power2.inOut",
           });
 
-          // Position balik ke floating position (y=1.2)
+          // Back to floating position
           gsap.to(modelRef.current.position, {
             x: 0,
             y: 1.2,
@@ -277,9 +280,9 @@ function Model({
             duration: 1,
             ease: "power2.inOut",
             onComplete: () => {
-              // Aktifkan kembali floating
               if (modelRef.current) {
                 const baseY = modelRef.current.position.y;
+
                 floatTweenRef.current = gsap.to(modelRef.current.position, {
                   y: baseY + 0.08,
                   duration: 4.5,
