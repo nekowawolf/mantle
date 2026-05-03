@@ -25,6 +25,15 @@ export default function Navbar() {
   const scaleMobile = useTransform(scrollY, [0, 300], [1, 0.285]); 
   const yMobile = useTransform(scrollY, [0, 300], [0, -112]); 
 
+  // Toggle menu-open class on body to hide FakeScrollbar
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("menu-open");
+    } else {
+      document.body.classList.remove("menu-open");
+    }
+  }, [isOpen]);
+
 
   return (
     <>

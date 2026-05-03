@@ -8,6 +8,7 @@ import Scene from "@/components/Scene";
 import Ecosystem from "@/components/Ecosystem";
 import Governance from "@/components/Governance";
 import GetMNT from "@/components/GetMNT";
+import FakeScrollbar from "@/components/FakeScrollbar";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -45,6 +46,9 @@ export default function Home() {
           <GetMNT />
         </div>
       </div>
+
+      {/* Custom Scrollbar */}
+      {!isLoading && <FakeScrollbar />}
     </main>
   );
 }

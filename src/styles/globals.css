@@ -4,6 +4,18 @@
   --font-sans: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+/* ═══ Hide native scrollbar ═══ */
+* {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
 html,
 body {
   max-width: 100vw;
@@ -14,32 +26,6 @@ body {
   color: white;
 }
 
-/* Custom Scrollbar - Chrome, Edge, Safari */
-::-webkit-scrollbar {
-  width: 14px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0a0a0a;
-  border-radius: 7px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #092C25;
-  border-radius: 7px;
-  border: 2px solid #1a1a1a;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #0d453a;
-}
-
-/* For Firefox */
-* {
-  scrollbar-width: auto;
-  scrollbar-color: #092C25 #0a0a0a;
-}
-
 /* Hide scrollbar during loading - completely hidden */
 body.loading {
   overflow: hidden !important;
@@ -48,18 +34,11 @@ body.loading {
   height: 100% !important;
 }
 
-body.loading::-webkit-scrollbar {
-  display: none !important;
-  width: 0 !important;
-}
-
-/* Hide scrollbar on html during loading */
-body.loading html {
-  overflow: hidden !important;
-}
-
-body.loading html::-webkit-scrollbar {
-  display: none !important;
+/* Hide fake scrollbar when mobile menu is open */
+body.menu-open .fake-scrollbar {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 @layer utilities {
