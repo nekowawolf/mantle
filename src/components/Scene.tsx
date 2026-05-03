@@ -300,7 +300,7 @@ function Model({
       ScrollTrigger.create({
         trigger: "#events",
       
-        start: isMobile ? "top 200%" : "top 100%",
+        start: isMobile ? "top 240%" : "top 100%",
         end: isMobile ? "top 35%" : "top 20%",
       
         scrub: isMobile ? 1 : 2,
@@ -341,7 +341,7 @@ function Model({
           eventsTl.to(
             modelRef.current.position,
             {
-              x: isMobile ? -0.2 : -0.09,
+              x: isMobile ? -0.2 : -0.35,
               y: isMobile ? -2.4 : -2.2,
               z: 1,
               duration: 1.8,
