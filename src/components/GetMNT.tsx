@@ -604,16 +604,16 @@ export default function GetMNT() {
             target="_blank"
             rel="noopener noreferrer"
             className="
-              flex items-center gap-2
-              text-[#00D4A0] text-base font-semibold
-              tracking-widest uppercase
+              flex items-center gap-1.5
+              text-[#00D4A0] text-xs font-medium
+              tracking-[0.2em] uppercase
               border-b border-[#00D4A0]/40
               hover:border-[#00D4A0]
               transition-all duration-300
-              pb-0.5
+              pb-[2px]
             "
           >
-            View More <FiArrowRight className="text-lg" />
+            View More <FiArrowRight className="text-sm" />
           </a>
         </motion.div>
       </div>
@@ -737,7 +737,7 @@ export default function GetMNT() {
           style={{ opacity: viewMoreOpacityMobile }}
           className="
             fixed
-            bottom-[17%]
+            bottom-[18%]
             left-1/2 -translate-x-1/2
             pointer-events-auto
           "
@@ -747,16 +747,16 @@ export default function GetMNT() {
             target="_blank"
             rel="noopener noreferrer"
             className="
-              flex items-center gap-1.5
-              text-[#00D4A0] text-sm font-semibold
-              tracking-widest uppercase
+              flex items-center gap-1
+              text-[#00D4A0] text-[10px] font-medium
+              tracking-[0.2em] uppercase
               border-b border-[#00D4A0]/40
               hover:border-[#00D4A0]
               transition-all duration-300
-              pb-0.5
+              pb-[1px]
             "
           >
-            View More <FiArrowRight className="text-base" />
+            View More <FiArrowRight className="text-xs" />
           </a>
         </motion.div>
       </div>
