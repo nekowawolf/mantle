@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
 
@@ -31,26 +32,246 @@ const dexImages = [
   "https://cms.mantle.xyz/assets/a38ede32-2060-48b1-9ddc-05be4d4d7154",
 ];
 
+// ─── Candlestick data ───────────────────────────────────────────────────────
+const closes = [
+  0.15, 0.18, 0.20, 0.25, 0.30, 0.32, 0.34, 0.36, 0.40, 0.42, 0.44, 0.46,
+  0.52, 0.56, 0.58, 0.60, 0.59, 0.62, 0.60, 0.65, 0.63, 0.66, 0.68, 0.67,
+  0.70, 0.72, 0.68, 0.69, 0.67, 0.65, 0.63, 0.60, 0.55, 0.52, 0.50, 0.48,
+  0.46, 0.44, 0.42, 0.45, 0.43, 0.46, 0.44, 0.45, 0.50, 0.54, 0.57, 0.60,
+  0.63, 0.66, 0.70, 0.68, 0.69, 0.70, 0.68, 0.72, 0.68, 0.66, 0.67, 0.65,
+  0.68, 0.64, 0.66, 0.65, 0.67, 0.70, 0.72, 0.74, 0.76, 0.78, 0.82, 0.85,
+  0.87, 0.88, 0.90, 0.89, 0.92, 0.95,
+];
+
+interface CandleData {
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  isGreen: boolean;
+}
+
+function buildCandles(): CandleData[] {
+  const candles: CandleData[] = [];
+  let prevClose = closes[0] - 0.02;
+  // Use seeded-like fixed random values to avoid hydration issues
+  const wickTops = [
+    0.012, 0.008, 0.014, 0.006, 0.010, 0.013, 0.007, 0.011, 0.009, 0.015,
+    0.008, 0.012, 0.006, 0.014, 0.010, 0.007, 0.013, 0.009, 0.011, 0.008,
+    0.015, 0.006, 0.012, 0.010, 0.007, 0.014, 0.009, 0.013, 0.008, 0.011,
+    0.006, 0.015, 0.010, 0.007, 0.012, 0.014, 0.009, 0.008, 0.013, 0.011,
+    0.006, 0.015, 0.010, 0.007, 0.012, 0.009, 0.014, 0.008, 0.011, 0.013,
+    0.006, 0.015, 0.010, 0.007, 0.012, 0.009, 0.014, 0.008, 0.011, 0.013,
+    0.007, 0.010, 0.006, 0.015, 0.012, 0.009, 0.014, 0.008, 0.011, 0.013,
+    0.006, 0.015, 0.010, 0.007, 0.012, 0.009, 0.014, 0.008,
+  ];
+  const wickBots = [
+    0.007, 0.011, 0.009, 0.013, 0.008, 0.006, 0.014, 0.010, 0.012, 0.007,
+    0.015, 0.009, 0.013, 0.008, 0.011, 0.014, 0.006, 0.010, 0.012, 0.007,
+    0.009, 0.015, 0.008, 0.011, 0.013, 0.007, 0.010, 0.006, 0.014, 0.012,
+    0.009, 0.008, 0.013, 0.015, 0.011, 0.007, 0.010, 0.014, 0.006, 0.012,
+    0.009, 0.008, 0.013, 0.015, 0.011, 0.007, 0.010, 0.014, 0.006, 0.012,
+    0.009, 0.008, 0.013, 0.015, 0.011, 0.007, 0.010, 0.014, 0.006, 0.012,
+    0.013, 0.009, 0.015, 0.008, 0.011, 0.007, 0.010, 0.014, 0.006, 0.012,
+    0.009, 0.008, 0.013, 0.015, 0.011, 0.007, 0.010, 0.014,
+  ];
+
+  for (let i = 0; i < closes.length; i++) {
+    const close = closes[i];
+    const open = prevClose;
+    const isGreen = close >= open;
+    const high = Math.max(open, close) + (wickTops[i] ?? 0.01);
+    const low = Math.min(open, close) - (wickBots[i] ?? 0.008);
+    candles.push({ open, high, low, close, isGreen });
+    prevClose = close;
+  }
+  return candles;
+}
+
+const CANDLES = buildCandles();
+
+// ─── CandleChart component ──────────────────────────────────────────────────
+interface CandleChartProps {
+  /** 0 → invisible, 1 → fully visible (matches heading opacity) */
+  opacity: number;
+  isMobile: boolean;
+}
+
+function CandleChart({ opacity, isMobile }: CandleChartProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const rafRef = useRef<number>(0);
+  const startTimeRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Responsive logical size
+    const W = isMobile ? 360 : 800;
+    const H = isMobile ? 160 : 280;
+    canvas.width = W;
+    canvas.height = H;
+
+    const margin = isMobile
+      ? { left: 4, right: 4, top: 10, bottom: 10 }
+      : { left: 8, right: 8, top: 16, bottom: 16 };
+
+    const chartW = W - margin.left - margin.right;
+    const chartH = H - margin.top - margin.bottom;
+
+    const totalCandles = CANDLES.length;
+    const candleSpacing = chartW / (totalCandles + 2);
+    const candleWidth = Math.max(isMobile ? 3 : 5, candleSpacing * 0.6);
+
+    function priceToY(p: number) {
+      return margin.top + chartH * (1 - p);
+    }
+
+    const buildDuration = 9500;
+    const holdDuration = 1200;
+    const fadeDuration = 600;
+    const totalDuration = buildDuration + holdDuration + fadeDuration;
+    const timePerCandle = buildDuration / totalCandles;
+
+    const drawCandle = (
+      candle: CandleData,
+      x: number,
+      progress: number
+    ) => {
+      const { open, high, low, close, isGreen } = candle;
+      const color = isGreen ? "#00ff88" : "#ff3b5c";
+      const glow = isGreen ? "rgba(0,255,136,0.9)" : "rgba(255,59,92,0.9)";
+
+      const curClose = open + (close - open) * progress;
+      const curHigh = open + (high - open) * Math.min(1, progress * 1.2);
+      const curLow = open + (low - open) * Math.min(1, progress * 1.2);
+
+      const yOpen = priceToY(open);
+      const yClose = priceToY(curClose);
+      const yHigh = priceToY(curHigh);
+      const yLow = priceToY(curLow);
+
+      const bodyTop = Math.min(yOpen, yClose);
+      const bodyHeight = Math.max(1.5, Math.abs(yClose - yOpen));
+
+      ctx.save();
+      ctx.shadowColor = glow;
+      ctx.shadowBlur = isMobile ? 10 : 18;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = isMobile ? 1 : 1.5;
+
+      // wick
+      ctx.beginPath();
+      ctx.moveTo(x, yHigh);
+      ctx.lineTo(x, yLow);
+      ctx.stroke();
+
+      // body
+      ctx.shadowBlur = isMobile ? 14 : 22;
+      ctx.fillStyle = color;
+      ctx.fillRect(x - candleWidth / 2, bodyTop, candleWidth, bodyHeight);
+
+      // inner bright core
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = isGreen ? "#b6ffe1" : "#ffb3c0";
+      ctx.globalAlpha = 0.28;
+      ctx.fillRect(
+        x - candleWidth / 2 + 0.5,
+        bodyTop + 0.5,
+        Math.max(0.5, candleWidth - 1),
+        Math.max(0.5, bodyHeight - 1)
+      );
+      ctx.restore();
+    };
+
+    const animate = (ts: number) => {
+      if (!startTimeRef.current) startTimeRef.current = ts;
+      const elapsed = (ts - startTimeRef.current) % totalDuration;
+
+      ctx.clearRect(0, 0, W, H);
+
+      let alpha = opacity; // respect external opacity
+      if (elapsed > buildDuration + holdDuration) {
+        alpha *= 1 - (elapsed - buildDuration - holdDuration) / fadeDuration;
+      }
+      ctx.globalAlpha = Math.max(0, Math.min(1, alpha));
+
+      const activeCount = Math.min(
+        totalCandles,
+        Math.floor(elapsed / timePerCandle) + 1
+      );
+
+      for (let i = 0; i < activeCount; i++) {
+        const candleStart = i * timePerCandle;
+        const progress = Math.min(
+          1,
+          Math.max(0, (elapsed - candleStart) / (timePerCandle * 0.85))
+        );
+        // ease-out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const x = margin.left + candleSpacing * (i + 1.5);
+        drawCandle(CANDLES[i], x, eased);
+      }
+
+      ctx.globalAlpha = 1;
+      rafRef.current = requestAnimationFrame(animate);
+    };
+
+    rafRef.current = requestAnimationFrame(animate);
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, [isMobile, opacity]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{
+        display: "block",
+        width: "100%",
+        height: "100%",
+        imageRendering: "crisp-edges",
+      }}
+    />
+  );
+}
+
+// ─── Main GetMNT component ──────────────────────────────────────────────────
 export default function GetMNT() {
   const { scrollY } = useScroll();
 
   // ─── DESKTOP ───────────────────────────────────────────────────────────────
 
-  // "How to get MNT?"
+  // "How to get MNT?" clip-in
   const headingClipDesktop = useTransform(
     scrollY,
     [GETMNT_START_DESKTOP, GETMNT_START_DESKTOP + 500],
     ["inset(100% 0% 0% 0%)", "inset(0% 0% 0% 0%)"]
   );
 
-  // "How to get MNT?"
+  // "How to get MNT?" fade-out
   const headingOpacityDesktop = useTransform(
     scrollY,
     [GETMNT_START_DESKTOP + 7100, GETMNT_START_DESKTOP + 7500],
     [1, 0]
   );
 
-  // "View More" 
+  // Chart opacity — same lifecycle as the heading (appears as heading enters, fades as heading fades)
+  const chartOpacityDesktop = useTransform(
+    scrollY,
+    [
+      GETMNT_START_DESKTOP,
+      GETMNT_START_DESKTOP + 500,
+      GETMNT_START_DESKTOP + 7100,
+      GETMNT_START_DESKTOP + 7500,
+    ],
+    [0, 1, 1, 0]
+  );
+
+  // "View More"
   const viewMoreOpacityDesktop = useTransform(
     scrollY,
     [
@@ -112,18 +333,30 @@ export default function GetMNT() {
 
   // ─── MOBILE ────────────────────────────────────────────────────────────────
 
-  // "How to get MNT?"
+  // "How to get MNT?" clip-in
   const headingClipMobile = useTransform(
     scrollY,
     [GETMNT_START_MOBILE, GETMNT_START_MOBILE + 500],
     ["inset(100% 0% 0% 0%)", "inset(0% 0% 0% 0%)"]
   );
 
-  // "How to get MNT?"
+  // "How to get MNT?" fade-out
   const headingOpacityMobile = useTransform(
     scrollY,
     [GETMNT_START_MOBILE + 7100, GETMNT_START_MOBILE + 7500],
     [1, 0]
+  );
+
+  // Chart opacity — same lifecycle as the heading
+  const chartOpacityMobile = useTransform(
+    scrollY,
+    [
+      GETMNT_START_MOBILE,
+      GETMNT_START_MOBILE + 500,
+      GETMNT_START_MOBILE + 7100,
+      GETMNT_START_MOBILE + 7500,
+    ],
+    [0, 1, 1, 0]
   );
 
   // "View More"
@@ -186,6 +419,22 @@ export default function GetMNT() {
     [0, 1, 1, 0]
   );
 
+  // ─── Live opacity values for canvas (read on each RAF) ────────────────────
+  const chartOpacityDesktopRef = useRef(0);
+  const chartOpacityMobileRef = useRef(0);
+
+  useEffect(() => {
+    return chartOpacityDesktop.on("change", (v) => {
+      chartOpacityDesktopRef.current = v;
+    });
+  }, [chartOpacityDesktop]);
+
+  useEffect(() => {
+    return chartOpacityMobile.on("change", (v) => {
+      chartOpacityMobileRef.current = v;
+    });
+  }, [chartOpacityMobile]);
+
   // ─── HELPER: Render image group ────────────────────────────────────────────
   const renderImageGroup = (
     images: string[],
@@ -232,6 +481,24 @@ export default function GetMNT() {
     >
       {/* ══════════════════════ DESKTOP ══════════════════════ */}
       <div className="hidden md:block">
+        {/* Candlestick Chart — appears & disappears with the heading */}
+        <motion.div
+          style={{ opacity: chartOpacityDesktop }}
+          className="
+            fixed
+            top-[35%]
+            left-1/2 -translate-x-1/2
+            w-[70%] max-w-3xl
+            h-[280px]
+            pointer-events-none
+          "
+        >
+          <CandleChartCanvas
+            opacityMotion={chartOpacityDesktop}
+            isMobile={false}
+          />
+        </motion.div>
+
         {/* Heading */}
         <div
           className="
@@ -353,6 +620,24 @@ export default function GetMNT() {
 
       {/* ══════════════════════ MOBILE ══════════════════════ */}
       <div className="flex md:hidden">
+        {/* Candlestick Chart — mobile */}
+        <motion.div
+          style={{ opacity: chartOpacityMobile }}
+          className="
+            fixed
+            top-[40%]
+            left-1/2 -translate-x-1/2
+            w-[105%]
+            h-[160px]
+            pointer-events-none
+          "
+        >
+          <CandleChartCanvas
+            opacityMotion={chartOpacityMobile}
+            isMobile={true}
+          />
+        </motion.div>
+
         {/* Heading */}
         <div
           className="
@@ -476,5 +761,153 @@ export default function GetMNT() {
         </motion.div>
       </div>
     </section>
+  );
+}
+
+// ─── Canvas wrapper that reads MotionValue opacity each frame ─────────────
+import type { MotionValue } from "framer-motion";
+
+function CandleChartCanvas({
+  opacityMotion,
+  isMobile,
+}: {
+  opacityMotion: MotionValue<number>;
+  isMobile: boolean;
+}) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const rafRef = useRef<number>(0);
+  const startTimeRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const W = isMobile ? 360 : 800;
+    const H = isMobile ? 160 : 280;
+    canvas.width = W;
+    canvas.height = H;
+
+    const margin = isMobile
+      ? { left: 4, right: 4, top: 10, bottom: 10 }
+      : { left: 8, right: 8, top: 16, bottom: 16 };
+
+    const chartW = W - margin.left - margin.right;
+    const chartH = H - margin.top - margin.bottom;
+
+    const totalCandles = CANDLES.length;
+    const candleSpacing = chartW / (totalCandles + 2);
+    const candleWidth = Math.max(isMobile ? 3 : 5, candleSpacing * 0.6);
+
+    function priceToY(p: number) {
+      return margin.top + chartH * (1 - p);
+    }
+
+    const buildDuration = 9500;
+    const holdDuration = 1200;
+    const fadeDuration = 600;
+    const totalDuration = buildDuration + holdDuration + fadeDuration;
+    const timePerCandle = buildDuration / totalCandles;
+
+    const drawCandle = (candle: CandleData, x: number, progress: number) => {
+      const { open, high, low, close, isGreen } = candle;
+      const color = isGreen ? "#00ff88" : "#ff3b5c";
+      const glow = isGreen ? "rgba(0,255,136,0.9)" : "rgba(255,59,92,0.9)";
+
+      const curClose = open + (close - open) * progress;
+      const curHigh = open + (high - open) * Math.min(1, progress * 1.2);
+      const curLow = open + (low - open) * Math.min(1, progress * 1.2);
+
+      const yOpen = priceToY(open);
+      const yClose = priceToY(curClose);
+      const yHigh = priceToY(curHigh);
+      const yLow = priceToY(curLow);
+
+      const bodyTop = Math.min(yOpen, yClose);
+      const bodyHeight = Math.max(1.5, Math.abs(yClose - yOpen));
+
+      ctx.save();
+      ctx.shadowColor = glow;
+      ctx.shadowBlur = isMobile ? 10 : 18;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = isMobile ? 1 : 1.5;
+
+      ctx.beginPath();
+      ctx.moveTo(x, yHigh);
+      ctx.lineTo(x, yLow);
+      ctx.stroke();
+
+      ctx.shadowBlur = isMobile ? 14 : 22;
+      ctx.fillStyle = color;
+      ctx.fillRect(x - candleWidth / 2, bodyTop, candleWidth, bodyHeight);
+
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = isGreen ? "#b6ffe1" : "#ffb3c0";
+      ctx.globalAlpha = 0.28;
+      ctx.fillRect(
+        x - candleWidth / 2 + 0.5,
+        bodyTop + 0.5,
+        Math.max(0.5, candleWidth - 1),
+        Math.max(0.5, bodyHeight - 1)
+      );
+      ctx.restore();
+    };
+
+    const animate = (ts: number) => {
+      if (!startTimeRef.current) startTimeRef.current = ts;
+      const elapsed = (ts - startTimeRef.current) % totalDuration;
+
+      ctx.clearRect(0, 0, W, H);
+
+      // Read live opacity from MotionValue
+      let alpha = opacityMotion.get();
+      if (elapsed > buildDuration + holdDuration) {
+        alpha *= 1 - (elapsed - buildDuration - holdDuration) / fadeDuration;
+      }
+
+      // Skip rendering when fully invisible (perf)
+      if (alpha <= 0) {
+        rafRef.current = requestAnimationFrame(animate);
+        return;
+      }
+
+      ctx.globalAlpha = Math.max(0, Math.min(1, alpha));
+
+      const activeCount = Math.min(
+        totalCandles,
+        Math.floor(elapsed / timePerCandle) + 1
+      );
+
+      for (let i = 0; i < activeCount; i++) {
+        const candleStart = i * timePerCandle;
+        const progress = Math.min(
+          1,
+          Math.max(0, (elapsed - candleStart) / (timePerCandle * 0.85))
+        );
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const x = margin.left + candleSpacing * (i + 1.5);
+        drawCandle(CANDLES[i], x, eased);
+      }
+
+      ctx.globalAlpha = 1;
+      rafRef.current = requestAnimationFrame(animate);
+    };
+
+    rafRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [isMobile, opacityMotion]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{
+        display: "block",
+        width: "100%",
+        height: "100%",
+        imageRendering: "crisp-edges",
+        background: "transparent",
+      }}
+    />
   );
 }
