@@ -244,7 +244,7 @@ function Model({
             modelRef.current.position,
             {
               x: 0,
-              y: isMobile ? -0.6 : -1,
+              y: isMobile ? -0.5 : -1,
               z: 1,
               duration: 1.4,
               ease: "power2.inOut",
