@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FiArrowRight } from "react-icons/fi";
 
@@ -243,6 +243,19 @@ function CandleChart({ opacity, isMobile }: CandleChartProps) {
 export default function GetMNT() {
   const { scrollY } = useScroll();
 
+  // Frozen VH for stable positioning on mobile
+  const [vh, setVh] = useState("100dvh");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setVh(`${window.innerHeight}px`);
+      const handleOrientationChange = () => {
+        setTimeout(() => setVh(`${window.innerHeight}px`), 200);
+      };
+      window.addEventListener("orientationchange", handleOrientationChange);
+      return () => window.removeEventListener("orientationchange", handleOrientationChange);
+    }
+  }, []);
+
   // ─── DESKTOP ───────────────────────────────────────────────────────────────
 
   // "How to get MNT?" clip-in
@@ -479,13 +492,18 @@ export default function GetMNT() {
       id="get-mnt"
       className="relative z-20 w-full h-[1200vh] pointer-events-none"
     >
-      {/* ══════════════════════ DESKTOP ══════════════════════ */}
+      {/* Stable fixed wrapper to prevent mobile address bar shifting */}
+      <div 
+        className="fixed top-0 left-0 w-full pointer-events-none"
+        style={{ height: vh }}
+      >
+
       <div className="hidden md:block">
         {/* Candlestick Chart — appears & disappears with the heading */}
         <motion.div
           style={{ opacity: chartOpacityDesktop }}
           className="
-            fixed
+            absolute
             top-[35%]
             left-1/2 -translate-x-1/2
             w-[70%] max-w-3xl
@@ -502,7 +520,7 @@ export default function GetMNT() {
         {/* Heading */}
         <div
           className="
-            fixed
+            absolute
             top-[13%]
             left-1/2 -translate-x-1/2
             pointer-events-none
@@ -530,7 +548,7 @@ export default function GetMNT() {
         <motion.p
           style={{ opacity: subtitleOpacityDesktop }}
           className="
-            fixed
+            absolute
             top-[72%]
             left-1/2 -translate-x-1/2
             w-[90%] max-w-2xl
@@ -548,7 +566,7 @@ export default function GetMNT() {
         <motion.div
           style={{ opacity: bridgesOpacityDesktop }}
           className="
-            fixed
+            absolute
             bottom-[16%]
             left-1/2 -translate-x-1/2
             w-[90%] max-w-3xl
@@ -563,7 +581,7 @@ export default function GetMNT() {
         <motion.div
           style={{ opacity: cexOpacityDesktop }}
           className="
-            fixed
+            absolute
             bottom-[16%]
             left-1/2 -translate-x-1/2
             w-[90%] max-w-3xl
@@ -578,7 +596,7 @@ export default function GetMNT() {
         <motion.div
           style={{ opacity: dexOpacityDesktop }}
           className="
-            fixed
+            absolute
             bottom-[16%]
             left-1/2 -translate-x-1/2
             w-[90%] max-w-3xl
@@ -593,7 +611,7 @@ export default function GetMNT() {
         <motion.div
           style={{ opacity: viewMoreOpacityDesktop }}
           className="
-            fixed
+            absolute
             bottom-[8%]
             left-1/2 -translate-x-1/2
             pointer-events-auto
@@ -624,7 +642,7 @@ export default function GetMNT() {
         <motion.div
           style={{ opacity: chartOpacityMobile }}
           className="
-            fixed
+            absolute
             top-[40%]
             left-1/2 -translate-x-1/2
             w-[105%]
@@ -641,7 +659,7 @@ export default function GetMNT() {
         {/* Heading */}
         <div
           className="
-            fixed
+            absolute
             top-[18%]
             left-1/2 -translate-x-1/2
             w-[90%]
@@ -672,7 +690,7 @@ export default function GetMNT() {
         <motion.p
           style={{ opacity: subtitleOpacityMobile }}
           className="
-            fixed
+            absolute
             bottom-[25%]
             left-1/2 -translate-x-1/2
             w-[88%]
@@ -691,7 +709,7 @@ export default function GetMNT() {
         <motion.div
           style={{ opacity: bridgesOpacityMobile }}
           className="
-            fixed
+            absolute
             bottom-[25%]
             left-1/2 -translate-x-1/2
             w-[90%]
@@ -736,7 +754,7 @@ export default function GetMNT() {
         <motion.div
           style={{ opacity: viewMoreOpacityMobile }}
           className="
-            fixed
+            absolute
             bottom-[18%]
             left-1/2 -translate-x-1/2
             pointer-events-auto
@@ -759,6 +777,7 @@ export default function GetMNT() {
             View More <FiArrowRight className="text-xs" />
           </a>
         </motion.div>
+        </div>
       </div>
     </section>
   );

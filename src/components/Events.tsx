@@ -30,11 +30,11 @@ export default function Events() {
 
   // ── DESKTOP: per-word opacity & Y ─────────────────────────────────────────.
   const wordOpacitiesDesktop = words.map((_, i) => {
-    const start = 0.15 + i * 0.02;
+    const start = 0.05 + i * 0.02;
     return useTransform(scrollYProgress, [start, start + 0.08], [0, 1]);
   });
   const wordYsDesktop = words.map((_, i) => {
-    const start = 0.15 + i * 0.02;
+    const start = 0.05 + i * 0.02;
     return useTransform(scrollYProgress, [start, start + 0.08], [40, 0]);
   });
   const containerOpacityDesktop = useTransform(
@@ -45,11 +45,11 @@ export default function Events() {
 
   // ── MOBILE: per-word opacity & Y ──────────────────────────────────────────
   const wordOpacitiesMobile = words.map((_, i) => {
-    const start = 0.12 + i * 0.015;
+    const start = 0.02 + i * 0.015;
     return useTransform(scrollYProgress, [start, start + 0.06], [0, 1]);
   });
   const wordYsMobile = words.map((_, i) => {
-    const start = 0.12 + i * 0.015;
+    const start = 0.02 + i * 0.015;
     return useTransform(scrollYProgress, [start, start + 0.06], [40, 0]);
   });
   const containerOpacityMobile = useTransform(
@@ -61,12 +61,12 @@ export default function Events() {
   // ── mantle_text.png  ────────────────
   const mantleTextOpacityDesktop = useTransform(
     scrollYProgress,
-    [0.35, 0.40],
+    [0.20, 0.25],
     [0, 1]
   );
   const mantleTextOpacityMobile = useTransform(
     scrollYProgress,
-    [0.30, 0.35],
+    [0.15, 0.20],
     [0, 1]
   );
 
@@ -160,9 +160,9 @@ export default function Events() {
           className="block md:hidden absolute pointer-events-none select-none"
           style={{
             opacity: mantleTextOpacityMobile,
-            bottom: "79px",
+            bottom: "78px",
             left: "29%",
-            marginLeft: "75px",
+            marginLeft: "78px",
           }}
         >
           <div className="relative w-[100px] h-[35px]">
