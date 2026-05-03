@@ -477,7 +477,7 @@ export default function GetMNT() {
   return (
     <section
       id="get-mnt"
-      className="relative z-20 w-full h-[1300vh] pointer-events-none"
+      className="relative z-20 w-full h-[1200vh] pointer-events-none"
     >
       {/* ══════════════════════ DESKTOP ══════════════════════ */}
       <div className="hidden md:block">

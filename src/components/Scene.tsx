@@ -296,6 +296,88 @@ function Model({
         },
       });
 
+      // ─── PHASE 5: EVENTS ───
+      ScrollTrigger.create({
+        trigger: "#events",
+      
+        start: isMobile ? "top 200%" : "top 100%",
+        end: isMobile ? "top 35%" : "top 20%",
+      
+        scrub: isMobile ? 1 : 2,
+      
+        onEnter: () => {
+          if (floatTweenRef.current) {
+            floatTweenRef.current.kill();
+            floatTweenRef.current = null;
+          }
+      
+          if (!modelRef.current) return;
+      
+          const eventsTl = gsap.timeline();
+      
+          // 1. Rotate 2x (720°)
+          eventsTl.to(
+            modelRef.current.rotation,
+            {
+              y: "+=" + Math.PI * 4,   // 2 full rotations
+              duration: 2.0,
+              ease: "power2.inOut",
+            },
+            0
+          );
+      
+          eventsTl.to(
+            modelRef.current.scale,
+            {
+              x: isMobile ? 0.3 : 0.4,
+              y: isMobile ? 0.3 : 0.4,
+              z: isMobile ? 0.3 : 0.4,
+              duration: 1.6,
+              ease: "power2.inOut",
+            },
+            0
+          );
+      
+          eventsTl.to(
+            modelRef.current.position,
+            {
+              x: isMobile ? -0.2 : -0.09,
+              y: isMobile ? -2.4 : -2.2,
+              z: 1,
+              duration: 1.8,
+              ease: "power2.inOut",
+            },
+            0.1
+          );
+        },
+      
+        onLeaveBack: () => {
+          if (!modelRef.current) return;
+      
+          gsap.to(modelRef.current.rotation, {
+            y: "-=" + Math.PI * 4,
+            duration: 1.5,
+            ease: "power2.inOut",
+          });
+      
+          gsap.to(modelRef.current.scale, {
+            x: isMobile ? 1.5 : 1.6,
+            y: isMobile ? 1.5 : 1.6,
+            z: isMobile ? 1.5 : 1.6,
+            duration: 1.2,
+            ease: "power2.inOut",
+          });
+      
+          gsap.to(modelRef.current.position, {
+            x: 0,
+            y: isMobile ? -0.7 : -1,
+            z: 1,
+            duration: 1.4,
+            ease: "power2.inOut",
+          });
+        },
+      });
+
       // ─── ROTATE 2 & 3 (text switch triggers) ───
       ScrollTrigger.create({
         trigger: ".scroll-container",
