@@ -113,7 +113,7 @@ export default function Events() {
           style={{ opacity: containerOpacityMobile }}
           className="
             flex md:hidden
-            absolute bottom-80
+            absolute bottom-96
             left-1/2 -translate-x-1/2
             w-[90%]
             flex-wrap justify-center gap-x-3 gap-y-2
@@ -160,7 +160,7 @@ export default function Events() {
           className="block md:hidden absolute pointer-events-none select-none"
           style={{
             opacity: mantleTextOpacityMobile,
-            bottom: "78px",
+            bottom: "76px",
             left: "29%",
             marginLeft: "78px",
           }}

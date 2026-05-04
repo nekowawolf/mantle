@@ -20,16 +20,16 @@ const bridgeImages = [
 const cexImages = [
   "https://cms.mantle.xyz/assets/5ad6aa20-2e1d-463e-9b1f-7e3de7f53c9f",
   "https://cms.mantle.xyz/assets/ebe45a64-40ce-4ee9-822c-47708b141dd6",
-  "https://cms.mantle.xyz/assets/8a6562a2-31b5-4b05-a0bb-312fd7126cd1",
-  "https://cms.mantle.xyz/assets/97c59f85-b73a-48da-9d3f-7cb6e732a200",
+  "https://cms.mantle.xyz/assets/8a6562a2-31b5-4b05-a0bb-312fd7126cd1", 
+  "https://cms.mantle.xyz/assets/97c59f85-b73a-48da-9d3f-7cb6e732a200", 
 ];
 
 // DEX images
 const dexImages = [
-  "https://cms.mantle.xyz/assets/d2576c94-0039-4c68-b4f9-53b15c67f21d",
-  "https://cms.mantle.xyz/assets/4379de1a-e98e-4be0-a92f-24278d590393",
-  "https://cms.mantle.xyz/assets/2fdbdf9e-9906-4481-9277-2ea5b75ac782",
-  "https://cms.mantle.xyz/assets/a38ede32-2060-48b1-9ddc-05be4d4d7154",
+  "https://cms.mantle.xyz/assets/d2576c94-0039-4c68-b4f9-53b15c67f21d", 
+  "https://cms.mantle.xyz/assets/4379de1a-e98e-4be0-a92f-24278d590393", 
+  "https://cms.mantle.xyz/assets/2fdbdf9e-9906-4481-9277-2ea5b75ac782", 
+  "https://cms.mantle.xyz/assets/a38ede32-2060-48b1-9ddc-05be4d4d7154", 
 ];
 
 // ─── Candlestick data ───────────────────────────────────────────────────────
@@ -724,7 +724,7 @@ export default function GetMNT() {
         <motion.div
           style={{ opacity: cexOpacityMobile }}
           className="
-            fixed
+            absolute
             bottom-[25%]
             left-1/2 -translate-x-1/2
             w-[90%]
@@ -739,7 +739,7 @@ export default function GetMNT() {
         <motion.div
           style={{ opacity: dexOpacityMobile }}
           className="
-            fixed
+            absolute
             bottom-[25%]
             left-1/2 -translate-x-1/2
             w-[90%]
