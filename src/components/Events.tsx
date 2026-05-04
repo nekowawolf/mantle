@@ -52,12 +52,12 @@ export default function Events() {
 
   // ── DESKTOP: per-word opacity & Y ─────────────────────────────────────────
   const wordOpacitiesDesktop = words.map((_, i) => {
-    const start = 0.05 + i * 0.02;
-    return useTransform(scrollYProgress, [start, start + 0.08], [0, 1]);
+    const start = 0.05 + i * 0.012;
+    return useTransform(scrollYProgress, [start, start + 0.04], [0, 1]);
   });
   const wordYsDesktop = words.map((_, i) => {
-    const start = 0.05 + i * 0.02;
-    return useTransform(scrollYProgress, [start, start + 0.08], [40, 0]);
+    const start = 0.05 + i * 0.012;
+    return useTransform(scrollYProgress, [start, start + 0.04], [40, 0]);
   });
 
   // Text fade out — FASTER (was 0.75–0.85, now 0.28–0.35)
@@ -69,18 +69,18 @@ export default function Events() {
 
   // ── MOBILE: per-word opacity & Y ──────────────────────────────────────────
   const wordOpacitiesMobile = words.map((_, i) => {
-    const start = 0.02 + i * 0.015;
-    return useTransform(scrollYProgress, [start, start + 0.06], [0, 1]);
+    const start = 0.02 + i * 0.01;
+    return useTransform(scrollYProgress, [start, start + 0.04], [0, 1]);
   });
   const wordYsMobile = words.map((_, i) => {
-    const start = 0.02 + i * 0.015;
-    return useTransform(scrollYProgress, [start, start + 0.06], [40, 0]);
+    const start = 0.02 + i * 0.01;
+    return useTransform(scrollYProgress, [start, start + 0.04], [40, 0]);
   });
 
-  // Text fade out — FASTER mobile (was 0.75–0.85, now 0.22–0.30)
+  // Text fade out — FASTER mobile (was 0.75–0.85, now 0.22–0.29)
   const containerOpacityMobile = useTransform(
     scrollYProgress,
-    [0.22, 0.30],
+    [0.22, 0.29],
     [1, 0]
   );
 
@@ -96,29 +96,20 @@ export default function Events() {
     [0, 1]
   );
 
-  // Hide mantle_text when words fade out
-  const mantleTextFinalDesktop = useTransform(
-    scrollYProgress,
-    [0.28, 0.35],
-    [1, 0]
-  );
-  const mantleTextFinalMobile = useTransform(
-    scrollYProgress,
-    [0.22, 0.30],
-    [1, 0]
-  );
+  // Mantle text stays visible
+
 
   // ── MantleSquadHub IMAGE ─────────────────────────────────────────────────
   // Desktop: appear after words fade, then disappear before cards
   const squadHubOpacityDesktop = useTransform(
     scrollYProgress,
-    [0.37, 0.43, 0.55, 0.62],
+    [0.37, 0.43, 0.54, 0.59],
     [0, 1, 1, 0]
   );
   // Mobile: same pattern
   const squadHubOpacityMobile = useTransform(
     scrollYProgress,
-    [0.33, 0.39, 0.50, 0.57],
+    [0.33, 0.39, 0.48, 0.53],
     [0, 1, 1, 0]
   );
 
@@ -126,24 +117,24 @@ export default function Events() {
   // DESKTOP: 3 cards fade in after squadHub disappears, then fade out
   const dCard1Op = useTransform(
     scrollYProgress,
-    [0.63, 0.69, 0.87, 0.93],
+    [0.60, 0.62, 0.78, 0.80],
     [0, 1, 1, 0]
   );
-  const dCard1Y = useTransform(scrollYProgress, [0.63, 0.69], [50, 0]);
+  const dCard1Y = useTransform(scrollYProgress, [0.60, 0.62], [50, 0]);
 
   const dCard2Op = useTransform(
     scrollYProgress,
-    [0.66, 0.72, 0.89, 0.95],
+    [0.61, 0.63, 0.79, 0.81],
     [0, 1, 1, 0]
   );
-  const dCard2Y = useTransform(scrollYProgress, [0.66, 0.72], [50, 0]);
+  const dCard2Y = useTransform(scrollYProgress, [0.61, 0.63], [50, 0]);
 
   const dCard3Op = useTransform(
     scrollYProgress,
-    [0.69, 0.75, 0.91, 0.97],
+    [0.62, 0.64, 0.80, 0.82],
     [0, 1, 1, 0]
   );
-  const dCard3Y = useTransform(scrollYProgress, [0.69, 0.75], [50, 0]);
+  const dCard3Y = useTransform(scrollYProgress, [0.62, 0.64], [50, 0]);
 
   const desktopCardsAnim = [
     {
@@ -166,24 +157,24 @@ export default function Events() {
   // MOBILE: cards appear one by one (stacked, like Governance mobile)
   const mCard1Op = useTransform(
     scrollYProgress,
-    [0.58, 0.64, 0.73, 0.79],
+    [0.54, 0.58, 0.62, 0.65],
     [0, 1, 1, 0]
   );
-  const mCard1Y = useTransform(scrollYProgress, [0.58, 0.64], [50, 0]);
+  const mCard1Y = useTransform(scrollYProgress, [0.54, 0.58], [50, 0]);
 
   const mCard2Op = useTransform(
     scrollYProgress,
-    [0.80, 0.86, 0.91, 0.96],
+    [0.66, 0.70, 0.76, 0.79],
     [0, 1, 1, 0]
   );
-  const mCard2Y = useTransform(scrollYProgress, [0.80, 0.86], [50, 0]);
+  const mCard2Y = useTransform(scrollYProgress, [0.66, 0.70], [50, 0]);
 
   const mCard3Op = useTransform(
     scrollYProgress,
-    [0.97, 1.0, 1.0, 1.0],
+    [0.80, 0.84, 1.0, 1.0],
     [0, 1, 1, 1]
   );
-  const mCard3Y = useTransform(scrollYProgress, [0.97, 1.0], [50, 0]);
+  const mCard3Y = useTransform(scrollYProgress, [0.80, 0.84], [50, 0]);
 
   const mobileCardsAnim = [
     {
@@ -217,7 +208,7 @@ export default function Events() {
     <section
       id="events"
       ref={containerRef}
-      className="relative z-20 w-full h-[700vh] pointer-events-none"
+      className="relative z-20 w-full h-[1300vh] pointer-events-none"
     >
       {/* Stable fixed wrapper */}
       <div
@@ -282,13 +273,10 @@ export default function Events() {
         <motion.div
           className="hidden md:block absolute pointer-events-none select-none"
           style={{
-            opacity: useTransform(
-              [mantleTextOpacityDesktop, mantleTextFinalDesktop],
-              ([a, b]) => Math.min(Number(a), Number(b))
-            ),
+            opacity: mantleTextOpacityDesktop,
             bottom: "94px",
-            left: "43%",
-            marginLeft: "94px",
+            left: "42%",
+            marginLeft: "92px",
           }}
         >
           <div className="relative w-[150px] h-[52px]">
@@ -305,10 +293,7 @@ export default function Events() {
         <motion.div
           className="block md:hidden absolute pointer-events-none select-none"
           style={{
-            opacity: useTransform(
-              [mantleTextOpacityMobile, mantleTextFinalMobile],
-              ([a, b]) => Math.min(Number(a), Number(b))
-            ),
+            opacity: mantleTextOpacityMobile,
             bottom: "76px",
             left: "29%",
             marginLeft: "78px",
@@ -330,26 +315,26 @@ export default function Events() {
           className="
             hidden md:flex
             absolute
-            top-1/2 -translate-y-1/2
+            top-[43%] -translate-y-1/2
             left-1/2 -translate-x-1/2
-            flex-col items-center gap-5
+            flex-col items-center gap-4
             pointer-events-auto
           "
         >
-          <div className="relative w-[340px] h-[340px] lg:w-[400px] lg:h-[400px] rounded-2xl overflow-hidden shadow-2xl border border-[#00D4A0]/20">
+          <div className="relative w-[420px] h-[420px] lg:w-[620px] lg:h-[620px]">
             <Image
               src="/img/MantleSquadHub.png"
               alt="Mantle Squad Hub"
               fill
-              className="object-cover"
+              className="object-contain"
             />
           </div>
           <button
             onClick={handleDownload}
-            className="flex items-center gap-2 px-6 py-2.5 bg-[#153e33] border border-[#00D4A0]/40 text-white font-semibold rounded-xl hover:bg-[#00D4A0] hover:text-[#092C25] hover:border-[#00D4A0] transition-all duration-300 cursor-pointer text-sm shadow-md"
+            className="absolute left-1/2 -translate-x-1/2 bottom-32 flex items-center gap-2 px-4 py-2 bg-[#153e33] border border-[#00D4A0]/40 text-white font-semibold rounded-lg hover:bg-[#00D4A0] hover:text-[#092C25] hover:border-[#00D4A0] transition-all duration-300 cursor-pointer text-xs lg:text-sm shadow-md"
           >
             Download Image
-            <FiDownload className="text-lg" />
+            <FiDownload className="text-base" />
           </button>
         </motion.div>
 
@@ -359,32 +344,33 @@ export default function Events() {
           className="
             flex md:hidden
             absolute
-            top-1/2 -translate-y-[55%]
+            top-[45%] -translate-y-[55%]
             left-1/2 -translate-x-1/2
-            flex-col items-center gap-4
+            flex-col items-center
             pointer-events-auto
-            w-[85%]
+            w-[85%] max-w-[360px]
           "
         >
-          <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-2xl border border-[#00D4A0]/20">
+          <div className="relative w-full aspect-square">
             <Image
               src="/img/MantleSquadHub.png"
               alt="Mantle Squad Hub"
               fill
-              className="object-cover"
+              className="object-contain"
             />
+
+            <button
+              onClick={handleDownload}
+              className="absolute left-1/2 -translate-x-1/2 bottom-8 flex items-center gap-2 px-4 py-2 bg-[#153e33] border border-[#00D4A0]/40 text-white font-semibold rounded-lg hover:bg-[#00D4A0] hover:text-[#092C25] hover:border-[#00D4A0] transition-all duration-300 cursor-pointer text-xs shadow-md justify-center w-fit"
+            >
+              Download Image
+              <FiDownload className="text-sm" />
+            </button>
           </div>
-          <button
-            onClick={handleDownload}
-            className="flex items-center gap-2 px-5 py-2.5 bg-[#153e33] border border-[#00D4A0]/40 text-white font-semibold rounded-xl hover:bg-[#00D4A0] hover:text-[#092C25] hover:border-[#00D4A0] transition-all duration-300 cursor-pointer text-sm shadow-md w-full justify-center"
-          >
-            Download Image
-            <FiDownload className="text-base" />
-          </button>
         </motion.div>
 
         {/* ════════════════ EVENT CARDS — DESKTOP ════════════════ */}
-        <div className="hidden md:flex fixed top-[55%] -translate-y-1/2 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl gap-5 pointer-events-none">
+        <div className="hidden md:flex fixed top-[46%] -translate-y-1/2 left-1/2 -translate-x-1/2 w-[80%] max-w-4xl gap-6 pointer-events-none">
           {eventCardsData.map((card, i) => (
             <motion.div
               key={`event-desktop-${i}`}
@@ -393,10 +379,10 @@ export default function Events() {
                 y: desktopCardsAnim[i].y,
                 pointerEvents: desktopCardsAnim[i].ptr,
               }}
-              className="flex-1 border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl overflow-hidden flex flex-col bg-[#0a1f1a] hover:scale-[1.02] transition-all duration-300 shadow-xl"
+              className="flex-1 border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl overflow-hidden flex flex-col bg-gradient-to-b from-[#092C25]/60 to-[#092C25]/90 hover:scale-[1.02] transition-all duration-300 shadow-xl"
             >
               {/* Card Image */}
-              <div className="relative w-full aspect-square overflow-hidden rounded-t-2xl">
+              <div className="relative w-full h-[140px] lg:h-[160px] overflow-hidden rounded-t-2xl">
                 <Image
                   src={card.image}
                   alt={card.title}
@@ -407,7 +393,7 @@ export default function Events() {
               </div>
               {/* Card Content */}
               <div className="flex flex-col flex-1 justify-between p-5 gap-4">
-                <p className="text-white text-sm lg:text-base font-semibold leading-snug">
+                <p className="text-white text-base lg:text-xl font-semibold leading-snug">
                   {card.title}
                 </p>
                 <a
@@ -424,8 +410,8 @@ export default function Events() {
           ))}
         </div>
 
-        {/* ════════════════ EVENT CARDS — MOBILE (stacked, one at a time) ════════════════ */}
-        <div className="flex md:hidden fixed top-[52%] -translate-y-1/2 left-1/2 -translate-x-1/2 w-[88%] max-w-sm pointer-events-none h-[420px]">
+        {/* ════════════════ EVENT CARDS — MOBILE ════════════════ */}
+        <div className="flex md:hidden fixed top-[46%] -translate-y-1/2 left-1/2 -translate-x-1/2 w-[75%] max-w-[280px] pointer-events-none h-[300px]">
           {eventCardsData.map((card, i) => (
             <motion.div
               key={`event-mobile-${i}`}
@@ -434,10 +420,10 @@ export default function Events() {
                 y: mobileCardsAnim[i].y,
                 pointerEvents: mobileCardsAnim[i].ptr,
               }}
-              className="absolute inset-0 w-full h-full border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl overflow-hidden flex flex-col bg-[#0a1f1a] shadow-xl"
+              className="absolute inset-0 w-full h-full border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl overflow-hidden flex flex-col bg-gradient-to-b from-[#092C25]/60 to-[#092C25]/90 shadow-xl"
             >
               {/* Card Image — rounded */}
-              <div className="relative w-full h-[220px] overflow-hidden rounded-t-2xl">
+              <div className="relative w-full h-[130px] overflow-hidden rounded-t-2xl">
                 <Image
                   src={card.image}
                   alt={card.title}
@@ -448,7 +434,7 @@ export default function Events() {
               </div>
               {/* Card Content */}
               <div className="flex flex-col flex-1 justify-between p-5 gap-3">
-                <p className="text-white text-sm font-semibold leading-snug">
+                <p className="text-white text-base font-semibold leading-snug">
                   {card.title}
                 </p>
                 <a

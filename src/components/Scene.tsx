@@ -341,7 +341,7 @@ function Model({
           eventsTl.to(
             modelRef.current.position,
             {
-              x: isMobile ? -0.25 : -0.35,
+              x: isMobile ? -0.25 : -0.5,
               y: isMobile ? -2.4 : -2.2,
               z: 1,
               duration: 1.8,
