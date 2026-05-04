@@ -55,27 +55,27 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8 text-sm font-medium">
-          <a href="#" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
+          <a href="#about" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
             About
           </a>
 
-          <a href="#" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
+          <a href="#ecosystem" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
             Ecosystem
           </a>
 
-          <a href="#" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
+          <a href="#governance" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
             Governance
           </a>
 
-          <a href="#" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
+          <a href="#get-mnt" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
             Get MNT
           </a>
 
-          <a href="#" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
+          <a href="#events" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
             Event
           </a>
 
-          <a href="#" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
+          <a href="#community" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
             Community
           </a>
         </div>
@@ -140,7 +140,7 @@ export default function Navbar() {
           </a>
 
           <a
-            href="#event"
+            href="#events"
             onClick={() => setIsOpen(false)}
             className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
           >

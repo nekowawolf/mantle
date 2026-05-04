@@ -156,7 +156,7 @@ const leftTextOpacity = useTransform(
       />
 
       {/* HERO CONTENT */}
-      <section className="h-screen w-full relative z-20 px-6 md:px-16 pointer-events-none">
+      <section id="about" className="h-screen w-full relative z-20 px-6 md:px-16 pointer-events-none">
 
         {/* LEFT TEXT */}
         <motion.div
