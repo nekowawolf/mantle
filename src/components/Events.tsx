@@ -117,21 +117,21 @@ export default function Events() {
   // DESKTOP: 3 cards fade in after squadHub disappears, then fade out
   const dCard1Op = useTransform(
     scrollYProgress,
-    [0.60, 0.62, 0.78, 0.80],
+    [0.60, 0.62, 0.92, 0.94],
     [0, 1, 1, 0]
   );
   const dCard1Y = useTransform(scrollYProgress, [0.60, 0.62], [50, 0]);
 
   const dCard2Op = useTransform(
     scrollYProgress,
-    [0.61, 0.63, 0.79, 0.81],
+    [0.61, 0.63, 0.93, 0.95],
     [0, 1, 1, 0]
   );
   const dCard2Y = useTransform(scrollYProgress, [0.61, 0.63], [50, 0]);
 
   const dCard3Op = useTransform(
     scrollYProgress,
-    [0.62, 0.64, 0.80, 0.82],
+    [0.62, 0.64, 0.94, 0.96],
     [0, 1, 1, 0]
   );
   const dCard3Y = useTransform(scrollYProgress, [0.62, 0.64], [50, 0]);
@@ -157,24 +157,24 @@ export default function Events() {
   // MOBILE: cards appear one by one (stacked, like Governance mobile)
   const mCard1Op = useTransform(
     scrollYProgress,
-    [0.54, 0.58, 0.62, 0.65],
+    [0.54, 0.58, 0.66, 0.69],
     [0, 1, 1, 0]
   );
   const mCard1Y = useTransform(scrollYProgress, [0.54, 0.58], [50, 0]);
 
   const mCard2Op = useTransform(
     scrollYProgress,
-    [0.66, 0.70, 0.76, 0.79],
+    [0.70, 0.74, 0.82, 0.85],
     [0, 1, 1, 0]
   );
-  const mCard2Y = useTransform(scrollYProgress, [0.66, 0.70], [50, 0]);
+  const mCard2Y = useTransform(scrollYProgress, [0.70, 0.74], [50, 0]);
 
   const mCard3Op = useTransform(
     scrollYProgress,
-    [0.80, 0.84, 1.0, 1.0],
-    [0, 1, 1, 1]
+    [0.86, 0.90, 0.96, 0.98],
+    [0, 1, 1, 0]
   );
-  const mCard3Y = useTransform(scrollYProgress, [0.80, 0.84], [50, 0]);
+  const mCard3Y = useTransform(scrollYProgress, [0.86, 0.90], [50, 0]);
 
   const mobileCardsAnim = [
     {

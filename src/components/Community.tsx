@@ -52,25 +52,25 @@ export default function Community() {
 
   // ── DESKTOP: per-word opacity & Y ─────────────────────────────────────────
   const wordOpacitiesDesktop = words.map((_, i) => {
-    const start = 0.05 + i * 0.05;
-    return useTransform(scrollYProgress, [start, start + 0.1], [0, 1]);
+    const start = 0.05 + i * 0.03;
+    return useTransform(scrollYProgress, [start, start + 0.06], [0, 1]);
   });
   const wordYsDesktop = words.map((_, i) => {
-    const start = 0.05 + i * 0.05;
-    return useTransform(scrollYProgress, [start, start + 0.1], [40, 0]);
+    const start = 0.05 + i * 0.03;
+    return useTransform(scrollYProgress, [start, start + 0.06], [40, 0]);
   });
-  const containerOpacityDesktop = useTransform(scrollYProgress, [0.30, 0.35], [1, 0]);
+  const containerOpacityDesktop = useTransform(scrollYProgress, [0.28, 0.33], [1, 0]);
 
   // ── MOBILE: per-word opacity & Y ──────────────────────────────────────────
   const wordOpacitiesMobile = words.map((_, i) => {
-    const start = 0.05 + i * 0.05;
-    return useTransform(scrollYProgress, [start, start + 0.1], [0, 1]);
+    const start = 0.05 + i * 0.03;
+    return useTransform(scrollYProgress, [start, start + 0.06], [0, 1]);
   });
   const wordYsMobile = words.map((_, i) => {
-    const start = 0.05 + i * 0.05;
-    return useTransform(scrollYProgress, [start, start + 0.1], [40, 0]);
+    const start = 0.05 + i * 0.03;
+    return useTransform(scrollYProgress, [start, start + 0.06], [40, 0]);
   });
-  const containerOpacityMobile = useTransform(scrollYProgress, [0.30, 0.35], [1, 0]);
+  const containerOpacityMobile = useTransform(scrollYProgress, [0.28, 0.33], [1, 0]);
 
   // ── EVENT CARDS — Governance-style staggered animation ───────────────────
   // DESKTOP: 3 cards fade in
@@ -96,7 +96,7 @@ export default function Community() {
   const mCard2Op = useTransform(scrollYProgress, [0.65, 0.70, 0.80, 0.85], [0, 1, 1, 0]);
   const mCard2Y = useTransform(scrollYProgress, [0.65, 0.70], [50, 0]);
 
-  const mCard3Op = useTransform(scrollYProgress, [0.85, 0.90, 1.0, 1.0], [0, 1, 1, 1]);
+  const mCard3Op = useTransform(scrollYProgress, [0.85, 0.90, 0.97, 1.0], [0, 1, 1, 0]);
   const mCard3Y = useTransform(scrollYProgress, [0.85, 0.90], [50, 0]);
 
   const mobileCardsAnim = [
@@ -176,24 +176,25 @@ export default function Community() {
                   opacity: desktopCardsAnim[i].op,
                   y: desktopCardsAnim[i].y,
                   pointerEvents: desktopCardsAnim[i].ptr,
+                  backgroundImage: `linear-gradient(to bottom, rgba(9, 44, 37, 0.4), rgba(9, 44, 37, 0.7)), url(${card.image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
                 }}
-                className="flex-1 border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl overflow-hidden flex flex-col bg-gradient-to-b from-[#092C25]/60 to-[#092C25]/90 hover:scale-[1.02] transition-all duration-300 shadow-xl"
+                className="relative flex-1 border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl overflow-hidden flex flex-col hover:scale-[1.02] transition-all duration-300 shadow-xl min-h-[300px]"
               >
-                <div className="relative w-full h-[140px] lg:h-[160px] overflow-hidden rounded-t-2xl">
-                  <Image src={card.image} alt={card.title} fill className="object-cover" unoptimized />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                    <Icon className="text-7xl text-white drop-shadow-md" />
-                  </div>
+                <div className="absolute inset-0 flex items-center justify-center pb-12">
+                  <Icon className="text-8xl lg:text-9xl text-white drop-shadow-2xl" />
                 </div>
-                <div className="flex flex-col flex-1 justify-between p-5 gap-4">
+                
+                <div className="relative z-10 flex flex-col flex-1 justify-end p-5 pb-6">
                   <a
                     href={card.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-fit px-5 py-2 bg-[#153e33] border border-[#00D4A0]/40 text-white font-semibold rounded-xl hover:bg-[#00D4A0] hover:text-[#092C25] hover:border-[#00D4A0] transition-all duration-300 cursor-pointer text-sm shadow-md self-center"
+                    className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-[#153e33]/90 backdrop-blur-sm border border-[#00D4A0]/40 text-white font-semibold rounded-xl hover:bg-[#00D4A0] hover:text-[#092C25] hover:border-[#00D4A0] transition-all duration-300 cursor-pointer text-base shadow-md"
                   >
                     {card.title}
-                    <FiArrowRight className="text-base" />
+                    <FiArrowRight className="text-lg" />
                   </a>
                 </div>
               </motion.div>
@@ -212,24 +213,25 @@ export default function Community() {
                   opacity: mobileCardsAnim[i].op,
                   y: mobileCardsAnim[i].y,
                   pointerEvents: mobileCardsAnim[i].ptr,
+                  backgroundImage: `linear-gradient(to bottom, rgba(9, 44, 37, 0.6), rgba(9, 44, 37, 0.8)), url(${card.image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
                 }}
-                className="absolute inset-0 w-full h-full border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl overflow-hidden flex flex-col bg-gradient-to-b from-[#092C25]/60 to-[#092C25]/90 shadow-xl"
+                className="absolute inset-0 w-full h-full border border-[#00D4A0]/20 backdrop-blur-md rounded-2xl overflow-hidden flex flex-col shadow-xl"
               >
-                <div className="relative w-full h-[130px] overflow-hidden rounded-t-2xl">
-                  <Image src={card.image} alt={card.title} fill className="object-cover" unoptimized />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                    <Icon className="text-7xl text-white drop-shadow-md" />
-                  </div>
+                <div className="absolute inset-0 flex items-center justify-center pb-12">
+                  <Icon className="text-[100px] text-white drop-shadow-2xl" />
                 </div>
-                <div className="flex flex-col flex-1 justify-between p-5 gap-3">
+                
+                <div className="relative z-10 flex flex-col flex-1 justify-end p-5 pb-6">
                   <a
                     href={card.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-full px-5 py-2.5 bg-[#153e33] border border-[#00D4A0]/40 text-white font-semibold rounded-xl hover:bg-[#00D4A0] hover:text-[#092C25] hover:border-[#00D4A0] transition-all duration-300 cursor-pointer text-sm shadow-md"
+                    className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-[#153e33]/90 backdrop-blur-sm border border-[#00D4A0]/40 text-white font-semibold rounded-xl hover:bg-[#00D4A0] hover:text-[#092C25] hover:border-[#00D4A0] transition-all duration-300 cursor-pointer text-base shadow-md"
                   >
                     {card.title}
-                    <FiArrowRight className="text-base" />
+                    <FiArrowRight className="text-lg" />
                   </a>
                 </div>
               </motion.div>
