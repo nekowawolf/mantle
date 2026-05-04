@@ -208,7 +208,7 @@ export default function Events() {
     <section
       id="events"
       ref={containerRef}
-      className="relative z-20 w-full h-[1300vh] pointer-events-none"
+      className="relative z-20 w-full h-[1100vh] pointer-events-none"
     >
       {/* Stable fixed wrapper */}
       <div
@@ -231,11 +231,10 @@ export default function Events() {
             <motion.span
               key={`events-d-${i}`}
               style={{ opacity: wordOpacitiesDesktop[i], y: wordYsDesktop[i] }}
-              className={`text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight ${
-                word === "Mantle" || word === "IRL" || word === "Online"
+              className={`text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight ${word === "Mantle" || word === "IRL" || word === "Online"
                   ? "text-[#00D4A0]"
                   : "text-white"
-              }`}
+                }`}
             >
               {word}
             </motion.span>
@@ -258,11 +257,10 @@ export default function Events() {
             <motion.span
               key={`events-m-${i}`}
               style={{ opacity: wordOpacitiesMobile[i], y: wordYsMobile[i] }}
-              className={`text-4xl font-bold tracking-tight leading-tight ${
-                word === "Mantle" || word === "IRL" || word === "Online"
+              className={`text-4xl font-bold tracking-tight leading-tight ${word === "Mantle" || word === "IRL" || word === "Online"
                   ? "text-[#00D4A0]"
                   : "text-white"
-              }`}
+                }`}
             >
               {word}
             </motion.span>
@@ -370,7 +368,7 @@ export default function Events() {
         </motion.div>
 
         {/* ════════════════ EVENT CARDS — DESKTOP ════════════════ */}
-        <div className="hidden md:flex fixed top-[46%] -translate-y-1/2 left-1/2 -translate-x-1/2 w-[80%] max-w-4xl gap-6 pointer-events-none">
+        <div className="hidden md:flex absolute top-[46%] -translate-y-1/2 left-1/2 -translate-x-1/2 w-[80%] max-w-4xl gap-6 pointer-events-none">
           {eventCardsData.map((card, i) => (
             <motion.div
               key={`event-desktop-${i}`}
@@ -411,7 +409,7 @@ export default function Events() {
         </div>
 
         {/* ════════════════ EVENT CARDS — MOBILE ════════════════ */}
-        <div className="flex md:hidden fixed top-[46%] -translate-y-1/2 left-1/2 -translate-x-1/2 w-[75%] max-w-[280px] pointer-events-none h-[300px]">
+        <div className="flex md:hidden absolute top-[46%] -translate-y-1/2 left-1/2 -translate-x-1/2 w-[75%] max-w-[280px] pointer-events-none h-[300px]">
           {eventCardsData.map((card, i) => (
             <motion.div
               key={`event-mobile-${i}`}
