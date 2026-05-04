@@ -11,6 +11,7 @@ import GetMNT from "@/components/GetMNT";
 import FakeScrollbar from "@/components/FakeScrollbar";
 import Events from "@/components/Events";
 import Community from "@/components/Community";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -48,6 +49,7 @@ export default function Home() {
           <GetMNT />
           <Events />
           <Community />
+          <Footer />
         </div>
       </div>
 
