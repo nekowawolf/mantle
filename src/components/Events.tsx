@@ -106,11 +106,20 @@ export default function Events() {
     [0.37, 0.43, 0.54, 0.59],
     [0, 1, 1, 0]
   );
+  const squadHubPtrDesktop = useTransform(
+    squadHubOpacityDesktop,
+    (v) => (v > 0.1 ? "auto" : "none")
+  );
+
   // Mobile: same pattern
   const squadHubOpacityMobile = useTransform(
     scrollYProgress,
     [0.33, 0.39, 0.48, 0.53],
     [0, 1, 1, 0]
+  );
+  const squadHubPtrMobile = useTransform(
+    squadHubOpacityMobile,
+    (v) => (v > 0.1 ? "auto" : "none")
   );
 
   // ── EVENT CARDS — Governance-style staggered animation ───────────────────
@@ -309,14 +318,16 @@ export default function Events() {
 
         {/* ════════════════ MantleSquadHub IMAGE — DESKTOP ════════════════ */}
         <motion.div
-          style={{ opacity: squadHubOpacityDesktop }}
+          style={{ 
+            opacity: squadHubOpacityDesktop,
+            pointerEvents: squadHubPtrDesktop
+          }}
           className="
             hidden md:flex
             absolute
             top-[43%] -translate-y-1/2
             left-1/2 -translate-x-1/2
             flex-col items-center gap-4
-            pointer-events-auto
           "
         >
           <div className="relative w-[420px] h-[420px] lg:w-[620px] lg:h-[620px]">
@@ -338,14 +349,16 @@ export default function Events() {
 
         {/* ════════════════ MantleSquadHub IMAGE — MOBILE ════════════════ */}
         <motion.div
-          style={{ opacity: squadHubOpacityMobile }}
+          style={{ 
+            opacity: squadHubOpacityMobile,
+            pointerEvents: squadHubPtrMobile
+          }}
           className="
             flex md:hidden
             absolute
             top-[45%] -translate-y-[55%]
             left-1/2 -translate-x-1/2
             flex-col items-center
-            pointer-events-auto
             w-[85%] max-w-[360px]
           "
         >
