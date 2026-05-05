@@ -304,7 +304,7 @@ export default function Events() {
           className="block md:hidden absolute pointer-events-none select-none left-1/2 -translate-x-1/2"
           style={{
             opacity: mantleTextOpacityMobile,
-            bottom: "39px",
+            bottom: "36px",
           }}
         >
           <div className="relative w-[100px] h-[35px]">
