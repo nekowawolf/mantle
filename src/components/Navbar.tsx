@@ -18,7 +18,6 @@ export default function Navbar() {
 
   // Desktop transforms
   const scale = useTransform(scrollY, [0, 300], [1, 0.1333]); 
-  const x = useTransform(scrollY, [0, 300], [0, 0]); 
   const y = useTransform(scrollY, [0, 300], [0, -80]); 
 
   // Mobile transforms
@@ -34,6 +33,24 @@ export default function Navbar() {
     }
   }, [isOpen]);
 
+  // Handler smooth scroll tanpa mengubah URL hash
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsOpen(false);
+  };
+
+  const navItems = [
+    { label: "About", target: "about" },
+    { label: "Ecosystem", target: "ecosystem" },
+    { label: "Governance", target: "governance" },
+    { label: "Get MNT", target: "get-mnt" },
+    { label: "Event", target: "events" },
+    { label: "Community", target: "community" },
+  ];
 
   return (
     <>
@@ -49,35 +66,23 @@ export default function Navbar() {
             transformOrigin: "top left"
           }}
           className="fixed top-34 md:top-25 left-6 md:left-16 z-[51] text-[70px] md:text-[120px] lg:text-[150px] font-bold leading-[0.85] tracking-tight text-white pointer-events-auto cursor-pointer"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
           MANTLE
         </motion.h1>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8 text-sm font-medium">
-          <a href="#about" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
-            About
-          </a>
-
-          <a href="#ecosystem" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
-            Ecosystem
-          </a>
-
-          <a href="#governance" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
-            Governance
-          </a>
-
-          <a href="#get-mnt" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
-            Get MNT
-          </a>
-
-          <a href="#events" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
-            Event
-          </a>
-
-          <a href="#community" className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300">
-            Community
-          </a>
+          {navItems.map((item) => (
+            <a
+              key={item.target}
+              href={`#${item.target}`}
+              onClick={(e) => handleNavClick(e, item.target)}
+              className="text-white hover:text-white hover:bg-[#092C25]/80 px-3 py-1 rounded transition-all duration-300"
+            >
+              {item.label}
+            </a>
+          ))}
         </div>
 
         {/* Mobile Burger */}
@@ -89,7 +94,7 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Fullscreen Menu - KEEP AS IS (NO CHANGES) */}
+      {/* Mobile Fullscreen Menu */}
       <div
         className={`fixed inset-0 z-[55] bg-black transition-transform duration-500 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
@@ -105,56 +110,18 @@ export default function Navbar() {
 
         {/* Menu Content */}
         <div className="flex flex-col justify-center h-full px-10">
-        <div className="flex flex-col items-end space-y-8 text-right w-full">
-
-          <a
-            href="#about"
-            onClick={() => setIsOpen(false)}
-            className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
-          >
-            About
-          </a>
-
-          <a
-            href="#ecosystem"
-            onClick={() => setIsOpen(false)}
-            className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
-          >
-            Ecosystem
-          </a>
-
-          <a
-            href="#governance"
-            onClick={() => setIsOpen(false)}
-            className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
-          >
-            Governance
-          </a>
-
-          <a
-            href="#get-mnt"
-            onClick={() => setIsOpen(false)}
-            className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
-          >
-            Get MNT
-          </a>
-
-          <a
-            href="#events"
-            onClick={() => setIsOpen(false)}
-            className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
-          >
-            Event
-          </a>
-
-          <a
-            href="#community"
-            onClick={() => setIsOpen(false)}
-            className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
-          >
-            Community
-          </a>
-            </div> 
+          <div className="flex flex-col items-end space-y-8 text-right w-full">
+            {navItems.map((item) => (
+              <a
+                key={item.target}
+                href={`#${item.target}`}
+                onClick={(e) => handleNavClick(e, item.target)}
+                className="text-white text-5xl font-bold hover:text-gray-400 transition-colors duration-300"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div> 
         </div>
       </div>
     </>
