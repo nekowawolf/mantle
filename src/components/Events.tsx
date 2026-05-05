@@ -278,40 +278,41 @@ export default function Events() {
 
         {/* ════════════════ mantle_text.png — DESKTOP ════════════════ */}
         <motion.div
-          className="hidden md:block absolute pointer-events-none select-none"
+           className="
+            hidden md:block absolute
+            pointer-events-none select-none
+            left-1/2 -translate-x-1/2
+            bottom-[44px]
+            min-[1440px]:bottom-[50px]
+          "
           style={{
             opacity: mantleTextOpacityDesktop,
-            bottom: "94px",
-            left: "42%",
-            marginLeft: "92px",
           }}
         >
-          <div className="relative w-[150px] h-[52px]">
+          <div className="relative w-[120px] h-[42px]">
             <Image
-              src="/img/mantle_text.png"
+              src="/img/mantle_text1.png"
               alt="Mantle"
               fill
-              className="object-contain object-left"
+              className="object-contain object-center"
             />
           </div>
         </motion.div>
 
         {/* ════════════════ mantle_text.png — MOBILE ════════════════ */}
         <motion.div
-          className="block md:hidden absolute pointer-events-none select-none"
+          className="block md:hidden absolute pointer-events-none select-none left-1/2 -translate-x-1/2"
           style={{
             opacity: mantleTextOpacityMobile,
-            bottom: "76px",
-            left: "29%",
-            marginLeft: "78px",
+            bottom: "39px",
           }}
         >
           <div className="relative w-[100px] h-[35px]">
             <Image
-              src="/img/mantle_text.png"
+              src="/img/mantle_text1.png"
               alt="Mantle"
               fill
-              className="object-contain object-left"
+              className="object-contain object-center"
             />
           </div>
         </motion.div>

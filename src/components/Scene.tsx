@@ -246,7 +246,7 @@ function Model({
             modelRef.current.position,
             {
               x: 0,
-              y: isMobile ? -0.7 : -1,
+              y: isMobile ? -0.7 : -1.2,
               z: 1,
               duration: 1.4,
               ease: "power2.inOut",
@@ -331,9 +331,9 @@ function Model({
           eventsTl.to(
             modelRef.current.scale,
             {
-              x: isMobile ? 0.3 : isLargeScreen ? 0.3 : 0.25,
-              y: isMobile ? 0.3 : isLargeScreen ? 0.3 : 0.25,
-              z: isMobile ? 0.3 : isLargeScreen ? 0.3 : 0.25,
+              x: isMobile ? 0.3 : isLargeScreen ? 0.4 : 0.5,
+              y: isMobile ? 0.3 : isLargeScreen ? 0.4 : 0.5,
+              z: isMobile ? 0.3 : isLargeScreen ? 0.4 : 0.5,
               duration: 1.6,
               ease: "power2.inOut",
             },
@@ -343,7 +343,7 @@ function Model({
           eventsTl.to(
             modelRef.current.position,
             {
-              x: isMobile ? -0.25 : -0.5,
+              x: 0,
               y: isMobile ? -2.4 : -2.2,
               z: 1,
               duration: 1.8,
@@ -372,7 +372,7 @@ function Model({
       
           gsap.to(modelRef.current.position, {
             x: 0,
-            y: isMobile ? -0.7 : -1,
+            y: isMobile ? -0.7 : -1.2,
             z: 1,
             duration: 1.4,
             ease: "power2.inOut",

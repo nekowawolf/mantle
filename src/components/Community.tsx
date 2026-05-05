@@ -90,14 +90,14 @@ export default function Community() {
   ];
 
   // MOBILE: cards replace each other
-  const mCard1Op = useTransform(scrollYProgress, [0.50, 0.60, 0.70, 0.75], [0, 1, 1, 0]);
-  const mCard1Y = useTransform(scrollYProgress, [0.50, 0.60], [50, 0]);
+  const mCard1Op = useTransform(scrollYProgress, [0.45, 0.52, 0.60, 0.64], [0, 1, 1, 0]);
+  const mCard1Y = useTransform(scrollYProgress, [0.45, 0.52], [50, 0]);
 
-  const mCard2Op = useTransform(scrollYProgress, [0.75, 0.80, 0.90, 0.95], [0, 1, 1, 0]);
-  const mCard2Y = useTransform(scrollYProgress, [0.75, 0.80], [50, 0]);
+  const mCard2Op = useTransform(scrollYProgress, [0.62, 0.69, 0.77, 0.81], [0, 1, 1, 0]);
+  const mCard2Y = useTransform(scrollYProgress, [0.62, 0.69], [50, 0]);
 
-  const mCard3Op = useTransform(scrollYProgress, [0.90, 0.95, 0.98, 1.0], [0, 1, 1, 0]);
-  const mCard3Y = useTransform(scrollYProgress, [0.90, 0.95], [50, 0]);
+  const mCard3Op = useTransform(scrollYProgress, [0.79, 0.86, 0.92, 0.96], [0, 1, 1, 0]);
+  const mCard3Y = useTransform(scrollYProgress, [0.79, 0.86], [50, 0]);
 
   const mobileCardsAnim = [
     { op: mCard1Op, y: mCard1Y, ptr: useTransform(mCard1Op, (v) => (v > 0.1 ? "auto" : "none")) },
