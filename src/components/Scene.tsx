@@ -69,9 +69,11 @@ function Model({
 
   const isMobile =
     typeof window !== "undefined" && window.innerWidth < 768;
+  const isLargeScreen =
+    typeof window !== "undefined" && window.innerWidth > 1440;
 
-  const targetScale = isMobile ? 1.9 : 2.8;
-  const targetY = isMobile ? -1 : -1.7;
+  const targetScale = isMobile ? 1.9 : isLargeScreen ? 3.4 : 2.8;
+  const targetY = isMobile ? -1 : isLargeScreen ? -2.2 : -1.7;
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -149,10 +151,10 @@ function Model({
           }
         },
         scrollTrigger: {
-          trigger: "#ecosystem",
-          start: isMobile ? "top 300%" : "top 90%",
-          end: isMobile ? "top 40%" : "top 10%",
-          scrub: isMobile ? 0.5 : 3,
+          trigger: ".scroll-container",
+          start: isMobile ? "7400px top" : "6800px top",
+          end: isMobile ? "7900px top" : "7600px top",
+          scrub: isMobile ? 0.5 : 1.5,
           onLeaveBack: () => {
             if (floatTweenRef.current) {
               floatTweenRef.current.kill();
@@ -196,11 +198,11 @@ function Model({
 
       // ─── PHASE 4: GetMNT ───
       ScrollTrigger.create({
-        trigger: "#get-mnt",
+        trigger: ".scroll-container",
 
-        // Different trigger positions
-        start: isMobile ? "top 100%" : "top 80%",
-        end: isMobile ? "top 35%" : "top 20%",
+        // Absolute pixel triggers to perfectly sync with text appearance
+        start: isMobile ? "35000px top" : "28200px top",
+        end: isMobile ? "35500px top" : "29300px top",
 
         scrub: isMobile ? 1 : 2,
 
@@ -219,9 +221,9 @@ function Model({
           getMntTl.to(
             modelRef.current.scale,
             {
-              x: isMobile ? 1.5 : 1.6,
-              y: isMobile ? 1.5 : 1.6,
-              z: isMobile ? 1.5 : 1.6,
+              x: isMobile ? 1.5 : isLargeScreen ? 1.9 : 1.6,
+              y: isMobile ? 1.5 : isLargeScreen ? 1.9 : 1.6,
+              z: isMobile ? 1.5 : isLargeScreen ? 1.9 : 1.6,
               duration: 1.2,
               ease: "power2.out",
             },
@@ -298,10 +300,10 @@ function Model({
 
       // ─── PHASE 5: EVENTS ───
       ScrollTrigger.create({
-        trigger: "#events",
+        trigger: ".scroll-container",
       
-        start: isMobile ? "top 240%" : "top 100%",
-        end: isMobile ? "top 35%" : "top 20%",
+        start: isMobile ? "43000px top" : "38500px top",
+        end: isMobile ? "43500px top" : "39500px top",
       
         scrub: isMobile ? 1 : 2,
       
@@ -329,9 +331,9 @@ function Model({
           eventsTl.to(
             modelRef.current.scale,
             {
-              x: isMobile ? 0.3 : 0.4,
-              y: isMobile ? 0.3 : 0.4,
-              z: isMobile ? 0.3 : 0.4,
+              x: isMobile ? 0.3 : isLargeScreen ? 0.5 : 0.4,
+              y: isMobile ? 0.3 : isLargeScreen ? 0.5 : 0.4,
+              z: isMobile ? 0.3 : isLargeScreen ? 0.5 : 0.4,
               duration: 1.6,
               ease: "power2.inOut",
             },
@@ -361,9 +363,9 @@ function Model({
           });
       
           gsap.to(modelRef.current.scale, {
-            x: isMobile ? 1.5 : 1.6,
-            y: isMobile ? 1.5 : 1.6,
-            z: isMobile ? 1.5 : 1.6,
+            x: isMobile ? 1.5 : isLargeScreen ? 1.9 : 1.6,
+            y: isMobile ? 1.5 : isLargeScreen ? 1.9 : 1.6,
+            z: isMobile ? 1.5 : isLargeScreen ? 1.9 : 1.6,
             duration: 1.2,
             ease: "power2.inOut",
           });

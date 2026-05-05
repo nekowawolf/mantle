@@ -131,7 +131,7 @@ export default function Governance() {
   return (
     <section
       id="governance"
-      className="relative z-20 w-full h-[850vh] md:h-[650vh] pointer-events-none"
+      className="relative z-20 w-full h-[6800px] md:h-[5200px] pointer-events-none"
     >
       {/* GOVERNANCE TEXT - DESKTOP */}
       <motion.div

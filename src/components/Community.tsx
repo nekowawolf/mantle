@@ -52,36 +52,36 @@ export default function Community() {
 
   // ── DESKTOP: per-word opacity & Y ─────────────────────────────────────────
   const wordOpacitiesDesktop = words.map((_, i) => {
-    const start = 0.05 + i * 0.03;
+    const start = 0.15 + i * 0.03;
     return useTransform(scrollYProgress, [start, start + 0.06], [0, 1]);
   });
   const wordYsDesktop = words.map((_, i) => {
-    const start = 0.05 + i * 0.03;
+    const start = 0.15 + i * 0.03;
     return useTransform(scrollYProgress, [start, start + 0.06], [40, 0]);
   });
-  const containerOpacityDesktop = useTransform(scrollYProgress, [0.28, 0.33], [1, 0]);
+  const containerOpacityDesktop = useTransform(scrollYProgress, [0.38, 0.43], [1, 0]);
 
   // ── MOBILE: per-word opacity & Y ──────────────────────────────────────────
   const wordOpacitiesMobile = words.map((_, i) => {
-    const start = 0.05 + i * 0.03;
+    const start = 0.15 + i * 0.03;
     return useTransform(scrollYProgress, [start, start + 0.06], [0, 1]);
   });
   const wordYsMobile = words.map((_, i) => {
-    const start = 0.05 + i * 0.03;
+    const start = 0.15 + i * 0.03;
     return useTransform(scrollYProgress, [start, start + 0.06], [40, 0]);
   });
-  const containerOpacityMobile = useTransform(scrollYProgress, [0.28, 0.33], [1, 0]);
+  const containerOpacityMobile = useTransform(scrollYProgress, [0.38, 0.43], [1, 0]);
 
   // ── EVENT CARDS — Governance-style staggered animation ───────────────────
   // DESKTOP: 3 cards fade in
-  const dCard1Op = useTransform(scrollYProgress, [0.40, 0.50], [0, 1]);
-  const dCard1Y = useTransform(scrollYProgress, [0.40, 0.50], [50, 0]);
+  const dCard1Op = useTransform(scrollYProgress, [0.50, 0.60], [0, 1]);
+  const dCard1Y = useTransform(scrollYProgress, [0.50, 0.60], [50, 0]);
 
-  const dCard2Op = useTransform(scrollYProgress, [0.45, 0.55], [0, 1]);
-  const dCard2Y = useTransform(scrollYProgress, [0.45, 0.55], [50, 0]);
+  const dCard2Op = useTransform(scrollYProgress, [0.55, 0.65], [0, 1]);
+  const dCard2Y = useTransform(scrollYProgress, [0.55, 0.65], [50, 0]);
 
-  const dCard3Op = useTransform(scrollYProgress, [0.50, 0.60], [0, 1]);
-  const dCard3Y = useTransform(scrollYProgress, [0.50, 0.60], [50, 0]);
+  const dCard3Op = useTransform(scrollYProgress, [0.60, 0.70], [0, 1]);
+  const dCard3Y = useTransform(scrollYProgress, [0.60, 0.70], [50, 0]);
 
   const desktopCardsAnim = [
     { op: dCard1Op, y: dCard1Y, ptr: useTransform(dCard1Op, (v) => (v > 0.1 ? "auto" : "none")) },
@@ -90,14 +90,14 @@ export default function Community() {
   ];
 
   // MOBILE: cards replace each other
-  const mCard1Op = useTransform(scrollYProgress, [0.40, 0.50, 0.60, 0.65], [0, 1, 1, 0]);
-  const mCard1Y = useTransform(scrollYProgress, [0.40, 0.50], [50, 0]);
+  const mCard1Op = useTransform(scrollYProgress, [0.50, 0.60, 0.70, 0.75], [0, 1, 1, 0]);
+  const mCard1Y = useTransform(scrollYProgress, [0.50, 0.60], [50, 0]);
 
-  const mCard2Op = useTransform(scrollYProgress, [0.65, 0.70, 0.80, 0.85], [0, 1, 1, 0]);
-  const mCard2Y = useTransform(scrollYProgress, [0.65, 0.70], [50, 0]);
+  const mCard2Op = useTransform(scrollYProgress, [0.75, 0.80, 0.90, 0.95], [0, 1, 1, 0]);
+  const mCard2Y = useTransform(scrollYProgress, [0.75, 0.80], [50, 0]);
 
-  const mCard3Op = useTransform(scrollYProgress, [0.85, 0.90, 0.97, 1.0], [0, 1, 1, 0]);
-  const mCard3Y = useTransform(scrollYProgress, [0.85, 0.90], [50, 0]);
+  const mCard3Op = useTransform(scrollYProgress, [0.90, 0.95, 0.98, 1.0], [0, 1, 1, 0]);
+  const mCard3Y = useTransform(scrollYProgress, [0.90, 0.95], [50, 0]);
 
   const mobileCardsAnim = [
     { op: mCard1Op, y: mCard1Y, ptr: useTransform(mCard1Op, (v) => (v > 0.1 ? "auto" : "none")) },
@@ -109,7 +109,7 @@ export default function Community() {
     <section
       id="community"
       ref={containerRef}
-      className="relative z-20 w-full h-[1000vh] pointer-events-none"
+      className="relative z-20 w-full h-[8000px] pointer-events-none"
     >
       <div
         className="fixed top-0 left-0 w-full pointer-events-none"
@@ -131,9 +131,8 @@ export default function Community() {
             <motion.span
               key={`comm-d-${i}`}
               style={{ opacity: wordOpacitiesDesktop[i], y: wordYsDesktop[i] }}
-              className={`text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight ${
-                word === "Community" ? "text-[#00D4A0]" : "text-white"
-              }`}
+              className={`text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight ${word === "Community" ? "text-[#00D4A0]" : "text-white"
+                }`}
             >
               {word}
             </motion.span>
@@ -156,9 +155,8 @@ export default function Community() {
             <motion.span
               key={`comm-m-${i}`}
               style={{ opacity: wordOpacitiesMobile[i], y: wordYsMobile[i] }}
-              className={`text-4xl font-bold tracking-tight leading-tight ${
-                word === "Community" ? "text-[#00D4A0]" : "text-white"
-              }`}
+              className={`text-4xl font-bold tracking-tight leading-tight ${word === "Community" ? "text-[#00D4A0]" : "text-white"
+                }`}
             >
               {word}
             </motion.span>
@@ -185,7 +183,7 @@ export default function Community() {
                 <div className="absolute inset-0 flex items-center justify-center pb-12">
                   <Icon className="text-8xl lg:text-9xl text-white drop-shadow-2xl" />
                 </div>
-                
+
                 <div className="relative z-10 flex flex-col flex-1 justify-end p-5 pb-6">
                   <a
                     href={card.link}
@@ -222,7 +220,7 @@ export default function Community() {
                 <div className="absolute inset-0 flex items-center justify-center pb-12">
                   <Icon className="text-[100px] text-white drop-shadow-2xl" />
                 </div>
-                
+
                 <div className="relative z-10 flex flex-col flex-1 justify-end p-5 pb-6">
                   <a
                     href={card.link}

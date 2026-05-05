@@ -276,7 +276,7 @@ const leftTextOpacity = useTransform(
       </section>
 
       {/* Spacer */}
-      <section className="relative z-10 w-full h-[1000vh] pointer-events-none" />
+      <section className="relative z-10 w-full h-[8000px] pointer-events-none" />
     </>
   );
 }

@@ -217,7 +217,7 @@ export default function Events() {
     <section
       id="events"
       ref={containerRef}
-      className="relative z-20 w-full h-[1100vh] pointer-events-none"
+      className="relative z-20 w-full h-[8800px] pointer-events-none"
     >
       {/* Stable fixed wrapper */}
       <div

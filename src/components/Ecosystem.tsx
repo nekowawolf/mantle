@@ -268,7 +268,7 @@ export default function Ecosystem() {
   return (
     <section
       id="ecosystem"
-      className="relative z-20 w-full h-[2200vh] pointer-events-none"
+      className="relative z-20 w-full h-[17600px] pointer-events-none"
     >
       {/* TEXT POSITION */}
       <motion.div
