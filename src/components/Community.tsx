@@ -120,7 +120,7 @@ export default function Community() {
           style={{ opacity: containerOpacityDesktop }}
           className="
             hidden md:flex
-            absolute top-[32%]
+            absolute top-[32%] min-[1440px]:top-[20%]
             left-1/2 -translate-x-1/2
             w-[90%] max-w-4xl
             flex-wrap justify-center gap-x-4 gap-y-2

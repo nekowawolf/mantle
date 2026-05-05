@@ -142,7 +142,7 @@ export default function Governance() {
         className="
           hidden md:flex
           fixed
-          bottom-80 md:bottom-40    
+          bottom-80 md:bottom-40 min-[1440px]:bottom-72
           left-1/2 -translate-x-1/2
           w-[90%] max-w-4xl
           flex-wrap justify-center gap-x-4 gap-y-2

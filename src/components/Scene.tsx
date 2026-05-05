@@ -152,8 +152,8 @@ function Model({
         },
         scrollTrigger: {
           trigger: ".scroll-container",
-          start: isMobile ? "7400px top" : "6800px top",
-          end: isMobile ? "7900px top" : "7600px top",
+          start: isMobile ? "7400px top" : "7500px top",
+          end: isMobile ? "7900px top" : "8100px top",
           scrub: isMobile ? 0.5 : 1.5,
           onLeaveBack: () => {
             if (floatTweenRef.current) {
@@ -302,8 +302,8 @@ function Model({
       ScrollTrigger.create({
         trigger: ".scroll-container",
       
-        start: isMobile ? "43000px top" : "38500px top",
-        end: isMobile ? "43500px top" : "39500px top",
+        start: isMobile ? "43000px top" : "37500px top",
+        end: isMobile ? "43500px top" : "38500px top",
       
         scrub: isMobile ? 1 : 2,
       
@@ -331,9 +331,9 @@ function Model({
           eventsTl.to(
             modelRef.current.scale,
             {
-              x: isMobile ? 0.3 : isLargeScreen ? 0.5 : 0.4,
-              y: isMobile ? 0.3 : isLargeScreen ? 0.5 : 0.4,
-              z: isMobile ? 0.3 : isLargeScreen ? 0.5 : 0.4,
+              x: isMobile ? 0.3 : isLargeScreen ? 0.3 : 0.25,
+              y: isMobile ? 0.3 : isLargeScreen ? 0.3 : 0.25,
+              z: isMobile ? 0.3 : isLargeScreen ? 0.3 : 0.25,
               duration: 1.6,
               ease: "power2.inOut",
             },

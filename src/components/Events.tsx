@@ -229,7 +229,7 @@ export default function Events() {
           style={{ opacity: containerOpacityDesktop }}
           className="
             hidden md:flex
-            absolute bottom-80
+            absolute bottom-80 min-[1440px]:bottom-[400px]
             left-1/2 -translate-x-1/2
             w-[90%] max-w-4xl
             flex-wrap justify-center gap-x-4 gap-y-2

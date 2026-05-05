@@ -490,7 +490,7 @@ export default function GetMNT() {
   return (
     <section
       id="get-mnt"
-      className="relative z-20 w-full h-[9600px] pointer-events-none"
+      className="relative z-20 w-full h-[11500px] md:h-[7500px] pointer-events-none"
     >
       {/* Stable fixed wrapper to prevent mobile address bar shifting */}
       <div 

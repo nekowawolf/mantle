@@ -275,7 +275,7 @@ export default function Ecosystem() {
         style={{ opacity: containerOpacity }}
         className="
           fixed
-          bottom-80 md:bottom-64
+          bottom-80 md:bottom-64 min-[1440px]:bottom-96
           left-1/2 -translate-x-1/2
           w-[90%] max-w-4xl
           flex flex-wrap justify-center gap-x-4 gap-y-2
@@ -428,7 +428,7 @@ export default function Ecosystem() {
         className="
           hidden md:flex
           fixed
-          bottom-40
+          bottom-80 md:bottom-40 min-[1440px]:bottom-96
           left-1/2 -translate-x-1/2
           w-[90%] max-w-4xl
           flex-wrap justify-center gap-x-4 gap-y-2
