@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { FiArrowRight, FiDownload } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 
 const words = ["Discover", "Upcoming", "Mantle", "Events", "IRL", "&", "Online"];
 
@@ -99,51 +99,30 @@ export default function Events() {
   // Mantle text stays visible
 
 
-  // ── MantleSquadHub IMAGE ─────────────────────────────────────────────────
-  // Desktop: appear after words fade, then disappear before cards
-  const squadHubOpacityDesktop = useTransform(
-    scrollYProgress,
-    [0.37, 0.43, 0.54, 0.59],
-    [0, 1, 1, 0]
-  );
-  const squadHubPtrDesktop = useTransform(
-    squadHubOpacityDesktop,
-    (v) => (v > 0.1 ? "auto" : "none")
-  );
 
-  // Mobile: same pattern
-  const squadHubOpacityMobile = useTransform(
-    scrollYProgress,
-    [0.33, 0.39, 0.48, 0.53],
-    [0, 1, 1, 0]
-  );
-  const squadHubPtrMobile = useTransform(
-    squadHubOpacityMobile,
-    (v) => (v > 0.1 ? "auto" : "none")
-  );
 
   // ── EVENT CARDS — Governance-style staggered animation ───────────────────
-  // DESKTOP: 3 cards fade in after squadHub disappears, then fade out
+  // DESKTOP: 3 cards fade in after words fade out, then fade out
   const dCard1Op = useTransform(
     scrollYProgress,
-    [0.60, 0.62, 0.92, 0.94],
+    [0.38, 0.45, 0.77, 0.80],
     [0, 1, 1, 0]
   );
-  const dCard1Y = useTransform(scrollYProgress, [0.60, 0.62], [50, 0]);
+  const dCard1Y = useTransform(scrollYProgress, [0.38, 0.45], [50, 0]);
 
   const dCard2Op = useTransform(
     scrollYProgress,
-    [0.61, 0.63, 0.93, 0.95],
+    [0.39, 0.46, 0.78, 0.81],
     [0, 1, 1, 0]
   );
-  const dCard2Y = useTransform(scrollYProgress, [0.61, 0.63], [50, 0]);
+  const dCard2Y = useTransform(scrollYProgress, [0.39, 0.46], [50, 0]);
 
   const dCard3Op = useTransform(
     scrollYProgress,
-    [0.62, 0.64, 0.94, 0.96],
+    [0.40, 0.47, 0.79, 0.82],
     [0, 1, 1, 0]
   );
-  const dCard3Y = useTransform(scrollYProgress, [0.62, 0.64], [50, 0]);
+  const dCard3Y = useTransform(scrollYProgress, [0.40, 0.47], [50, 0]);
 
   const desktopCardsAnim = [
     {
@@ -166,24 +145,24 @@ export default function Events() {
   // MOBILE: cards appear one by one (stacked, like Governance mobile)
   const mCard1Op = useTransform(
     scrollYProgress,
-    [0.54, 0.58, 0.66, 0.69],
+    [0.30, 0.35, 0.45, 0.48],
     [0, 1, 1, 0]
   );
-  const mCard1Y = useTransform(scrollYProgress, [0.54, 0.58], [50, 0]);
+  const mCard1Y = useTransform(scrollYProgress, [0.30, 0.35], [50, 0]);
 
   const mCard2Op = useTransform(
     scrollYProgress,
-    [0.70, 0.74, 0.82, 0.85],
+    [0.47, 0.52, 0.62, 0.65],
     [0, 1, 1, 0]
   );
-  const mCard2Y = useTransform(scrollYProgress, [0.70, 0.74], [50, 0]);
+  const mCard2Y = useTransform(scrollYProgress, [0.47, 0.52], [50, 0]);
 
   const mCard3Op = useTransform(
     scrollYProgress,
-    [0.86, 0.90, 0.96, 0.98],
+    [0.64, 0.69, 0.79, 0.82],
     [0, 1, 1, 0]
   );
-  const mCard3Y = useTransform(scrollYProgress, [0.86, 0.90], [50, 0]);
+  const mCard3Y = useTransform(scrollYProgress, [0.64, 0.69], [50, 0]);
 
   const mobileCardsAnim = [
     {
@@ -203,21 +182,12 @@ export default function Events() {
     },
   ];
 
-  // ── Download handler ─────────────────────────────────────────────────────
-  const handleDownload = () => {
-    const link = document.createElement("a");
-    link.href = "/img/MantleSquadHub.png";
-    link.download = "MantleSquadHub.png";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
 
   return (
     <section
       id="events"
       ref={containerRef}
-      className="relative z-20 w-full h-[8800px] pointer-events-none"
+      className="relative z-20 w-full h-[4500px] pointer-events-none"
     >
       {/* Stable fixed wrapper */}
       <div
@@ -317,69 +287,6 @@ export default function Events() {
           </div>
         </motion.div>
 
-        {/* ════════════════ MantleSquadHub IMAGE — DESKTOP ════════════════ */}
-        <motion.div
-          style={{ 
-            opacity: squadHubOpacityDesktop,
-            pointerEvents: squadHubPtrDesktop
-          }}
-          className="
-            hidden md:flex
-            absolute
-            top-[43%] -translate-y-1/2
-            left-1/2 -translate-x-1/2
-            flex-col items-center gap-4
-          "
-        >
-          <div className="relative w-[420px] h-[420px] lg:w-[620px] lg:h-[620px]">
-            <Image
-              src="/img/MantleSquadHub.png"
-              alt="Mantle Squad Hub"
-              fill
-              className="object-contain"
-            />
-          </div>
-          <button
-            onClick={handleDownload}
-            className="absolute left-1/2 -translate-x-1/2 bottom-32 flex items-center gap-2 px-4 py-2 bg-[#153e33] border border-[#00D4A0]/40 text-white font-semibold rounded-lg hover:bg-[#00D4A0] hover:text-[#092C25] hover:border-[#00D4A0] transition-all duration-300 cursor-pointer text-xs lg:text-sm shadow-md"
-          >
-            Download Image
-            <FiDownload className="text-base" />
-          </button>
-        </motion.div>
-
-        {/* ════════════════ MantleSquadHub IMAGE — MOBILE ════════════════ */}
-        <motion.div
-          style={{ 
-            opacity: squadHubOpacityMobile,
-            pointerEvents: squadHubPtrMobile
-          }}
-          className="
-            flex md:hidden
-            absolute
-            top-[45%] -translate-y-[55%]
-            left-1/2 -translate-x-1/2
-            flex-col items-center
-            w-[85%] max-w-[360px]
-          "
-        >
-          <div className="relative w-full aspect-square">
-            <Image
-              src="/img/MantleSquadHub.png"
-              alt="Mantle Squad Hub"
-              fill
-              className="object-contain"
-            />
-
-            <button
-              onClick={handleDownload}
-              className="absolute left-1/2 -translate-x-1/2 bottom-8 flex items-center gap-2 px-4 py-2 bg-[#153e33] border border-[#00D4A0]/40 text-white font-semibold rounded-lg hover:bg-[#00D4A0] hover:text-[#092C25] hover:border-[#00D4A0] transition-all duration-300 cursor-pointer text-xs shadow-md justify-center w-fit"
-            >
-              Download Image
-              <FiDownload className="text-sm" />
-            </button>
-          </div>
-        </motion.div>
 
         {/* ════════════════ EVENT CARDS — DESKTOP ════════════════ */}
         <div className="hidden md:flex absolute top-[46%] -translate-y-1/2 left-1/2 -translate-x-1/2 w-[80%] max-w-4xl gap-6 pointer-events-none">

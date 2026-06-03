@@ -52,36 +52,36 @@ export default function Community() {
 
   // ── DESKTOP: per-word opacity & Y ─────────────────────────────────────────
   const wordOpacitiesDesktop = words.map((_, i) => {
-    const start = 0.15 + i * 0.03;
-    return useTransform(scrollYProgress, [start, start + 0.06], [0, 1]);
+    const start = 0.05 + i * 0.05;
+    return useTransform(scrollYProgress, [start, start + 0.10], [0, 1]);
   });
   const wordYsDesktop = words.map((_, i) => {
-    const start = 0.15 + i * 0.03;
-    return useTransform(scrollYProgress, [start, start + 0.06], [40, 0]);
+    const start = 0.05 + i * 0.05;
+    return useTransform(scrollYProgress, [start, start + 0.10], [40, 0]);
   });
-  const containerOpacityDesktop = useTransform(scrollYProgress, [0.38, 0.43], [1, 0]);
+  const containerOpacityDesktop = useTransform(scrollYProgress, [0.35, 0.45], [1, 0]);
 
   // ── MOBILE: per-word opacity & Y ──────────────────────────────────────────
   const wordOpacitiesMobile = words.map((_, i) => {
-    const start = 0.15 + i * 0.03;
-    return useTransform(scrollYProgress, [start, start + 0.06], [0, 1]);
+    const start = 0.05 + i * 0.05;
+    return useTransform(scrollYProgress, [start, start + 0.10], [0, 1]);
   });
   const wordYsMobile = words.map((_, i) => {
-    const start = 0.15 + i * 0.03;
-    return useTransform(scrollYProgress, [start, start + 0.06], [40, 0]);
+    const start = 0.05 + i * 0.05;
+    return useTransform(scrollYProgress, [start, start + 0.10], [40, 0]);
   });
-  const containerOpacityMobile = useTransform(scrollYProgress, [0.38, 0.43], [1, 0]);
+  const containerOpacityMobile = useTransform(scrollYProgress, [0.35, 0.45], [1, 0]);
 
   // ── EVENT CARDS — Governance-style staggered animation ───────────────────
   // DESKTOP: 3 cards fade in
-  const dCard1Op = useTransform(scrollYProgress, [0.50, 0.60], [0, 1]);
-  const dCard1Y = useTransform(scrollYProgress, [0.50, 0.60], [50, 0]);
+  const dCard1Op = useTransform(scrollYProgress, [0.45, 0.55], [0, 1]);
+  const dCard1Y = useTransform(scrollYProgress, [0.45, 0.55], [50, 0]);
 
-  const dCard2Op = useTransform(scrollYProgress, [0.55, 0.65], [0, 1]);
-  const dCard2Y = useTransform(scrollYProgress, [0.55, 0.65], [50, 0]);
+  const dCard2Op = useTransform(scrollYProgress, [0.50, 0.60], [0, 1]);
+  const dCard2Y = useTransform(scrollYProgress, [0.50, 0.60], [50, 0]);
 
-  const dCard3Op = useTransform(scrollYProgress, [0.60, 0.70], [0, 1]);
-  const dCard3Y = useTransform(scrollYProgress, [0.60, 0.70], [50, 0]);
+  const dCard3Op = useTransform(scrollYProgress, [0.55, 0.65], [0, 1]);
+  const dCard3Y = useTransform(scrollYProgress, [0.55, 0.65], [50, 0]);
 
   const desktopCardsAnim = [
     { op: dCard1Op, y: dCard1Y, ptr: useTransform(dCard1Op, (v) => (v > 0.1 ? "auto" : "none")) },
@@ -90,14 +90,14 @@ export default function Community() {
   ];
 
   // MOBILE: cards replace each other
-  const mCard1Op = useTransform(scrollYProgress, [0.45, 0.52, 0.60, 0.64], [0, 1, 1, 0]);
-  const mCard1Y = useTransform(scrollYProgress, [0.45, 0.52], [50, 0]);
+  const mCard1Op = useTransform(scrollYProgress, [0.40, 0.48, 0.58, 0.62], [0, 1, 1, 0]);
+  const mCard1Y = useTransform(scrollYProgress, [0.40, 0.48], [50, 0]);
 
-  const mCard2Op = useTransform(scrollYProgress, [0.62, 0.69, 0.77, 0.81], [0, 1, 1, 0]);
-  const mCard2Y = useTransform(scrollYProgress, [0.62, 0.69], [50, 0]);
+  const mCard2Op = useTransform(scrollYProgress, [0.60, 0.68, 0.78, 0.82], [0, 1, 1, 0]);
+  const mCard2Y = useTransform(scrollYProgress, [0.60, 0.68], [50, 0]);
 
-  const mCard3Op = useTransform(scrollYProgress, [0.79, 0.86, 0.92, 0.96], [0, 1, 1, 0]);
-  const mCard3Y = useTransform(scrollYProgress, [0.79, 0.86], [50, 0]);
+  const mCard3Op = useTransform(scrollYProgress, [0.80, 0.88, 0.98, 1.00], [0, 1, 1, 0]);
+  const mCard3Y = useTransform(scrollYProgress, [0.80, 0.88], [50, 0]);
 
   const mobileCardsAnim = [
     { op: mCard1Op, y: mCard1Y, ptr: useTransform(mCard1Op, (v) => (v > 0.1 ? "auto" : "none")) },
@@ -109,7 +109,7 @@ export default function Community() {
     <section
       id="community"
       ref={containerRef}
-      className="relative z-20 w-full h-[8000px] pointer-events-none"
+      className="relative z-20 w-full h-[2500px] pointer-events-none"
     >
       <div
         className="fixed top-0 left-0 w-full pointer-events-none"
