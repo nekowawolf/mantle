@@ -10,19 +10,17 @@ const words = ["Discover", "Upcoming", "Mantle", "Events", "IRL", "&", "Online"]
 // 3 Event Cards Data
 const eventCardsData = [
   {
-    image:
-      "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/uploads/so/318b6830-5117-4da2-aee9-319b9353779b.jpg",
+    image: "/img/event1.avif",
     title: "House of AI (by Lagrange & 0G) | Consensus Miami",
     link: "https://luma.com/d7e60v9j",
   },
   {
-    image: "https://pbs.twimg.com/media/HGCcu5AbQAEYgyD?format=jpg&name=large",
+    image: "/img/event2.jpeg",
     title: "Mantle Spring Creative Marathon",
     link: "https://mantle-hub.notion.site/?p=343fc254d25c801d9681fa2a000181e3&pm=c",
   },
   {
-    image:
-      "https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/event-covers/9t/5b8213d7-c425-43ad-bc04-05687555a435.png",
+    image: "/img/event3.avif",
     title: "Mantle x Solana Accelerate Miami",
     link: "https://luma.com/vdjdy9q3",
   },

@@ -10,7 +10,18 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: "Mantle Network",
-  description: "Mantle Network Landing Page",
+  description: "High-performance Ethereum Layer-2 network.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon1.png", type: "image/png" },
+      { url: "/icon0.svg", type: "image/svg+xml" },
+    ],
+    apple: [
+      { url: "/apple-icon.png" }
+    ],
+  },
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({

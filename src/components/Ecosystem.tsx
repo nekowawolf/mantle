@@ -54,7 +54,7 @@ const newCardsData = [
 // Data for partner cards
 const partnerCardsData = [
   {
-    logo: "https://www.mantle.xyz/images/home/project-ecofund-logo.svg",
+    logo: "/img/logo_mantle.webp",
     name: "EcoFund",
     desc: "The Mantle EcoFund supports ecosystem growth with a $200M capital pool, backing innovative projects alongside top-tier VCs like Polychain and Dragonfly.",
     textLink: "Visit",
@@ -62,7 +62,7 @@ const partnerCardsData = [
     bg: "/img/mantle_card1.1.png",
   },
   {
-    logo: "https://www.mantle.xyz/images/home/project-mirana-logo.svg",
+    logo: "/img/mirana.jpg",
     name: "Mirana Ventures",
     desc: "Mirana Ventures supports Mantle's EcoFund with strong venture capital expertise, helping drive ecosystem growth through strategic investments and industry experience.",
     textLink: "Visit",
@@ -70,7 +70,7 @@ const partnerCardsData = [
     bg: "/img/mantle_card1.2.png",
   },
   {
-    logo: "https://www.mantle.xyz/images/home/project-bybit-logo.svg",
+    logo: "/img/bybit.jpg",
     name: "Bybit",
     desc: "Bybit strengthens Mantle's liquidity and DeFi-CeFi integration through yield-bearing collateral, simplified asset access, fiat ramps, and connected on-chain and CEX opportunities.",
     textLink: "Visit",

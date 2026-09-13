@@ -130,7 +130,7 @@ export default function Footer() {
 
           {/* Center - Copyright */}
           <div className="text-white/40 text-sm text-center order-3 md:order-2">
-            © Mantle 2026. All rights reserved.
+            &copy; Mantle {new Date().getFullYear()}. All rights reserved.
           </div>
 
           {/* Right - Created by nekowawolf */}

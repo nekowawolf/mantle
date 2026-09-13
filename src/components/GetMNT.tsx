@@ -10,26 +10,26 @@ const GETMNT_START_MOBILE = 35500;
 
 // Bridge images
 const bridgeImages = [
-  "https://cms.mantle.xyz/assets/dce6cb1d-0c2b-4123-a282-256fd45a04a7",
-  "https://cms.mantle.xyz/assets/0e297c90-5866-49a1-a5e8-d04b58c1c587",
-  "https://cms.mantle.xyz/assets/2990f058-367d-4d1f-817a-2f0132a03fe1",
-  "https://cms.mantle.xyz/assets/5088552c-6c12-48f3-8faa-bc012e7c24d4",
+  "/img/GetMNT1.jpg",
+  "/img/GetMNT2.png",
+  "/img/GetMNT3.png",
+  "/img/GetMNT4.jpg",
 ];
 
 // CEX images
 const cexImages = [
-  "https://cms.mantle.xyz/assets/5ad6aa20-2e1d-463e-9b1f-7e3de7f53c9f",
-  "https://cms.mantle.xyz/assets/ebe45a64-40ce-4ee9-822c-47708b141dd6",
-  "https://cms.mantle.xyz/assets/8a6562a2-31b5-4b05-a0bb-312fd7126cd1", 
-  "https://cms.mantle.xyz/assets/97c59f85-b73a-48da-9d3f-7cb6e732a200", 
+  "/img/bybit.jpg",
+  "/img/GetMNT6.png",
+  "/img/GetMNT7.jpeg",
+  "/img/GetMNT8.png",
 ];
 
 // DEX images
 const dexImages = [
-  "https://cms.mantle.xyz/assets/d2576c94-0039-4c68-b4f9-53b15c67f21d", 
-  "https://cms.mantle.xyz/assets/4379de1a-e98e-4be0-a92f-24278d590393", 
-  "https://cms.mantle.xyz/assets/2fdbdf9e-9906-4481-9277-2ea5b75ac782", 
-  "https://cms.mantle.xyz/assets/a38ede32-2060-48b1-9ddc-05be4d4d7154", 
+  "/img/GetMNT9.png",
+  "/img/GetMNT10.png",
+  "/img/GetMNT11.png",
+  "/img/GetMNT12.png",
 ];
 
 // ─── Candlestick data ───────────────────────────────────────────────────────

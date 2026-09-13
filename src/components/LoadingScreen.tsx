@@ -42,7 +42,7 @@ export default function LoadingScreen() {
       <div className="relative z-10 flex flex-col items-center space-y-6">
         <div className="w-44 h-44 animate-spin-slow relative">
           <Image
-            src="/img/logo_mantle1.png"
+            src="/img/logo_mantle.webp"
             alt="Logo"
             fill
             className="object-contain"
